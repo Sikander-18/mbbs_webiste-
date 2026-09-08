@@ -1,0 +1,326 @@
+[
+  {
+    "slug": "kazan-state-medical-university",
+    "name": "Kazan State Medical University",
+    "city": "Kazan",
+    "country": "Russia",
+    "established": "1814",
+    "annual_fee": "₹5,40,000",
+    "total_fee": "₹40–45L",
+    "fmge_rate": "45–65%",
+    "highlights": [
+      "Founded 1814 — Russia's oldest medical university",
+      "FMGE pass rate 45–65% (top performer in Russia)",
+      "Strong faculty and high-quality clinical training",
+      "Better future opportunities and reputation",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "volgograd-state-medical-university",
+    "name": "Volgograd State Medical University",
+    "city": "Volgograd",
+    "country": "Russia",
+    "established": "1935",
+    "annual_fee": "₹4,30,000",
+    "total_fee": "₹30–38L",
+    "fmge_rate": "40–50%",
+    "highlights": [
+      "Top-ranked, strong international reputation",
+      "High patient inflow → excellent clinical practice",
+      "Advanced research and clinical training",
+      "NMC and WHO recognized",
+      "Better academic reputation than most Russian universities"
+    ]
+  },
+  {
+    "slug": "omsk-state-medical-university",
+    "name": "Omsk State Medical University",
+    "city": "Omsk",
+    "country": "Russia",
+    "established": "1921",
+    "annual_fee": "₹3,30,000",
+    "total_fee": "₹24–30L",
+    "fmge_rate": "45–55%",
+    "highlights": [
+      "Founded 1921 — over 100 years of medical education",
+      "FMGE pass rate 45–55%",
+      "Recognized by WHO, NMC, ECFMG",
+      "Simulation labs and modern infrastructure",
+      "Very affordable tuition fees"
+    ]
+  },
+  {
+    "slug": "tyumen-state-medical-university",
+    "name": "Tyumen State Medical University",
+    "city": "Tyumen",
+    "country": "Russia",
+    "established": "1963",
+    "annual_fee": "₹4,10,000",
+    "total_fee": "₹30–36L",
+    "fmge_rate": "30–45%",
+    "highlights": [
+      "Modern government university with good infrastructure",
+      "FMGE pass rate 30–45%",
+      "Balanced clinical exposure and lab facilities",
+      "Growing Indian student community",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "northern-state-medical-university",
+    "name": "Northern State Medical University",
+    "city": "Arkhangelsk",
+    "country": "Russia",
+    "established": "1932",
+    "annual_fee": "₹3,15,000",
+    "total_fee": "₹25–30L",
+    "fmge_rate": "25–40%",
+    "highlights": [
+      "Research-based, strong theoretical curriculum",
+      "FMGE pass rate 25–40%",
+      "Unique cold-climate medicine exposure",
+      "Good academic discipline",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "north-ossetian-state-medical-academy",
+    "name": "North Ossetian State Medical Academy",
+    "city": "Vladikavkaz",
+    "country": "Russia",
+    "established": "1939",
+    "annual_fee": "₹3,20,000",
+    "total_fee": "₹26–30L",
+    "fmge_rate": "25–40%",
+    "highlights": [
+      "Popular Indian-friendly environment",
+      "FMGE pass rate 25–40%",
+      "Affordable fees — ₹26–30L total",
+      "Warmer climate than Siberian cities",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "tbilisi-state-medical-university",
+    "name": "Tbilisi State Medical University",
+    "city": "Tbilisi",
+    "country": "Georgia",
+    "established": "1918",
+    "annual_fee": "₹6,00,000",
+    "total_fee": "₹36,00,000",
+    "fmge_rate": "",
+    "highlights": [
+      "Oldest and most prestigious medical university in Georgia",
+      "European-standard medical education",
+      "Strong hospital affiliations for clinical practice",
+      "One of the highest FMGE pass rates from Georgia",
+      "NMC approved"
+    ]
+  },
+  {
+    "slug": "david-tvildiani-medical-university",
+    "name": "David Tvildiani Medical University",
+    "city": "Tbilisi",
+    "country": "Georgia",
+    "established": "1990",
+    "annual_fee": "₹5,50,000",
+    "total_fee": "₹33,00,000",
+    "fmge_rate": "",
+    "highlights": [
+      "Modern campus and simulation laboratories",
+      "Fully English-medium program",
+      "Hospital partnerships for clinical rotations",
+      "Dedicated international student support",
+      "NMC approved"
+    ]
+  },
+  {
+    "slug": "asfendiyarov-kazakh-national-medical-university",
+    "name": "Asfendiyarov Kazakh National Medical University",
+    "city": "Almaty",
+    "country": "Kazakhstan",
+    "established": "1930",
+    "annual_fee": "₹3,50,000",
+    "total_fee": "₹17–20L",
+    "fmge_rate": "",
+    "highlights": [
+      "Founded 1930 — one of the oldest in Kazakhstan",
+      "FMGE pass rate ~27%",
+      "Good hospital tie-ups in Almaty",
+      "NMC and WHO approved",
+      "Safe and established option"
+    ]
+  },
+  {
+    "slug": "semey-medical-university",
+    "name": "Semey Medical University",
+    "city": "Semey",
+    "country": "Kazakhstan",
+    "established": "1953",
+    "annual_fee": "₹3,00,000",
+    "total_fee": "₹15–18L",
+    "fmge_rate": "",
+    "highlights": [
+      "Our team doctors graduated from Semey",
+      "Known for strong practical training",
+      "FMGE pass rate ~21–24%",
+      "Dr. Nishu Yadav & Dr. Lokesh Attri alumni",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "karaganda-medical-university",
+    "name": "Karaganda Medical University",
+    "city": "Karaganda",
+    "country": "Kazakhstan",
+    "established": "1950",
+    "annual_fee": "₹3,00,000",
+    "total_fee": "₹15–20L",
+    "fmge_rate": "",
+    "highlights": [
+      "One of Kazakhstan's largest medical universities",
+      "FMGE pass rate ~24–25%",
+      "Strong clinical exposure",
+      "Good infrastructure",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "west-kazakhstan-marat-ospanov-medical-university",
+    "name": "West Kazakhstan Marat Ospanov Medical University",
+    "city": "Aktobe",
+    "country": "Kazakhstan",
+    "established": "1957",
+    "annual_fee": "₹3,00,000",
+    "total_fee": "₹15–18L",
+    "fmge_rate": "",
+    "highlights": [
+      "FMGE pass rate ~25–29%",
+      "Very affordable — ₹15–18L total",
+      "Good clinical exposure in Aktobe",
+      "Stable academic environment",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "astana-medical-university",
+    "name": "Astana Medical University",
+    "city": "Astana",
+    "country": "Kazakhstan",
+    "established": "1964",
+    "annual_fee": "₹3,50,000",
+    "total_fee": "₹17–25L",
+    "fmge_rate": "",
+    "highlights": [
+      "FMGE pass rate ~35.9% — top consistent performer",
+      "Located in capital city — best hospital access",
+      "Excellent clinical exposure",
+      "Best for clinical training + FMGE performance",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "al-farabi-kazakh-national-university",
+    "name": "Al-Farabi Kazakh National University",
+    "city": "Almaty",
+    "country": "Kazakhstan",
+    "established": "1934",
+    "annual_fee": "₹4,50,000",
+    "total_fee": "₹22–30L",
+    "fmge_rate": "",
+    "highlights": [
+      "FMGE pass rate ~51% — highest in Kazakhstan",
+      "QS Top 200 globally ranked",
+      "Excellent clinical exposure in Almaty hospitals",
+      "Best academic quality in Kazakhstan",
+      "NMC and WHO approved"
+    ]
+  },
+  {
+    "slug": "tashkent-medical-academy",
+    "name": "Tashkent Medical Academy",
+    "city": "Tashkent",
+    "country": "Uzbekistan",
+    "established": "1919",
+    "annual_fee": "₹3,80,000",
+    "total_fee": "₹19,00,000",
+    "fmge_rate": "",
+    "highlights": [
+      "Oldest medical institution in Uzbekistan (est. 1919)",
+      "Warm climate — similar to north India",
+      "Low fees with good quality education",
+      "Growing Indian student population",
+      "NMC approved"
+    ]
+  },
+  {
+    "slug": "kyrgyz-state-medical-academy",
+    "name": "Kyrgyz State Medical Academy",
+    "city": "Bishkek",
+    "country": "Kyrgyzstan",
+    "established": "1939",
+    "annual_fee": "₹3,00,000",
+    "total_fee": "₹15,00,000",
+    "fmge_rate": "",
+    "highlights": [
+      "Most affordable NMC-approved destination",
+      "Established 1939 with long medical tradition",
+      "Large Indian student community in Bishkek",
+      "FMGE pass rate ~35%",
+      "NMC approved"
+    ]
+  },
+  {
+    "slug": "university-of-perpetual-help-system-dalta",
+    "name": "University of Perpetual Help System DALTA",
+    "city": "",
+    "country": "Philippines",
+    "established": "1975",
+    "annual_fee": "₹5,50,000",
+    "total_fee": "₹33,00,000",
+    "fmge_rate": "",
+    "highlights": [
+      "US-style medical curriculum",
+      "English-first country — zero language barrier",
+      "Strong USMLE preparation program",
+      "FMGE pass rate ~55%",
+      "NMC approved"
+    ]
+  },
+  {
+    "slug": "university-of-kragujevac",
+    "name": "University of Kragujevac",
+    "city": "Kragujevac",
+    "country": "Serbia",
+    "established": "1976",
+    "annual_fee": "",
+    "total_fee": "€12,000–€16,000",
+    "fmge_rate": "",
+    "highlights": [
+      "Medicine program at €2,000/year — affordable European medical education",
+      "Established 1976 — experienced faculty",
+      "Full Stellar Science Hub support: visa, documentation, accommodation",
+      "Access to EU/Schengen networks and job opportunities",
+      "Part-time job support and UAE/Germany placement after degree"
+    ]
+  },
+  {
+    "slug": "alfa-bk-university",
+    "name": "Alfa BK University",
+    "city": "Belgrade",
+    "country": "Serbia",
+    "established": "2003",
+    "annual_fee": "",
+    "total_fee": "€4,000–€10,000",
+    "fmge_rate": "",
+    "highlights": [
+      "Most affordable European university — from €1,000/year (girls)",
+      "Bachelor's and Master's programs available",
+      "Stellar Science Hub handles visa, documentation, airport pickup",
+      "Part-time job support while studying",
+      "Post-graduation job placement in UAE and Germany",
+      "Access to EU/Schengen conferences and networks"
+    ]
+  }
+]

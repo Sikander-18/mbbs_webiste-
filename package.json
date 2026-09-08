@@ -1,0 +1,10 @@
+{
+  "name": "mbbs-educonsultancy",
+  "version": "1.0.0",
+  "description": "MBBS Abroad Educonsultancy Website",
+  "scripts": {
+    "dev": "python server.py",
+    "serve": "npx serve -l 3000 .",
+    "test": "python scripts/verify_routes.py"
+  }
+}
