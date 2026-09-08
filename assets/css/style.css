@@ -190,25 +190,579 @@
 }
 
 /* ========================================================
-   FORGE AUTOMOTIVE HOMEPAGE MOTION STYLES
+   CINEMATIC COLLEGE GATE & HERO MOTION EXPERIENCE
    ======================================================== */
 
 @keyframes mouseScroll {
     0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(12px); opacity: 0; }
+    100% { transform: translateY(10px); opacity: 0; }
 }
 
-/* Gate Entrance Perspective */
-.gate-hero-pinned {
-    perspective: 1200px;
+@keyframes infiniteMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-#gate-door-left, #gate-door-right {
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+/* Header hiding during initial gate interaction */
+header.header-cinematic-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(-12px) !important;
 }
 
-#campus-facade {
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+header {
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* --- SECTION 1 & 2: CINEMATIC COLLEGE GATE HERO --- */
+.cinematic-gate-section {
+    position: relative;
+    min-height: 220vh;
+    background: #03060E;
+    z-index: 10;
+}
+
+.cinematic-sticky-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1400px;
+    background: #03060E;
+}
+
+.cinematic-campus-bg {
+    position: absolute;
+    inset: -2%;
+    background-image: url('/assets/images/campus_entrance.png');
+    background-size: cover;
+    background-position: center 60%;
+    will-change: transform;
+    transform-origin: center 65%;
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cinematic-campus-ambient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center 55%, rgba(3,6,14,0.1) 0%, rgba(3,6,14,0.55) 65%, rgba(3,6,14,0.92) 100%);
+}
+
+.cinematic-gates-viewport {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    perspective: 1400px;
+    transform-style: preserve-3d;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.gate-wing {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    will-change: transform, opacity;
+    background: linear-gradient(to bottom, rgba(5,9,18,0.94) 0%, rgba(8,14,26,0.85) 50%, rgba(5,9,18,0.95) 100%);
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
+}
+
+.gate-wing-left {
+    transform-origin: left center;
+    justify-content: flex-end;
+    border-right: 2px solid rgba(0,197,163,0.6);
+}
+
+.gate-wing-right {
+    transform-origin: right center;
+    justify-content: flex-start;
+    border-left: 2px solid rgba(0,197,163,0.6);
+}
+
+.gate-svg {
+    height: 92%;
+    width: auto;
+    max-width: 480px;
+    opacity: 0.45;
+    position: absolute;
+}
+
+.gate-wing-left .gate-svg {
+    right: 10px;
+}
+
+.gate-wing-right .gate-svg {
+    left: 10px;
+    transform: scaleX(-1);
+}
+
+.gate-medallion {
+    position: relative;
+    z-index: 5;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,197,163,0.7);
+    background: rgba(3,7,16,0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 35px rgba(0,197,163,0.35), inset 0 0 15px rgba(0,197,163,0.15);
+}
+
+.gate-wing-left .gate-medallion {
+    margin-right: 28px;
+}
+
+.gate-wing-right .gate-medallion {
+    margin-left: 28px;
+}
+
+.gate-medallion-text {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #00C5A3;
+    letter-spacing: 0.14em;
+}
+
+.cinematic-hero-overlay {
+    position: relative;
+    z-index: 30;
+    text-align: center;
+    max-width: 820px;
+    padding: 0 1.5rem;
+    will-change: transform, opacity;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cinematic-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #00C5A3;
+    margin-bottom: 1.25rem;
+    text-shadow: 0 0 20px rgba(0,197,163,0.4);
+}
+
+.cinematic-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5.8vw, 4.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    margin: 0 0 1rem;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.85);
+}
+
+.cinematic-subline {
+    font-family: var(--font-inter);
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    color: rgba(255,255,255,0.8);
+    margin: 0 0 3.5rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.8);
+}
+
+.cinematic-scroll-cue {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.85;
+}
+
+.cinematic-scroll-cue span {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+}
+
+.cue-pill {
+    width: 20px;
+    height: 32px;
+    border: 2px solid rgba(0,197,163,0.65);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    background: rgba(0,0,0,0.3);
+}
+
+.cue-dot {
+    width: 3px;
+    height: 7px;
+    background: #00C5A3;
+    border-radius: 2px;
+    animation: mouseScroll 1.6s infinite;
+    box-shadow: 0 0 6px #00C5A3;
+}
+
+/* --- SECTION 3: DARK QUOTE TRANSITION --- */
+.cinematic-quote-section {
+    background: #04070D;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    z-index: 10;
+}
+
+.quote-ambient-light {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(0,197,163,0.07) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.quote-container {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    max-width: 900px;
+}
+
+.quote-caduceus-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 2.25rem;
+    border-radius: 50%;
+    background: rgba(0,197,163,0.08);
+    border: 1px solid rgba(0,197,163,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(0,197,163,0.18);
+}
+
+.cinematic-quote-body {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
+    margin: 0 0 2rem;
+    font-weight: 400;
+}
+
+.quote-em {
+    color: #00C5A3;
+    font-style: italic;
+}
+
+.quote-line-accent {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #00C5A3, transparent);
+    margin: 0 auto 1.75rem;
+}
+
+.quote-sub-meta {
+    font-family: var(--font-mono);
+    font-size: clamp(0.62rem, 0.95vw, 0.75rem);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin: 0;
+}
+
+/* --- SECTION 4: BRAND HERO ("FOR THE DOCTORS. BY THE DOCTORS.") --- */
+.brand-hero-section {
+    background: #080C14;
+    min-height: 94vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 5.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 10;
+}
+
+.brand-hero-backdrop-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 62%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1562774053-701939374585?w=1920&q=90');
+    background-size: cover;
+    background-position: center right;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.brand-hero-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #080C14 0%, rgba(8,12,20,0.92) 25%, rgba(8,12,20,0.5) 60%, transparent 100%);
+}
+
+.brand-hero-inner {
+    position: relative;
+    z-index: 5;
+    padding: clamp(2rem, 4.5vw, 4rem) 1.5rem 2.5rem;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.brand-hero-col-left {
+    max-width: 640px;
+}
+
+.brand-hero-meta-kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.75rem;
+}
+
+.kicker-brand {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+}
+
+.kicker-divider {
+    width: 30px;
+    height: 1px;
+    background: rgba(0,197,163,0.6);
+}
+
+.kicker-year {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #00C5A3;
+}
+
+.brand-hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 7.2vw, 6.2rem);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    color: #FFFFFF;
+    margin: 0 0 1.75rem;
+    font-weight: 700;
+}
+
+.brand-hero-teal-accent {
+    color: #00C5A3;
+    font-style: italic;
+}
+
+.brand-hero-lead {
+    font-family: var(--font-inter);
+    font-size: clamp(0.98rem, 1.25vw, 1.15rem);
+    line-height: 1.75;
+    color: rgba(255,255,255,0.72);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+}
+
+.brand-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn-hero-talk {
+    background: #00C5A3;
+    color: #040812;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-shadow: 0 6px 20px rgba(0,197,163,0.35);
+}
+
+.btn-hero-talk:hover {
+    background: #00dfb8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,197,163,0.45);
+}
+
+.btn-hero-explore {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: rgba(255,255,255,0.04);
+}
+
+.btn-hero-explore:hover {
+    border-color: #00C5A3;
+    color: #00C5A3;
+    background: rgba(0,197,163,0.08);
+    transform: translateY(-2px);
+}
+
+/* --- INTEGRATED INFINITE MARQUEE RIBBON --- */
+.brand-marquee-ribbon {
+    position: relative;
+    z-index: 15;
+    background: rgba(4,7,15,0.92);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 1.15rem 0 1.35rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.marquee-ribbon-heading {
+    margin-bottom: 0.75rem;
+}
+
+.marquee-ribbon-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #00C5A3;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00C5A3;
+    box-shadow: 0 0 8px #00C5A3;
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.marquee-ribbon-all-link {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.marquee-ribbon-all-link:hover {
+    color: #00C5A3;
+}
+
+.marquee-belt-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.marquee-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.marquee-fade-l {
+    left: 0;
+    background: linear-gradient(to right, #04070F, transparent);
+}
+
+.marquee-fade-r {
+    right: 0;
+    background: linear-gradient(to left, #04070F, transparent);
+}
+
+.marquee-belt-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 3.5rem;
+    white-space: nowrap;
+    animation: infiniteMarquee 28s linear infinite;
+    will-change: transform;
+}
+
+.marquee-belt-wrap:hover .marquee-belt-track {
+    animation-play-state: paused;
+}
+
+.marquee-chunk {
+    font-family: var(--font-mono);
+    font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.78);
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: color 0.2s, transform 0.2s;
+    text-decoration: none;
+}
+
+.marquee-chunk:hover {
+    color: #00C5A3;
+    transform: translateY(-1px);
+}
+
+.marquee-chunk i {
+    font-style: normal;
+    color: #00C5A3;
+    font-size: 0.8em;
+    opacity: 0.75;
 }
 
 /* 3D Medical Book Opening */
@@ -222,8 +776,15 @@
     box-shadow: 0 35px 80px rgba(0,0,0,0.7), 0 0 50px rgba(0,197,163,0.25);
 }
 
-/* Pinned Country Explorer */
+/* Responsive adjustments */
 @media (max-width: 1023px) {
+    .brand-hero-backdrop-img {
+        width: 100%;
+        opacity: 0.28;
+    }
+    .brand-hero-gradient-overlay {
+        background: rgba(8,12,20,0.85);
+    }
     .pinned-countries-sticky {
         position: relative !important;
         height: auto !important;
@@ -239,3 +800,17 @@
         min-height: auto !important;
     }
 }
+
+@media (max-width: 767px) {
+    .gate-medallion {
+        width: 56px;
+        height: 56px;
+    }
+    .gate-medallion-text {
+        font-size: 0.58rem;
+    }
+    .gate-svg {
+        max-width: 260px;
+    }
+}
+

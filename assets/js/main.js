@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagneticButtons();
     initGalleryLightbox();
     initScrollReveals();
-    initForgeGate();
+    initCinematicGateSequence();
+    initHeroMarquee();
     initForgeCountries();
     initForgeDoctors();
 });
@@ -126,9 +127,40 @@ function initHeaderScroll() {
     });
 
     function onScroll() {
-        isScrolled = window.scrollY > 40;
+        const brandHero = document.getElementById('brand-hero-section');
+        const isOverDarkHero = brandHero 
+            ? (window.scrollY < (brandHero.offsetTop + brandHero.offsetHeight - 80)) 
+            : (window.scrollY < 2200);
 
-        if (isScrolled) {
+        if (isOverDarkHero) {
+            header.style.background = 'rgba(6, 10, 18, 0.85)';
+            header.style.backdropFilter = 'blur(12px)';
+            header.style.webkitBackdropFilter = 'blur(12px)';
+            header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+            accentLine.style.display = 'block';
+
+            if (brandContainer) brandContainer.style.borderRight = '1px solid rgba(255, 255, 255, 0.1)';
+            if (brandTitle) brandTitle.style.color = 'white';
+            if (brandSub) brandSub.style.color = '#00C5A3';
+            if (brandBadge) {
+                brandBadge.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                brandBadge.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
+            }
+
+            navLinks.forEach(link => {
+                link.style.borderRight = '1px solid rgba(255, 255, 255, 0.08)';
+                if (!link.dataset.active) {
+                    link.style.color = 'rgba(255, 255, 255, 0.7)';
+                }
+            });
+
+            if (counselingContainer) counselingContainer.style.borderLeft = '1px solid rgba(255, 255, 255, 0.1)';
+            if (toggleBtn) {
+                toggleBtn.style.color = 'white';
+                toggleBtn.style.borderLeft = '1px solid rgba(255, 255, 255, 0.1)';
+            }
+        } else {
             header.style.background = 'rgba(255, 255, 255, 0.98)';
             header.style.backdropFilter = 'blur(12px)';
             header.style.webkitBackdropFilter = 'blur(12px)';
@@ -155,34 +187,6 @@ function initHeaderScroll() {
             if (toggleBtn) {
                 toggleBtn.style.color = '#003366';
                 toggleBtn.style.borderLeft = '1px solid #E8E8E8';
-            }
-        } else {
-            header.style.background = 'transparent';
-            header.style.backdropFilter = 'none';
-            header.style.webkitBackdropFilter = 'none';
-            header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
-            header.style.boxShadow = 'none';
-            accentLine.style.display = 'none';
-
-            if (brandContainer) brandContainer.style.borderRight = '1px solid rgba(255, 255, 255, 0.1)';
-            if (brandTitle) brandTitle.style.color = 'white';
-            if (brandSub) brandSub.style.color = '#00C5A3';
-            if (brandBadge) {
-                brandBadge.style.borderColor = 'rgba(255, 255, 255, 0.25)';
-                brandBadge.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
-            }
-
-            navLinks.forEach(link => {
-                link.style.borderRight = '1px solid rgba(255, 255, 255, 0.08)';
-                if (!link.dataset.active) {
-                    link.style.color = 'rgba(255, 255, 255, 0.55)';
-                }
-            });
-
-            if (counselingContainer) counselingContainer.style.borderLeft = '1px solid rgba(255, 255, 255, 0.1)';
-            if (toggleBtn) {
-                toggleBtn.style.color = 'white';
-                toggleBtn.style.borderLeft = '1px solid rgba(255, 255, 255, 0.1)';
             }
         }
     }
@@ -595,51 +599,98 @@ function initScrollReveals() {
     });
 }
 
-// 12. Forge Automotive Gate Entrance & Campus Zoom Controller
-function initForgeGate() {
-    const heroSection = document.getElementById('gate-hero-section');
-    const gateLeft = document.getElementById('gate-door-left');
-    const gateRight = document.getElementById('gate-door-right');
-    const campusBg = document.getElementById('campus-facade');
-    const heroContent = document.getElementById('hero-entrance-content');
-    if (!heroSection || !gateLeft || !gateRight) return;
+// 12. Cinematic College Gate Entrance & Camera Dolly Controller
+function initCinematicGateSequence() {
+    const section = document.getElementById('cinematic-gate-section');
+    const wingLeft = document.getElementById('gate-wing-left');
+    const wingRight = document.getElementById('gate-wing-right');
+    const campusBg = document.getElementById('cinematic-campus-bg');
+    const heroOverlay = document.getElementById('cinematic-hero-overlay');
+    const header = document.querySelector('header');
+    if (!section || !wingLeft || !wingRight) return;
 
     let ticking = false;
-    function updateGate() {
+
+    function onScroll() {
         ticking = false;
-        const rect = heroSection.getBoundingClientRect();
+        const rect = section.getBoundingClientRect();
         const scrollDistance = -rect.top;
-        const maxScroll = heroSection.offsetHeight - window.innerHeight;
-        const progress = Math.min(Math.max(scrollDistance / (maxScroll > 0 ? maxScroll : window.innerHeight), 0), 1);
+        const maxScroll = section.offsetHeight - window.innerHeight;
+        const progress = Math.min(Math.max(scrollDistance / (maxScroll > 0 ? maxScroll : 1), 0), 1);
 
-        // Rotate gate doors open
-        const angle = progress * 92;
-        const translateX = progress * 40;
-        gateLeft.style.transform = `rotateY(-${angle}deg) translateX(-${translateX}%)`;
-        gateRight.style.transform = `rotateY(${angle}deg) translateX(${translateX}%)`;
-        gateLeft.style.opacity = `${Math.max(1 - progress * 1.1, 0)}`;
-        gateRight.style.opacity = `${Math.max(1 - progress * 1.1, 0)}`;
-
-        // Zoom into campus facade
-        if (campusBg) {
-            const scale = 1 + progress * 0.45;
-            campusBg.style.transform = `scale(${scale})`;
+        // Header visibility: hide during the initial gate exterior, reveal as user enters
+        if (header) {
+            if (progress < 0.72) {
+                header.classList.add('header-cinematic-hidden');
+            } else {
+                header.classList.remove('header-cinematic-hidden');
+            }
         }
 
-        // Fade hero title text slightly as gate opens
-        if (heroContent) {
-            heroContent.style.opacity = `${Math.max(1 - progress * 1.6, 0)}`;
-            heroContent.style.transform = `scale(${1 + progress * 0.1}) translateY(-${progress * 40}px)`;
+        // 1. Minimal Hero Typography fade out (0% to 22%)
+        if (heroOverlay) {
+            const textFade = Math.min(progress / 0.22, 1);
+            heroOverlay.style.opacity = (1 - textFade).toFixed(3);
+            heroOverlay.style.transform = `translateY(-${(textFade * 32).toFixed(1)}px) scale(${(1 - textFade * 0.05).toFixed(3)})`;
+            heroOverlay.style.pointerEvents = textFade > 0.85 ? 'none' : 'auto';
+        }
+
+        // 2. 3D Gate Opening (20% to 85%)
+        let gateProgress = 0;
+        if (progress > 0.18) {
+            gateProgress = Math.min((progress - 0.18) / 0.67, 1);
+        }
+        // Smooth cubic easing for physical iron inertia
+        const easedGate = gateProgress < 0.5 
+            ? 4 * gateProgress * gateProgress * gateProgress 
+            : 1 - Math.pow(-2 * gateProgress + 2, 3) / 2;
+
+        const swingAngle = easedGate * 94; // degrees
+        const shiftX = easedGate * 36; // %
+        wingLeft.style.transform = `rotateY(-${swingAngle.toFixed(2)}deg) translateX(-${shiftX.toFixed(1)}%)`;
+        wingRight.style.transform = `rotateY(${swingAngle.toFixed(2)}deg) translateX(${shiftX.toFixed(1)}%)`;
+        wingLeft.style.opacity = Math.max(1 - easedGate * 0.85, 0).toFixed(3);
+        wingRight.style.opacity = Math.max(1 - easedGate * 0.85, 0).toFixed(3);
+
+        // 3. Camera Dolly Push toward campus entrance (0% to 100%)
+        if (campusBg) {
+            const cameraScale = 1 + progress * 0.38;
+            const cameraY = progress * 20;
+            campusBg.style.transform = `scale(${cameraScale.toFixed(3)}) translateY(${cameraY.toFixed(1)}px)`;
         }
     }
 
     window.addEventListener('scroll', () => {
         if (!ticking) {
             ticking = true;
-            window.requestAnimationFrame(updateGate);
+            window.requestAnimationFrame(onScroll);
         }
     }, { passive: true });
-    updateGate();
+    
+    // Initial sync
+    onScroll();
+}
+
+// 12b. Infinite Country Marquee Scroll-Speed Controller
+function initHeroMarquee() {
+    const track = document.getElementById('hero-marquee-track');
+    if (!track) return;
+
+    let lastScrollY = window.scrollY;
+    let scrollTimeout = null;
+
+    window.addEventListener('scroll', () => {
+        const delta = Math.abs(window.scrollY - lastScrollY);
+        lastScrollY = window.scrollY;
+
+        if (delta > 4) {
+            track.style.animationDuration = '13s';
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                track.style.animationDuration = '28s';
+            }, 300);
+        }
+    }, { passive: true });
 }
 
 // 13. Pinned Split Country Explorer Controller (Forge Image 3 - Wheels Style)
