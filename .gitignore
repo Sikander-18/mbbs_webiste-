@@ -28,6 +28,7 @@ wheels/
 
 # Logs & Temp
 *.log
+*.mp4
 scratch/
 tmp/
 temp/

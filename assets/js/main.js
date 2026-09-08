@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagneticButtons();
     initGalleryLightbox();
     initScrollReveals();
-    initCinematicGateSequence();
+    initForgeExperienceController();
     initHeroMarquee();
     initForgeCountries();
     initForgeDoctors();
@@ -127,9 +127,9 @@ function initHeaderScroll() {
     });
 
     function onScroll() {
-        const brandHero = document.getElementById('brand-hero-section');
-        const isOverDarkHero = brandHero 
-            ? (window.scrollY < (brandHero.offsetTop + brandHero.offsetHeight - 80)) 
+        const forgeStage = document.getElementById('forge-stage-experience');
+        const isOverDarkHero = forgeStage 
+            ? (window.scrollY < (forgeStage.offsetTop + forgeStage.offsetHeight - 80)) 
             : (window.scrollY < 2200);
 
         if (isOverDarkHero) {
@@ -599,15 +599,21 @@ function initScrollReveals() {
     });
 }
 
-// 12. Cinematic College Gate Entrance & Camera Dolly Controller
-function initCinematicGateSequence() {
-    const section = document.getElementById('cinematic-gate-section');
+// 12. Forge Automotive Style Unified Hero Stage Controller
+function initForgeExperienceController() {
+    const section = document.getElementById('forge-stage-experience');
+    if (!section) return;
+
     const wingLeft = document.getElementById('gate-wing-left');
     const wingRight = document.getElementById('gate-wing-right');
-    const campusBg = document.getElementById('cinematic-campus-bg');
-    const heroOverlay = document.getElementById('cinematic-hero-overlay');
+    const campusBg = document.getElementById('stage-campus-bg') || document.querySelector('.stage-campus-bg');
+    const heroOverlay = document.getElementById('stage-hero-overlay');
+    const darkVeil = document.getElementById('stage-dark-veil');
+    const quoteLayer = document.getElementById('stage-quote-layer');
+    const quoteContainer = document.getElementById('stage-quote-container');
+    const apertureLayer = document.getElementById('stage-aperture-layer');
+    const apertureFrame = document.getElementById('stage-aperture-frame');
     const header = document.querySelector('header');
-    if (!section || !wingLeft || !wingRight) return;
 
     let ticking = false;
 
@@ -618,45 +624,151 @@ function initCinematicGateSequence() {
         const maxScroll = section.offsetHeight - window.innerHeight;
         const progress = Math.min(Math.max(scrollDistance / (maxScroll > 0 ? maxScroll : 1), 0), 1);
 
-        // Header visibility: hide during the initial gate exterior, reveal as user enters
+        // Header visibility: hidden during initial campus & gate view, reveals as scene transitions
         if (header) {
-            if (progress < 0.72) {
+            if (progress < 0.28) {
                 header.classList.add('header-cinematic-hidden');
             } else {
                 header.classList.remove('header-cinematic-hidden');
             }
         }
 
-        // 1. Minimal Hero Typography fade out (0% to 22%)
+        // --- PHASE 1: Initial Text Fade Out (0.00 to 0.16) ---
         if (heroOverlay) {
-            const textFade = Math.min(progress / 0.22, 1);
-            heroOverlay.style.opacity = (1 - textFade).toFixed(3);
-            heroOverlay.style.transform = `translateY(-${(textFade * 32).toFixed(1)}px) scale(${(1 - textFade * 0.05).toFixed(3)})`;
-            heroOverlay.style.pointerEvents = textFade > 0.85 ? 'none' : 'auto';
+            if (progress <= 0.16) {
+                const textFade = progress / 0.16;
+                heroOverlay.style.opacity = (1 - textFade).toFixed(3);
+                heroOverlay.style.transform = `translateY(-${(textFade * 28).toFixed(1)}px)`;
+                heroOverlay.style.pointerEvents = textFade > 0.8 ? 'none' : 'auto';
+            } else {
+                heroOverlay.style.opacity = '0';
+                heroOverlay.style.pointerEvents = 'none';
+            }
         }
 
-        // 2. 3D Gate Opening (20% to 85%)
-        let gateProgress = 0;
-        if (progress > 0.18) {
-            gateProgress = Math.min((progress - 0.18) / 0.67, 1);
+        // --- PHASE 1b: 3D Gate Swing (0.06 to 0.36) ---
+        if (wingLeft && wingRight) {
+            let gateProgress = 0;
+            if (progress > 0.06) {
+                gateProgress = Math.min((progress - 0.06) / 0.30, 1);
+            }
+            const easedGate = gateProgress < 0.5 
+                ? 4 * gateProgress * gateProgress * gateProgress 
+                : 1 - Math.pow(-2 * gateProgress + 2, 3) / 2;
+
+            const swingAngle = easedGate * 96; // degrees
+            const shiftX = easedGate * 38; // %
+            wingLeft.style.transform = `rotateY(-${swingAngle.toFixed(2)}deg) translateX(-${shiftX.toFixed(1)}%)`;
+            wingRight.style.transform = `rotateY(${swingAngle.toFixed(2)}deg) translateX(${shiftX.toFixed(1)}%)`;
+            const gateOpacity = Math.max(1 - easedGate * 0.9, 0).toFixed(3);
+            wingLeft.style.opacity = gateOpacity;
+            wingRight.style.opacity = gateOpacity;
         }
-        // Smooth cubic easing for physical iron inertia
-        const easedGate = gateProgress < 0.5 
-            ? 4 * gateProgress * gateProgress * gateProgress 
-            : 1 - Math.pow(-2 * gateProgress + 2, 3) / 2;
 
-        const swingAngle = easedGate * 94; // degrees
-        const shiftX = easedGate * 36; // %
-        wingLeft.style.transform = `rotateY(-${swingAngle.toFixed(2)}deg) translateX(-${shiftX.toFixed(1)}%)`;
-        wingRight.style.transform = `rotateY(${swingAngle.toFixed(2)}deg) translateX(${shiftX.toFixed(1)}%)`;
-        wingLeft.style.opacity = Math.max(1 - easedGate * 0.85, 0).toFixed(3);
-        wingRight.style.opacity = Math.max(1 - easedGate * 0.85, 0).toFixed(3);
-
-        // 3. Camera Dolly Push toward campus entrance (0% to 100%)
+        // --- PHASE 1c: Camera Dolly Push Toward Campus (0.00 to 0.38) ---
         if (campusBg) {
-            const cameraScale = 1 + progress * 0.38;
-            const cameraY = progress * 20;
-            campusBg.style.transform = `scale(${cameraScale.toFixed(3)}) translateY(${cameraY.toFixed(1)}px)`;
+            const dollyProgress = Math.min(progress / 0.38, 1);
+            const cameraScale = 1 + dollyProgress * 0.52;
+            campusBg.style.transform = `scale(${cameraScale.toFixed(3)})`;
+        }
+
+        // --- PHASE 1d: Dark Blend Veil (0.10 to 0.36) ---
+        // Simultaneously as the camera pushes forward and gates swing open, background turns to solid black
+        if (darkVeil) {
+            let veilP = 0;
+            if (progress > 0.10) {
+                veilP = Math.min((progress - 0.10) / 0.26, 1);
+            }
+            const easedVeil = veilP < 0.5 ? 2 * veilP * veilP : 1 - Math.pow(-2 * veilP + 2, 2) / 2;
+            darkVeil.style.opacity = easedVeil.toFixed(3);
+        }
+
+        // --- PHASE 2: Quote Appears on Static Dark Screen (0.34 to 0.62) ---
+        if (quoteLayer) {
+            if (progress < 0.33) {
+                quoteLayer.style.opacity = '0';
+                quoteLayer.style.pointerEvents = 'none';
+            } else if (progress >= 0.33 && progress < 0.44) {
+                // Fade in quote
+                const qIn = (progress - 0.33) / 0.11;
+                quoteLayer.style.opacity = qIn.toFixed(3);
+                if (quoteContainer) {
+                    const transY = (1 - qIn) * 26;
+                    quoteContainer.style.transform = `translateY(${transY.toFixed(1)}px)`;
+                }
+            } else if (progress >= 0.44 && progress <= 0.54) {
+                // Hold quote static and readable
+                quoteLayer.style.opacity = '1';
+                if (quoteContainer) quoteContainer.style.transform = 'translateY(0px)';
+            } else if (progress > 0.54 && progress <= 0.62) {
+                // Fade out quote
+                const qOut = (progress - 0.54) / 0.08;
+                quoteLayer.style.opacity = (1 - qOut).toFixed(3);
+                if (quoteContainer) {
+                    const transY = -qOut * 24;
+                    quoteContainer.style.transform = `translateY(${transY.toFixed(1)}px)`;
+                }
+            } else {
+                quoteLayer.style.opacity = '0';
+                quoteLayer.style.pointerEvents = 'none';
+            }
+        }
+
+        // --- PHASE 3: Center Box Opens & Expands to Reveal Brand Hero + Marquee (0.58 to 0.98) ---
+        if (apertureLayer) {
+            if (progress < 0.58) {
+                apertureLayer.style.opacity = '0';
+                apertureLayer.style.pointerEvents = 'none';
+                apertureLayer.style.clipPath = 'inset(45% 42% 45% 42% round 16px)';
+                if (apertureFrame) {
+                    apertureFrame.style.opacity = '0';
+                }
+            } else {
+                const boxProgress = Math.min((progress - 0.58) / 0.38, 1);
+                const easedBox = boxProgress < 0.5 
+                    ? 4 * Math.pow(boxProgress, 3) 
+                    : 1 - Math.pow(-2 * boxProgress + 2, 3) / 2;
+
+                apertureLayer.style.opacity = boxProgress < 0.06 ? (boxProgress / 0.06).toFixed(3) : '1';
+
+                // Aperture inset clip: shrinks from 44% top/bottom and 40% left/right down to 0%
+                const clipY = Math.max((1 - easedBox) * 44, 0).toFixed(2);
+                const clipX = Math.max((1 - easedBox) * 40, 0).toFixed(2);
+                const clipRadius = Math.max((1 - easedBox) * 16, 0).toFixed(1);
+                apertureLayer.style.clipPath = `inset(${clipY}% ${clipX}% ${clipY}% ${clipX}% round ${clipRadius}px)`;
+
+                // Subtle zoom of content from 0.94 to 1.00 as aperture opens
+                const scaleVal = (0.94 + easedBox * 0.06).toFixed(3);
+                apertureLayer.style.transform = `scale(${scaleVal})`;
+
+                // Aperture glowing frame outline
+                if (apertureFrame) {
+                    if (progress < 0.97) {
+                        apertureFrame.style.opacity = (boxProgress < 0.1 ? boxProgress / 0.1 : 1).toFixed(2);
+                        const frameW = (100 - clipX * 2).toFixed(2);
+                        const frameH = (100 - clipY * 2).toFixed(2);
+                        apertureFrame.style.width = `${frameW}%`;
+                        apertureFrame.style.height = `${frameH}%`;
+                        apertureFrame.style.borderRadius = `${clipRadius}px`;
+                        const alpha = Math.max((1 - easedBox) * 0.6, 0).toFixed(2);
+                        apertureFrame.style.borderColor = `rgba(0, 197, 163, ${alpha})`;
+                        apertureFrame.style.boxShadow = `0 0 50px rgba(0, 197, 163, ${(alpha * 0.4).toFixed(2)}), 0 25px 80px rgba(0, 0, 0, ${(alpha * 1.5).toFixed(2)})`;
+                    } else {
+                        apertureFrame.style.opacity = '0';
+                    }
+                }
+
+                if (boxProgress >= 0.85) {
+                    apertureLayer.style.pointerEvents = 'auto';
+                } else {
+                    apertureLayer.style.pointerEvents = 'none';
+                }
+
+                if (progress >= 0.98) {
+                    apertureLayer.style.clipPath = 'inset(0% 0% 0% 0% round 0px)';
+                    apertureLayer.style.transform = 'scale(1)';
+                }
+            }
         }
     }
 
@@ -666,7 +778,7 @@ function initCinematicGateSequence() {
             window.requestAnimationFrame(onScroll);
         }
     }, { passive: true });
-    
+
     // Initial sync
     onScroll();
 }
