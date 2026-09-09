@@ -30,6 +30,7 @@ wheels/
 *.log
 *.mp4
 gate image.png
+book image.png
 scratch/
 tmp/
 temp/

@@ -96,7 +96,7 @@ function initHeaderScroll() {
         accentLine.style.left = '0';
         accentLine.style.right = '0';
         accentLine.style.height = '2px';
-        accentLine.style.background = 'linear-gradient(to right, #00B8A9, #C9A45C)';
+        accentLine.style.background = 'linear-gradient(to right, #283A27, #C9A45C)';
         accentLine.style.display = 'none';
         accentLine.style.zIndex = '10';
         header.prepend(accentLine);
@@ -116,7 +116,7 @@ function initHeaderScroll() {
     navLinks.forEach(link => {
         link.addEventListener('mouseenter', () => {
             if (!link.dataset.active) {
-                link.style.color = isScrolled ? '#00B8A9' : '#F5F3EE';
+                link.style.color = isScrolled ? '#283A27' : '#F7F5EE';
             }
         });
         link.addEventListener('mouseleave', () => {
@@ -142,7 +142,7 @@ function initHeaderScroll() {
 
             if (brandContainer) brandContainer.style.borderRight = '1px solid rgba(255, 255, 255, 0.1)';
             if (brandTitle) brandTitle.style.color = 'white';
-            if (brandSub) brandSub.style.color = '#00B8A9';
+            if (brandSub) brandSub.style.color = '#C9A45C';
             if (brandBadge) {
                 brandBadge.style.borderColor = 'rgba(255, 255, 255, 0.25)';
                 brandBadge.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
@@ -170,7 +170,7 @@ function initHeaderScroll() {
 
             if (brandContainer) brandContainer.style.borderRight = '1px solid #243342';
             if (brandTitle) brandTitle.style.color = '#F5F3EE';
-            if (brandSub) brandSub.style.color = '#00B8A9';
+            if (brandSub) brandSub.style.color = '#C9A45C';
             if (brandBadge) {
                 brandBadge.style.borderColor = '#E2E8F0';
                 brandBadge.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.08)';
@@ -281,9 +281,9 @@ function initCountryFilters() {
                     b.style.color = '#6B7280';
                     b.style.borderColor = '#E8E8E8';
                 });
-                btn.style.background = '#00B8A9'; btn.style.color = '#07111C';
+                btn.style.background = '#283A27'; btn.style.color = '#F7F5EE';
                 btn.style.color = '#FFFFFF';
-                btn.style.borderColor = '#00B8A9';
+                btn.style.borderColor = '#283A27';
 
                 if (rowLabel === 'Budget') selectedBudget = text;
                 if (rowLabel === 'Duration') selectedDuration = text;
@@ -328,7 +328,7 @@ function initCountryFilters() {
 
     if (gridBtn && listBtn && container) {
         gridBtn.addEventListener('click', () => {
-            gridBtn.style.background = '#00B8A9'; gridBtn.style.color = '#07111C';
+            gridBtn.style.background = '#283A27'; gridBtn.style.color = '#F7F5EE';
             gridBtn.style.color = '#FFFFFF';
             listBtn.style.background = '#FFFFFF';
             listBtn.style.color = '#9CA3AF';
@@ -336,7 +336,7 @@ function initCountryFilters() {
         });
 
         listBtn.addEventListener('click', () => {
-            listBtn.style.background = '#00B8A9'; listBtn.style.color = '#07111C';
+            listBtn.style.background = '#283A27'; listBtn.style.color = '#F7F5EE';
             listBtn.style.color = '#FFFFFF';
             gridBtn.style.background = '#FFFFFF';
             gridBtn.style.color = '#9CA3AF';
@@ -358,7 +358,7 @@ function highlightActiveNavLink() {
         if (cleanHref === currentPath || (cleanHref !== '/' && currentPath.startsWith(cleanHref))) {
             const bar = link.querySelector('span');
             if (bar) bar.style.transform = 'scaleX(1)';
-            link.style.color = '#00B8A9';
+            link.style.color = '#283A27';
         }
     });
 }
@@ -379,7 +379,7 @@ function initKineticHero() {
         heroP.classList.add('blur-focus-reveal');
     }
 
-    const heroLine = document.querySelector('.glow-line-pulse') || document.querySelector('main section:first-of-type > div[style*="background:#00B8A9"]');
+    const heroLine = document.querySelector('.glow-line-pulse') || document.querySelector('main section:first-of-type > div[style*="background:#283A27"]');
     if (heroLine && !heroLine.classList.contains('glow-line-pulse')) {
         heroLine.classList.add('glow-line-pulse');
     }
@@ -490,8 +490,8 @@ function initBudgetCalculator() {
                 const tag = document.createElement('div');
                 tag.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:6px;transition:all 0.2s;';
                 tag.innerHTML = `<div>
-                    <span style="font-family:var(--font-inter);font-size:0.82rem;font-weight:600;color:#07111C;display:block">${u.name}</span>
-                    <span style="font-family:var(--font-mono);font-size:0.6rem;color:#00B8A9;letter-spacing:0.08em;text-transform:uppercase">${u.country}</span>
+                    <span style="font-family:var(--font-inter);font-size:0.82rem;font-weight:600;color:#181915;display:block">${u.name}</span>
+                    <span style="font-family:var(--font-mono);font-size:0.6rem;color:#283A27;letter-spacing:0.08em;text-transform:uppercase">${u.country}</span>
                 </div>
                 <div style="text-align:right">
                     <span style="font-family:var(--font-mono);font-size:0.75rem;font-weight:700;color:#0A0A0A">₹${u.minBudget}L – ₹${u.maxBudget}L</span>
@@ -897,11 +897,11 @@ function initForgeCountries() {
                     ctaBtn.textContent = d.ctaText;
                     ctaBtn.href = d.ctaHref;
                     if (slideIndex === totalSlides - 1) {
-                        ctaBtn.style.background = '#00B8A9';
-                        ctaBtn.style.color = '#07111C';
+                        ctaBtn.style.background = '#283A27';
+                        ctaBtn.style.color = '#F7F5EE';
                         ctaBtn.style.fontWeight = '700';
                     } else {
-                        ctaBtn.style.background = '#00B8A9';
+                        ctaBtn.style.background = '#283A27';
                         ctaBtn.style.color = '#FFFFFF';
                     }
                 }
@@ -1002,7 +1002,7 @@ function initForgeDoctors() {
 
         tabBtns.forEach((btn, i) => {
             if (i === index) {
-                btn.style.background = '#00B8A9'; btn.style.color = '#07111C';
+                btn.style.background = '#283A27'; btn.style.color = '#F7F5EE';
                 btn.classList.add('active');
             } else {
                 btn.style.background = 'rgba(255,255,255,0.2)';
