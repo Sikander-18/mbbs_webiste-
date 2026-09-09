@@ -29,6 +29,7 @@ wheels/
 # Logs & Temp
 *.log
 *.mp4
+gate image.png
 scratch/
 tmp/
 temp/

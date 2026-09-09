@@ -96,7 +96,7 @@ function initHeaderScroll() {
         accentLine.style.left = '0';
         accentLine.style.right = '0';
         accentLine.style.height = '2px';
-        accentLine.style.background = 'linear-gradient(to right, #00C5A3, #003366)';
+        accentLine.style.background = 'linear-gradient(to right, #00B8A9, #C9A45C)';
         accentLine.style.display = 'none';
         accentLine.style.zIndex = '10';
         header.prepend(accentLine);
@@ -116,7 +116,7 @@ function initHeaderScroll() {
     navLinks.forEach(link => {
         link.addEventListener('mouseenter', () => {
             if (!link.dataset.active) {
-                link.style.color = isScrolled ? '#003366' : 'white';
+                link.style.color = isScrolled ? '#00B8A9' : '#F5F3EE';
             }
         });
         link.addEventListener('mouseleave', () => {
@@ -133,7 +133,7 @@ function initHeaderScroll() {
             : (window.scrollY < 2200);
 
         if (isOverDarkHero) {
-            header.style.background = 'rgba(6, 10, 18, 0.85)';
+            header.style.background = 'rgba(7, 17, 28, 0.88)';
             header.style.backdropFilter = 'blur(12px)';
             header.style.webkitBackdropFilter = 'blur(12px)';
             header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
@@ -142,7 +142,7 @@ function initHeaderScroll() {
 
             if (brandContainer) brandContainer.style.borderRight = '1px solid rgba(255, 255, 255, 0.1)';
             if (brandTitle) brandTitle.style.color = 'white';
-            if (brandSub) brandSub.style.color = '#00C5A3';
+            if (brandSub) brandSub.style.color = '#00B8A9';
             if (brandBadge) {
                 brandBadge.style.borderColor = 'rgba(255, 255, 255, 0.25)';
                 brandBadge.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
@@ -161,32 +161,32 @@ function initHeaderScroll() {
                 toggleBtn.style.borderLeft = '1px solid rgba(255, 255, 255, 0.1)';
             }
         } else {
-            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.background = 'rgba(13, 27, 42, 0.96)';
             header.style.backdropFilter = 'blur(12px)';
             header.style.webkitBackdropFilter = 'blur(12px)';
-            header.style.borderBottom = '1px solid #E8E8E8';
+            header.style.borderBottom = '1px solid #243342';
             header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.06)';
             accentLine.style.display = 'block';
 
-            if (brandContainer) brandContainer.style.borderRight = '1px solid #E8E8E8';
-            if (brandTitle) brandTitle.style.color = '#003366';
-            if (brandSub) brandSub.style.color = '#00C5A3';
+            if (brandContainer) brandContainer.style.borderRight = '1px solid #243342';
+            if (brandTitle) brandTitle.style.color = '#F5F3EE';
+            if (brandSub) brandSub.style.color = '#00B8A9';
             if (brandBadge) {
                 brandBadge.style.borderColor = '#E2E8F0';
                 brandBadge.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.08)';
             }
 
             navLinks.forEach(link => {
-                link.style.borderRight = '1px solid #E8E8E8';
+                link.style.borderRight = '1px solid #243342';
                 if (!link.dataset.active) {
                     link.style.color = '#9CA3AF';
                 }
             });
 
-            if (counselingContainer) counselingContainer.style.borderLeft = '1px solid #E8E8E8';
+            if (counselingContainer) counselingContainer.style.borderLeft = '1px solid #243342';
             if (toggleBtn) {
-                toggleBtn.style.color = '#003366';
-                toggleBtn.style.borderLeft = '1px solid #E8E8E8';
+                toggleBtn.style.color = '#F5F3EE';
+                toggleBtn.style.borderLeft = '1px solid #243342';
             }
         }
     }
@@ -281,9 +281,9 @@ function initCountryFilters() {
                     b.style.color = '#6B7280';
                     b.style.borderColor = '#E8E8E8';
                 });
-                btn.style.background = '#003366';
+                btn.style.background = '#00B8A9'; btn.style.color = '#07111C';
                 btn.style.color = '#FFFFFF';
-                btn.style.borderColor = '#003366';
+                btn.style.borderColor = '#00B8A9';
 
                 if (rowLabel === 'Budget') selectedBudget = text;
                 if (rowLabel === 'Duration') selectedDuration = text;
@@ -328,7 +328,7 @@ function initCountryFilters() {
 
     if (gridBtn && listBtn && container) {
         gridBtn.addEventListener('click', () => {
-            gridBtn.style.background = '#003366';
+            gridBtn.style.background = '#00B8A9'; gridBtn.style.color = '#07111C';
             gridBtn.style.color = '#FFFFFF';
             listBtn.style.background = '#FFFFFF';
             listBtn.style.color = '#9CA3AF';
@@ -336,7 +336,7 @@ function initCountryFilters() {
         });
 
         listBtn.addEventListener('click', () => {
-            listBtn.style.background = '#003366';
+            listBtn.style.background = '#00B8A9'; listBtn.style.color = '#07111C';
             listBtn.style.color = '#FFFFFF';
             gridBtn.style.background = '#FFFFFF';
             gridBtn.style.color = '#9CA3AF';
@@ -358,7 +358,7 @@ function highlightActiveNavLink() {
         if (cleanHref === currentPath || (cleanHref !== '/' && currentPath.startsWith(cleanHref))) {
             const bar = link.querySelector('span');
             if (bar) bar.style.transform = 'scaleX(1)';
-            link.style.color = '#00C5A3';
+            link.style.color = '#00B8A9';
         }
     });
 }
@@ -379,7 +379,7 @@ function initKineticHero() {
         heroP.classList.add('blur-focus-reveal');
     }
 
-    const heroLine = document.querySelector('main section:first-of-type > div[style*="background:#00C5A3"]');
+    const heroLine = document.querySelector('.glow-line-pulse') || document.querySelector('main section:first-of-type > div[style*="background:#00B8A9"]');
     if (heroLine && !heroLine.classList.contains('glow-line-pulse')) {
         heroLine.classList.add('glow-line-pulse');
     }
@@ -490,8 +490,8 @@ function initBudgetCalculator() {
                 const tag = document.createElement('div');
                 tag.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:6px;transition:all 0.2s;';
                 tag.innerHTML = `<div>
-                    <span style="font-family:var(--font-inter);font-size:0.82rem;font-weight:600;color:#003366;display:block">${u.name}</span>
-                    <span style="font-family:var(--font-mono);font-size:0.6rem;color:#00C5A3;letter-spacing:0.08em;text-transform:uppercase">${u.country}</span>
+                    <span style="font-family:var(--font-inter);font-size:0.82rem;font-weight:600;color:#07111C;display:block">${u.name}</span>
+                    <span style="font-family:var(--font-mono);font-size:0.6rem;color:#00B8A9;letter-spacing:0.08em;text-transform:uppercase">${u.country}</span>
                 </div>
                 <div style="text-align:right">
                     <span style="font-family:var(--font-mono);font-size:0.75rem;font-weight:700;color:#0A0A0A">₹${u.minBudget}L – ₹${u.maxBudget}L</span>
@@ -624,9 +624,9 @@ function initForgeExperienceController() {
         const maxScroll = section.offsetHeight - window.innerHeight;
         const progress = Math.min(Math.max(scrollDistance / (maxScroll > 0 ? maxScroll : 1), 0), 1);
 
-        // Header visibility: hidden during initial campus & gate view, reveals as scene transitions
+        // Header visibility: hidden during cinematic stage experience, reveals once scrolling into page content
         if (header) {
-            if (progress < 0.28) {
+            if (progress < 0.95) {
                 header.classList.add('header-cinematic-hidden');
             } else {
                 header.classList.remove('header-cinematic-hidden');
@@ -743,16 +743,17 @@ function initForgeExperienceController() {
 
                 // Aperture glowing frame outline
                 if (apertureFrame) {
-                    if (progress < 0.97) {
-                        apertureFrame.style.opacity = (boxProgress < 0.1 ? boxProgress / 0.1 : 1).toFixed(2);
+                    if (progress < 0.92 && boxProgress < 0.85) {
+                        const frameOpacity = boxProgress < 0.08 ? (boxProgress / 0.08) : Math.max(0, 1 - (boxProgress - 0.65) / 0.2);
+                        apertureFrame.style.opacity = Math.max(0, Math.min(1, frameOpacity)).toFixed(2);
                         const frameW = (100 - clipX * 2).toFixed(2);
                         const frameH = (100 - clipY * 2).toFixed(2);
                         apertureFrame.style.width = `${frameW}%`;
                         apertureFrame.style.height = `${frameH}%`;
                         apertureFrame.style.borderRadius = `${clipRadius}px`;
                         const alpha = Math.max((1 - easedBox) * 0.6, 0).toFixed(2);
-                        apertureFrame.style.borderColor = `rgba(0, 197, 163, ${alpha})`;
-                        apertureFrame.style.boxShadow = `0 0 50px rgba(0, 197, 163, ${(alpha * 0.4).toFixed(2)}), 0 25px 80px rgba(0, 0, 0, ${(alpha * 1.5).toFixed(2)})`;
+                        apertureFrame.style.borderColor = `rgba(0, 184, 169, ${alpha})`;
+                        apertureFrame.style.boxShadow = `0 0 35px rgba(0, 184, 169, ${(alpha * 0.35).toFixed(2)}), 0 20px 60px rgba(0, 0, 0, ${(alpha * 1.5).toFixed(2)})`;
                     } else {
                         apertureFrame.style.opacity = '0';
                     }
@@ -905,11 +906,11 @@ function initForgeCountries() {
                     ctaBtn.textContent = d.ctaText;
                     ctaBtn.href = d.ctaHref;
                     if (slideIndex === totalSlides - 1) {
-                        ctaBtn.style.background = '#00C5A3';
-                        ctaBtn.style.color = '#003366';
+                        ctaBtn.style.background = '#00B8A9';
+                        ctaBtn.style.color = '#07111C';
                         ctaBtn.style.fontWeight = '700';
                     } else {
-                        ctaBtn.style.background = '#003366';
+                        ctaBtn.style.background = '#00B8A9';
                         ctaBtn.style.color = '#FFFFFF';
                     }
                 }
@@ -1010,7 +1011,7 @@ function initForgeDoctors() {
 
         tabBtns.forEach((btn, i) => {
             if (i === index) {
-                btn.style.background = '#00C5A3';
+                btn.style.background = '#00B8A9'; btn.style.color = '#07111C';
                 btn.classList.add('active');
             } else {
                 btn.style.background = 'rgba(255,255,255,0.2)';
