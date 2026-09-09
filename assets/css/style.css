@@ -254,210 +254,144 @@ header {
     height: 100%;
 }
 
-/* LAYER 1: CAMPUS EXTERIOR & 3D GATES */
+/* LAYER 1: PHOTOREALISTIC CAMPUS GATE EXPERIENCE */
 .stage-campus-layer {
     z-index: 10;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    perspective: 1400px;
+    perspective: 1600px;
     background: #07111C;
 }
 
-.stage-campus-bg,
-.cinematic-campus-bg {
+/* Coordinate frame that maintains exact 1264x848 aspect ratio (1.490566) while covering 100% of viewport */
+.stage-campus-scene {
     position: absolute;
-    inset: -4%;
-    background-image: url('/assets/images/campus_entrance.png');
-    background-size: cover;
-    background-position: center 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: max(100vw, calc(100vh * 1.490566));
+    height: max(100vh, calc(100vw / 1.490566));
+    min-width: 100%;
+    min-height: 100%;
     will-change: transform;
-    transform-origin: center 65%;
-    transition: transform 0.08s linear;
+    transform-origin: center center;
+    perspective: 1600px;
+    transform-style: preserve-3d;
+}
+
+.stage-campus-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.campus-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .cinematic-campus-ambient {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center 55%, rgba(7,17,28,0.1) 0%, rgba(7,17,28,0.6) 65%, rgba(7,17,28,0.98) 100%);
+    background: radial-gradient(circle at center 55%, rgba(7,17,28,0) 35%, rgba(7,17,28,0.3) 70%, rgba(7,17,28,0.75) 100%);
+    pointer-events: none;
 }
 
-.stage-gates-viewport,
-.cinematic-gates-viewport {
+/* 3D Realistic Wrought Iron Double Gate */
+.stage-gates-stage {
     position: absolute;
     inset: 0;
-    display: flex;
-    perspective: 1400px;
-    transform-style: preserve-3d;
-    pointer-events: none;
-    z-index: 20;
-}
-
-.gate-wing {
-    width: 50%;
+    width: 100%;
     height: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    will-change: transform, opacity;
-    background: linear-gradient(to bottom, rgba(7,17,28,0.97) 0%, rgba(13,27,42,0.92) 50%, rgba(7,17,28,0.98) 100%);
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.85);
-    transition: transform 0.08s linear, opacity 0.08s linear;
+    pointer-events: none;
+    perspective: 1600px;
+    transform-style: preserve-3d;
 }
 
-.gate-wing-left {
-    transform-origin: left center;
-    justify-content: flex-end;
-    border-right: 2px solid #243342;
-}
-
-.gate-wing-right {
-    transform-origin: right center;
-    justify-content: flex-start;
-    border-left: 2px solid #243342;
-}
-
-.gate-svg {
-    height: 92%;
-    width: auto;
-    max-width: 480px;
-    opacity: 0.55;
+.gate-wing-realistic {
     position: absolute;
-}
-
-.gate-wing-left .gate-svg {
-    right: 10px;
-}
-
-.gate-wing-right .gate-svg {
-    left: 10px;
-    transform: scaleX(-1);
-}
-
-.gate-medallion {
-    position: relative;
-    z-index: 5;
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    border: 2px solid rgba(209,199,189,0.7);
-    background: rgba(30,26,23,0.88);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 35px rgba(201,164,92,0.35), inset 0 0 15px rgba(201,164,92,0.2);
-}
-
-.gate-wing-left .gate-medallion {
-    margin-right: 28px;
-}
-
-.gate-wing-right .gate-medallion {
-    margin-left: 28px;
-}
-
-.gate-medallion-text {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: #F5F3EE;
-    letter-spacing: 0.14em;
-}
-
-.cinematic-hero-overlay {
-    position: relative;
-    z-index: 30;
-    text-align: center;
-    max-width: 820px;
-    padding: 0 1.5rem;
+    top: 2.12264%;
+    height: 92.21698%;
+    width: 37.89557%;
     will-change: transform, opacity;
-    transition: opacity 0.1s linear, transform 0.1s linear;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.65));
+    transition: transform 0.05s linear, opacity 0.05s linear;
 }
 
-.cinematic-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #A7B0BA;
-    margin-bottom: 1.25rem;
-    text-shadow: 0 0 20px rgba(172,156,141,0.35);
+.gate-wing-realistic-left {
+    left: 12.10443%;
+    transform-origin: left center;
 }
 
-.cinematic-headline {
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 5.8vw, 4.8rem);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: #F5F3EE;
-    margin: 0 0 1rem;
-    text-shadow: 0 4px 30px rgba(0,0,0,0.85);
+.gate-wing-realistic-right {
+    left: 50.00000%;
+    transform-origin: right center;
 }
 
-.cinematic-subline {
-    font-family: var(--font-inter);
-    font-size: clamp(1rem, 1.4vw, 1.25rem);
-    color: #C9A45C;
-    margin: 0 0 3.5rem;
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    text-shadow: 0 2px 15px rgba(0,0,0,0.8);
+.gate-leaf-image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-.cinematic-scroll-cue {
-    display: inline-flex;
+/* Discreet Bottom Scroll Cue (Strictly NO text above or across gate) */
+.gate-bottom-scroll-cue {
+    position: absolute;
+    bottom: 2.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    opacity: 0.85;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
 }
 
-.cinematic-scroll-cue span {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(239,233,225,0.7);
-}
-
-.cue-pill {
-    width: 20px;
-    height: 32px;
-    border: 2px solid rgba(172,156,141,0.65);
-    border-radius: 16px;
+.gate-bottom-scroll-cue .cue-pill {
+    width: 22px;
+    height: 34px;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-radius: 17px;
     display: flex;
     justify-content: center;
     padding-top: 5px;
-    background: rgba(30,26,23,0.4);
+    background: rgba(7, 17, 28, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-.cue-dot {
+.gate-bottom-scroll-cue .cue-dot {
     width: 3px;
     height: 7px;
     background: #00B8A9;
     border-radius: 2px;
     animation: mouseScroll 1.6s infinite;
-    box-shadow: 0 0 8px #00B8A9;
+    box-shadow: 0 0 10px #00B8A9;
 }
 
-/* DARK VEIL OVERLAY: Smoothly blends scene to deep espresso */
+/* DARK VEIL OVERLAY: Disabled as requested — quote blends directly with the college image */
 .stage-dark-veil {
-    position: absolute;
-    inset: 0;
-    background: #07111C;
-    z-index: 25;
-    opacity: 0;
+    display: none !important;
+    opacity: 0 !important;
     pointer-events: none;
-    will-change: opacity;
-    transition: opacity 0.08s linear;
 }
 
-/* LAYER 2: DARK QUOTE (ON THE SAME STATIC DARK VIEWPORT) */
+/* LAYER 2: MINIMALIST QUOTE (BLENDS DIRECTLY WITH SUNLIT CAMPUS COURTYARD) */
 .stage-quote-layer,
 .cinematic-quote-section {
     z-index: 30;
@@ -468,13 +402,13 @@ header {
     opacity: 0;
     background: transparent;
     will-change: opacity, transform;
-    transition: opacity 0.1s linear, transform 0.1s linear;
+    transition: opacity 0.08s linear, transform 0.08s linear;
 }
 
 .quote-ambient-light {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(0,184,169,0.15) 0%, rgba(201,164,92,0.08) 40%, transparent 65%);
+    background: radial-gradient(circle at 50% 50%, rgba(7,17,28,0.48) 0%, rgba(7,17,28,0.22) 50%, transparent 75%);
     pointer-events: none;
 }
 
@@ -482,53 +416,59 @@ header {
     position: relative;
     z-index: 5;
     text-align: center;
-    max-width: 900px;
+    max-width: 920px;
     padding: 0 1.5rem;
 }
 
 .quote-caduceus-icon {
-    width: 58px;
-    height: 58px;
+    width: 60px;
+    height: 60px;
     margin: 0 auto 2.25rem;
     border-radius: 50%;
-    background: rgba(114,56,61,0.12);
-    border: 1px solid rgba(172,156,141,0.35);
+    background: rgba(7,17,28,0.65);
+    border: 1px solid rgba(212,175,55,0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 30px rgba(114,56,61,0.25);
+    box-shadow: 0 4px 25px rgba(0,0,0,0.6), 0 0 15px rgba(212,175,55,0.25);
 }
 
 .cinematic-quote-body {
     font-family: var(--font-display);
-    font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+    font-size: clamp(2.35rem, 5.4vw, 4.4rem);
     line-height: 1.12;
     letter-spacing: -0.03em;
-    color: #F5F3EE;
+    color: #FFFFFF;
     margin: 0 0 2rem;
     font-weight: 400;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.92), 0 2px 10px rgba(0,0,0,0.95);
 }
 
 .quote-em {
-    color: #C9A45C;
+    color: #D4AF37;
     font-style: italic;
+    text-shadow: 0 4px 25px rgba(0,0,0,0.92), 0 0 20px rgba(212,175,55,0.4);
 }
 
 .quote-line-accent {
-    width: 60px;
+    width: 64px;
     height: 2px;
-    background: linear-gradient(to right, transparent, #243342, transparent);
+    background: linear-gradient(to right, transparent, #D4AF37, transparent);
     margin: 0 auto 1.75rem;
+    box-shadow: 0 0 8px rgba(212,175,55,0.5);
 }
 
 .quote-sub-meta {
     font-family: var(--font-mono);
     font-size: clamp(0.62rem, 0.95vw, 0.75rem);
     font-weight: 700;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: #A7B0BA;
+    color: rgba(255,255,255,0.9);
     margin: 0;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.95);
 }
 
 /* LAYER 3: EXPANDING APERTURE (REVEALS BRAND HERO + MARQUEE) */
@@ -997,16 +937,4 @@ header {
     }
 }
 
-@media (max-width: 767px) {
-    .gate-medallion {
-        width: 56px;
-        height: 56px;
-    }
-    .gate-medallion-text {
-        font-size: 0.58rem;
-    }
-    .gate-svg {
-        max-width: 260px;
-    }
-}
 

@@ -606,8 +606,8 @@ function initForgeExperienceController() {
 
     const wingLeft = document.getElementById('gate-wing-left');
     const wingRight = document.getElementById('gate-wing-right');
-    const campusBg = document.getElementById('stage-campus-bg') || document.querySelector('.stage-campus-bg');
-    const heroOverlay = document.getElementById('stage-hero-overlay');
+    const campusScene = document.getElementById('stage-campus-scene');
+    const scrollCue = document.getElementById('stage-scroll-cue');
     const darkVeil = document.getElementById('stage-dark-veil');
     const quoteLayer = document.getElementById('stage-quote-layer');
     const quoteContainer = document.getElementById('stage-quote-container');
@@ -633,79 +633,70 @@ function initForgeExperienceController() {
             }
         }
 
-        // --- PHASE 1: Initial Text Fade Out (0.00 to 0.16) ---
-        if (heroOverlay) {
-            if (progress <= 0.16) {
-                const textFade = progress / 0.16;
-                heroOverlay.style.opacity = (1 - textFade).toFixed(3);
-                heroOverlay.style.transform = `translateY(-${(textFade * 28).toFixed(1)}px)`;
-                heroOverlay.style.pointerEvents = textFade > 0.8 ? 'none' : 'auto';
+        // --- PHASE 1a: Fade Out Discreet Bottom Scroll Cue (0.00 to 0.08) ---
+        if (scrollCue) {
+            if (progress <= 0.08) {
+                scrollCue.style.opacity = (1 - progress / 0.08).toFixed(3);
             } else {
-                heroOverlay.style.opacity = '0';
-                heroOverlay.style.pointerEvents = 'none';
+                scrollCue.style.opacity = '0';
             }
         }
 
-        // --- PHASE 1b: 3D Gate Swing (0.06 to 0.36) ---
+        // --- PHASE 1b: Realistic 3D Double Gate Opening (0.00 to 0.32) ---
         if (wingLeft && wingRight) {
-            let gateProgress = 0;
-            if (progress > 0.06) {
-                gateProgress = Math.min((progress - 0.06) / 0.30, 1);
-            }
+            const gateProgress = Math.min(progress / 0.30, 1);
+            // Smooth natural cubic easing
             const easedGate = gateProgress < 0.5 
                 ? 4 * gateProgress * gateProgress * gateProgress 
                 : 1 - Math.pow(-2 * gateProgress + 2, 3) / 2;
 
-            const swingAngle = easedGate * 96; // degrees
-            const shiftX = easedGate * 38; // %
-            wingLeft.style.transform = `rotateY(-${swingAngle.toFixed(2)}deg) translateX(-${shiftX.toFixed(1)}%)`;
-            wingRight.style.transform = `rotateY(${swingAngle.toFixed(2)}deg) translateX(${shiftX.toFixed(1)}%)`;
-            const gateOpacity = Math.max(1 - easedGate * 0.9, 0).toFixed(3);
+            const swingAngle = easedGate * 82; // degrees rotation around pillar hinges
+            wingLeft.style.transform = `rotateY(-${swingAngle.toFixed(2)}deg)`;
+            wingRight.style.transform = `rotateY(${swingAngle.toFixed(2)}deg)`;
+
+            // Smoothly blend into perspective as gates swing fully open
+            const gateOpacity = gateProgress > 0.72 
+                ? Math.max(1 - (gateProgress - 0.72) / 0.28, 0).toFixed(3) 
+                : '1';
             wingLeft.style.opacity = gateOpacity;
             wingRight.style.opacity = gateOpacity;
         }
 
-        // --- PHASE 1c: Camera Dolly Push Toward Campus (0.00 to 0.38) ---
-        if (campusBg) {
-            const dollyProgress = Math.min(progress / 0.38, 1);
-            const cameraScale = 1 + dollyProgress * 0.52;
-            campusBg.style.transform = `scale(${cameraScale.toFixed(3)})`;
+        // --- PHASE 1c: Camera Dolly Push into University Courtyard (0.00 to 0.56) ---
+        if (campusScene) {
+            const dollyProgress = Math.min(progress / 0.56, 1);
+            const cameraScale = 1 + dollyProgress * 0.14; // gentle, majestic 1.0 to 1.14 zoom
+            campusScene.style.transform = `translate(-50%, -50%) scale(${cameraScale.toFixed(3)})`;
         }
 
-        // --- PHASE 1d: Dark Blend Veil (0.10 to 0.36) ---
-        // Simultaneously as the camera pushes forward and gates swing open, background turns to solid black
+        // --- PHASE 1d: No solid black veil — keep college image visible! ---
         if (darkVeil) {
-            let veilP = 0;
-            if (progress > 0.10) {
-                veilP = Math.min((progress - 0.10) / 0.26, 1);
-            }
-            const easedVeil = veilP < 0.5 ? 2 * veilP * veilP : 1 - Math.pow(-2 * veilP + 2, 2) / 2;
-            darkVeil.style.opacity = easedVeil.toFixed(3);
+            darkVeil.style.opacity = '0';
         }
 
-        // --- PHASE 2: Quote Appears on Static Dark Screen (0.34 to 0.62) ---
+        // --- PHASE 2: Quote Appears Directly on College Image after Gate Opens (0.20 to 0.56) ---
         if (quoteLayer) {
-            if (progress < 0.33) {
+            if (progress < 0.20) {
                 quoteLayer.style.opacity = '0';
                 quoteLayer.style.pointerEvents = 'none';
-            } else if (progress >= 0.33 && progress < 0.44) {
-                // Fade in quote
-                const qIn = (progress - 0.33) / 0.11;
+            } else if (progress >= 0.20 && progress < 0.32) {
+                // Fade in quote smoothly over the open collegiate courtyard
+                const qIn = (progress - 0.20) / 0.12;
                 quoteLayer.style.opacity = qIn.toFixed(3);
                 if (quoteContainer) {
-                    const transY = (1 - qIn) * 26;
+                    const transY = (1 - qIn) * 24;
                     quoteContainer.style.transform = `translateY(${transY.toFixed(1)}px)`;
                 }
-            } else if (progress >= 0.44 && progress <= 0.54) {
-                // Hold quote static and readable
+            } else if (progress >= 0.32 && progress <= 0.46) {
+                // Hold quote static, prominent, and readable directly over the sunlit campus
                 quoteLayer.style.opacity = '1';
                 if (quoteContainer) quoteContainer.style.transform = 'translateY(0px)';
-            } else if (progress > 0.54 && progress <= 0.62) {
-                // Fade out quote
-                const qOut = (progress - 0.54) / 0.08;
+            } else if (progress > 0.46 && progress <= 0.56) {
+                // Fade out quote gently before aperture opens
+                const qOut = (progress - 0.46) / 0.10;
                 quoteLayer.style.opacity = (1 - qOut).toFixed(3);
                 if (quoteContainer) {
-                    const transY = -qOut * 24;
+                    const transY = -qOut * 20;
                     quoteContainer.style.transform = `translateY(${transY.toFixed(1)}px)`;
                 }
             } else {
