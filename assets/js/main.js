@@ -1,10 +1,12 @@
 // Stellar Science Hub & Educonsultancy - Main Client Interactions
 
 document.addEventListener('DOMContentLoaded', () => {
+    initRafiqProfileSection();
     initHeaderScroll();
     initMobileMenu();
     initFaqAccordion();
     initCountryFilters();
+    initCountryBannerStack();
     highlightActiveNavLink();
     initKineticHero();
     initStatCounters();
@@ -17,6 +19,97 @@ document.addEventListener('DOMContentLoaded', () => {
     initForgeCountries();
     initForgeDoctors();
 });
+
+// Homepage profile copy beside the featured video.
+function initRafiqProfileSection() {
+    const video = document.querySelector('iframe[src*="youtube.com/embed/dQw4w9WgXcQ"]');
+    const section = video?.closest('section');
+    const heading = section?.querySelector('h2');
+    const description = section?.querySelector('h2 + div + p');
+
+    if (!heading || !description) return;
+
+    heading.textContent = 'Rafiq Sir';
+    description.textContent = 'With a career dedicated to guiding students toward the right medical education opportunities, Rafiq Sir brings over a decade of experience in the MBBS abroad counselling space. He completed his B.Sc. in 1997 and later pursued an LLB, completed in 2026. While Stellar Educonsultancy was officially established in 2024, his work in the field began more than 10 years ago, during which he has successfully guided and placed 1,200+ students in medical universities abroad. His experience is built on understanding students’ aspirations, choosing the right destinations, and helping families navigate the journey with confidence.';
+}
+
+// Countries page: scroll-driven editorial banner stack.
+function initCountryBannerStack() {
+    const section = document.getElementById('filter');
+    const firstCard = section?.querySelector('a.group');
+    const stack = firstCard?.parentElement;
+    if (!section || !stack) return;
+
+    const cards = Array.from(stack.children).filter(child => child.matches('a.group'));
+    if (cards.length < 2) return;
+
+    section.classList.add('country-stack-section');
+    stack.classList.add('country-banner-stack');
+
+    const sectionHeading = section.querySelector('h2');
+    if (sectionHeading) {
+        sectionHeading.innerHTML = sectionHeading.innerHTML.replace('All 8 destinations', 'All 7 destinations');
+    }
+
+    cards.forEach((card, index) => {
+        card.classList.add('country-banner-card');
+        card.style.setProperty('--stack-order', index);
+        card.style.setProperty('--stack-z', index + 1);
+
+        const sequence = document.createElement('span');
+        sequence.className = 'country-banner-sequence';
+        sequence.textContent = `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+        sequence.setAttribute('aria-hidden', 'true');
+        card.appendChild(sequence);
+    });
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let ticking = false;
+
+    const updateStack = () => {
+        ticking = false;
+        const visibleCards = cards.filter(card => window.getComputedStyle(card).display !== 'none');
+        const compact = window.innerWidth < 768;
+        const baseTop = compact ? 76 : 88;
+        const step = compact ? 7 : 13;
+
+        visibleCards.forEach((card, index) => {
+            card.style.setProperty('--stack-top', `${baseTop + (index * step)}px`);
+            card.style.setProperty('--stack-z', index + 1);
+
+            if (reduceMotion) return;
+
+            const nextCard = visibleCards[index + 1];
+            if (!nextCard) {
+                card.style.setProperty('--stack-scale', '1');
+                card.style.setProperty('--stack-brightness', '1');
+                return;
+            }
+
+            const nextTop = nextCard.getBoundingClientRect().top;
+            const animationStart = window.innerHeight * 0.88;
+            const animationDistance = window.innerHeight * 0.7;
+            const progress = Math.max(0, Math.min(1, (animationStart - nextTop) / animationDistance));
+            card.style.setProperty('--stack-scale', (1 - (progress * (compact ? 0.018 : 0.032))).toFixed(4));
+            card.style.setProperty('--stack-brightness', (1 - (progress * 0.28)).toFixed(4));
+        });
+    };
+
+    const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(updateStack);
+    };
+
+    if (!reduceMotion) {
+        window.addEventListener('scroll', requestUpdate, { passive: true });
+        window.addEventListener('resize', requestUpdate, { passive: true });
+    }
+
+    const filterObserver = new MutationObserver(requestUpdate);
+    cards.forEach(card => filterObserver.observe(card, { attributes: true, attributeFilter: ['style', 'class'] }));
+    updateStack();
+}
 
 // 17. Integrated destination story: the country marquee belongs to the
 // existing Why Stellar editorial section instead of becoming a standalone page.
@@ -43,8 +136,8 @@ function initIntegratedDestinationStory() {
             <div class="destination-marquee-fade destination-marquee-fade-left"></div>
             <div class="destination-marquee-fade destination-marquee-fade-right"></div>
             <div class="destination-marquee-track">
-                <span>Russia <b>•</b></span><span>Georgia <b>•</b></span><span>Kazakhstan <b>•</b></span><span>Uzbekistan <b>•</b></span><span>Kyrgyzstan <b>•</b></span><span>Philippines <b>•</b></span><span>Serbia <b>•</b></span>
-                <span aria-hidden="true">Russia <b>•</b></span><span aria-hidden="true">Georgia <b>•</b></span><span aria-hidden="true">Kazakhstan <b>•</b></span><span aria-hidden="true">Uzbekistan <b>•</b></span><span aria-hidden="true">Kyrgyzstan <b>•</b></span><span aria-hidden="true">Philippines <b>•</b></span><span aria-hidden="true">Serbia <b>•</b></span>
+                <span>Uzbekistan <b>•</b></span><span>Kyrgyzstan <b>•</b></span><span>Kazakhstan <b>•</b></span><span>Russia <b>•</b></span><span>Bangladesh <b>•</b></span><span>Georgia <b>•</b></span><span>Nepal <b>•</b></span>
+                <span aria-hidden="true">Uzbekistan <b>•</b></span><span aria-hidden="true">Kyrgyzstan <b>•</b></span><span aria-hidden="true">Kazakhstan <b>•</b></span><span aria-hidden="true">Russia <b>•</b></span><span aria-hidden="true">Bangladesh <b>•</b></span><span aria-hidden="true">Georgia <b>•</b></span><span aria-hidden="true">Nepal <b>•</b></span>
             </div>
         </div>
 
@@ -230,25 +323,72 @@ function initMobileMenu() {
 
 // 3. Interactive FAQ Accordion
 function initFaqAccordion() {
-    // Find all FAQ question headers/containers
-    const faqBlocks = document.querySelectorAll('details, [data-faq-item]');
-    faqBlocks.forEach(block => {
-        const summary = block.querySelector('summary, [data-faq-trigger]');
-        if (summary) {
-            summary.style.cursor = 'pointer';
-        }
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const closeTimers = new WeakMap();
+
+    document.querySelectorAll('details').forEach(block => {
+        const summary = block.querySelector(':scope > summary');
+        const answer = summary?.nextElementSibling;
+        if (!summary || !answer) return;
+
+        block.classList.add('faq-hover-item');
+        summary.style.cursor = 'pointer';
+        summary.setAttribute('aria-expanded', String(block.open));
+
+        block.addEventListener('toggle', () => {
+            summary.setAttribute('aria-expanded', String(block.open));
+            if (block.open && !reduceMotion && typeof answer.animate === 'function') {
+                answer.animate(
+                    [
+                        { opacity: 0, transform: 'translateY(-7px)' },
+                        { opacity: 1, transform: 'translateY(0)' }
+                    ],
+                    { duration: 220, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+                );
+            }
+        });
+
+        if (!canHover) return;
+
+        block.addEventListener('mouseenter', () => {
+            window.clearTimeout(closeTimers.get(block));
+            block.open = true;
+        });
+
+        block.addEventListener('mouseleave', () => {
+            const timer = window.setTimeout(() => {
+                if (!block.contains(document.activeElement)) block.open = false;
+            }, 140);
+            closeTimers.set(block, timer);
+        });
+
+        // Pointer users get hover-first behaviour. Keyboard activation continues
+        // to use the native details control, and touch devices retain tap-to-open.
+        summary.addEventListener('click', event => {
+            if (event.detail > 0) {
+                event.preventDefault();
+                block.open = true;
+            }
+        });
     });
 
-    // Support accordion items that use buttons/headings
-    const accordions = document.querySelectorAll('.faq-item, [class*="border-b"][class*="cursor-pointer"]');
-    accordions.forEach(item => {
-        const trigger = item.querySelector('button, h3, div');
-        const content = item.querySelector('p, div.faq-content');
-        if (trigger && content) {
-            trigger.addEventListener('click', () => {
-                const isExpanded = content.style.display !== 'none';
-                content.style.display = isExpanded ? 'none' : 'block';
-            });
+    // Support any non-details FAQ components that may be added later.
+    document.querySelectorAll('[data-faq-item]').forEach(item => {
+        const trigger = item.querySelector('[data-faq-trigger]');
+        const content = item.querySelector('[data-faq-content]');
+        if (!trigger || !content) return;
+
+        const setExpanded = expanded => {
+            item.classList.toggle('is-open', expanded);
+            trigger.setAttribute('aria-expanded', String(expanded));
+            content.hidden = !expanded;
+        };
+
+        trigger.addEventListener('click', () => setExpanded(content.hidden));
+        if (canHover) {
+            item.addEventListener('mouseenter', () => setExpanded(true));
+            item.addEventListener('mouseleave', () => setExpanded(false));
         }
     });
 }
@@ -262,7 +402,10 @@ function initCountryFilters() {
     let selectedDuration = 'Any Duration';
     let selectedInternship = 'Any';
 
-    const countryCards = document.querySelectorAll('a[href*="/countries/"]');
+    const filterSection = document.getElementById('filter');
+    const countryCards = filterSection
+        ? filterSection.querySelectorAll('a.group')
+        : document.querySelectorAll('a[href*="/countries/"]');
 
     filterButtons.forEach(btn => {
         const text = btn.textContent.trim();
@@ -300,12 +443,16 @@ function initCountryFilters() {
             let match = true;
 
             // Budget filter logic
+            const budgetMatch = cardText.match(/₹\s*(\d+)[^\d]+(\d+)/);
+            const budgetMin = budgetMatch ? Number(budgetMatch[1]) : null;
+            const budgetMax = budgetMatch ? Number(budgetMatch[2]) : null;
+
             if (selectedBudget === 'Under ₹25L') {
-                match = match && (cardText.includes('15l') || cardText.includes('17l') || cardText.includes('20l') || cardText.includes('22l'));
+                match = match && budgetMin !== null && budgetMin < 25;
             } else if (selectedBudget === '₹25L – ₹40L') {
-                match = match && (cardText.includes('25l') || cardText.includes('30l') || cardText.includes('33l') || cardText.includes('35l') || cardText.includes('36l'));
+                match = match && budgetMin !== null && budgetMin >= 25 && budgetMin <= 40;
             } else if (selectedBudget === '₹40L+') {
-                match = match && (cardText.includes('40l') || cardText.includes('45l'));
+                match = match && budgetMax !== null && budgetMax >= 40;
             }
 
             // Duration filter logic
@@ -844,80 +991,80 @@ function initForgeCountries() {
     const countryData = [
         {
             index: "DESTINATION 01 / 07",
-            title: "Russia",
-            desc: "World-renowned government medical academies with 200+ years of history, English-medium curriculum, high FMGE pass rates, and subsidized tuition fees.",
-            budget: "₹20L – ₹35L (Total 6-Yr)",
-            duration: "5.8 Years with Internship",
-            recog: "NMC Gazette Aligned",
-            img: "https://images.unsplash.com/photo-1562774053-701939374585?w=1600&q=88",
-            ctaText: "Explore Russia",
-            ctaHref: "/countries/russia"
+            title: "Uzbekistan",
+            desc: "Access to 7 government medical institutes within Stellar's 60+ college network, with structured guidance from selection through admission.",
+            institutes: "7 government institutes",
+            budget: "₹30–35 lakh",
+            tieups: "Government-only network",
+            img: "/assets/images/countries/uzbekistan-campus.jpg",
+            ctaText: "View affiliated universities",
+            ctaHref: "/universities"
         },
         {
             index: "DESTINATION 02 / 07",
-            title: "Georgia",
-            desc: "European-standard clinical education, 100% English medium from day one, safe student-friendly cities, and world-class simulation hospitals.",
-            budget: "₹30L – ₹45L (Total 6-Yr)",
-            duration: "6.0 Years (European ECTS)",
-            recog: "WHO & WFME Recognized",
-            img: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?w=1600&q=88",
-            ctaText: "Explore Georgia",
-            ctaHref: "/countries/georgia"
+            title: "Kyrgyzstan",
+            desc: "Five government medical institutes offering an accessible MBBS pathway, supported by transparent counselling and end-to-end admission guidance.",
+            institutes: "5 government institutes",
+            budget: "₹30–35 lakh",
+            tieups: "Government-only network",
+            img: "/assets/images/countries/kyrgyzstan-campus.jpg",
+            ctaText: "View affiliated universities",
+            ctaHref: "/universities"
         },
         {
             index: "DESTINATION 03 / 07",
             title: "Kazakhstan",
-            desc: "Direct alumni mentorship from our founders. Top national universities like Semey and Al-Farabi offering high clinical patient loads and low cost of living.",
-            budget: "₹18L – ₹26L (Total 5.8-Yr)",
-            duration: "5.8 Years (NMC Validated)",
-            recog: "Doctor-Mentored Pathway",
-            img: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=1600&q=88",
-            ctaText: "Explore Kazakhstan",
-            ctaHref: "/countries/kazakhstan"
+            desc: "A broad choice of 10–12 government medical institutes, paired with practical counselling on university fit, budget, and student readiness.",
+            institutes: "10–12 government institutes",
+            budget: "₹30–35 lakh",
+            tieups: "Government-only network",
+            img: "/assets/images/countries/kazakhstan-campus.jpg",
+            ctaText: "View affiliated universities",
+            ctaHref: "/universities"
         },
         {
             index: "DESTINATION 04 / 07",
-            title: "Uzbekistan",
-            desc: "Centrally located government institutions like Tashkent Medical Academy with affordable living costs, high clinical patient exposure, and strong doctor mentors.",
-            budget: "₹16L – ₹22L (Total 5.8-Yr)",
-            duration: "5.8 Years with Clinical Training",
-            recog: "NMC Gazette Listed",
-            img: "https://images.unsplash.com/photo-1529001618208-b45a62e0e6c2?w=1600&q=88",
-            ctaText: "Explore Uzbekistan",
-            ctaHref: "/countries/uzbekistan"
+            title: "Russia",
+            desc: "Stellar's largest government-college ecosystem, including 10+ high-level institutional tie-ups and options across established medical education hubs.",
+            institutes: "60+ government institutes",
+            budget: "₹27–45 lakh",
+            tieups: "10+ high-level tie-ups",
+            img: "/assets/images/countries/russia-campus.jpg",
+            ctaText: "View affiliated universities",
+            ctaHref: "/universities"
         },
         {
             index: "DESTINATION 05 / 07",
-            title: "Kyrgyzstan",
-            desc: "Highly affordable government medical education at Kyrgyz State Medical Academy with established Indian student communities, mess facilities, and clinical rotations.",
-            budget: "₹15L – ₹24L (Total 5.8-Yr)",
-            duration: "5.8 Years (NMC Compliant)",
-            recog: "WHO, WDOMS & NMC Recognized",
-            img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=88",
-            ctaText: "Explore Kyrgyzstan",
-            ctaHref: "/countries/kyrgyzstan"
+            title: "Bangladesh",
+            desc: "A substantial network of 37 government medical institutes, including 15+ high-level tie-ups and a familiar South Asian academic environment.",
+            institutes: "37 government institutes",
+            budget: "₹32–45 lakh",
+            tieups: "15+ high-level tie-ups",
+            img: "/assets/images/countries/bangladesh-campus.jpg",
+            ctaText: "View affiliated universities",
+            ctaHref: "/universities"
         },
         {
             index: "DESTINATION 06 / 07",
-            title: "Philippines",
-            desc: "American-pattern USMLE-aligned medical curriculum with 100% English medium instruction, extensive hands-on hospital exposure, and high global practice readiness.",
-            budget: "₹22L – ₹35L (Total 5.5-Yr)",
-            duration: "5.5 Years (BS + MD)",
-            recog: "CHED & NMC Compliant",
-            img: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=1600&q=88",
-            ctaText: "Explore Philippines",
-            ctaHref: "/countries/philippines"
+            title: "Georgia",
+            desc: "A focused selection of 4–5 government medical institutes with counselling that explains the destination, estimated cost, and institutional fit clearly.",
+            institutes: "4–5 government institutes",
+            budget: "₹38–55 lakh",
+            tieups: "Government-only network",
+            img: "/assets/images/countries/georgia-campus.jpg",
+            ctaText: "View affiliated universities",
+            ctaHref: "/universities"
         },
         {
             index: "DESTINATION 07 / 07",
-            title: "Serbia",
-            desc: "Prestigious European Union candidate nation offering Bologna-compliant 6-year medical degrees with English instruction and residency pathways across Europe.",
-            budget: "₹28L – ₹42L (Total 6-Yr)",
-            duration: "6.0 Years (360 ECTS Credits)",
-            recog: "Bologna-Aligned Curriculum",
-            img: "/assets/images/alfa_bk_1.jpg",
-            ctaText: "Explore Serbia",
-            ctaHref: "/countries/serbia"
+            title: "Nepal",
+            desc: "Eight to nine government medical institutes with close cultural proximity to India and personalised guidance for students and families.",
+            institutes: "8–9 government institutes",
+            budget: "₹57–80 lakh",
+            tieups: "Government-only network",
+            img: "/assets/images/countries/nepal-campus.webp",
+            ctaText: "View affiliated universities",
+            ctaHref: "/universities"
         }
     ];
 
@@ -934,9 +1081,9 @@ function initForgeCountries() {
             <h2 class="country-story-pane__title"${index === 0 ? ' id="countries-story-title"' : ''}>${country.title}</h2>
             <p class="country-story-pane__description">${country.desc}</p>
             <dl class="country-story-pane__specs">
-                <div><dt>Estimated budget</dt><dd>${country.budget}</dd></div>
-                <div><dt>Course duration</dt><dd>${country.duration}</dd></div>
-                <div><dt>Recognition</dt><dd>${country.recog}</dd></div>
+                <div><dt>Government institutes</dt><dd>${country.institutes}</dd></div>
+                <div><dt>Estimated total budget</dt><dd>${country.budget}</dd></div>
+                <div><dt>Institutional access</dt><dd>${country.tieups}</dd></div>
             </dl>
             <a class="country-story-pane__cta" href="${country.ctaHref}">${country.ctaText}<span aria-hidden="true">↗</span></a>
         </article>
@@ -947,7 +1094,7 @@ function initForgeCountries() {
         const layer = document.createElement('div');
         layer.className = `country-story-image${index === 0 ? ' active' : ''}`;
         layer.dataset.country = index;
-        layer.innerHTML = `<img src="${country.img}" alt="Medical education destination in ${country.title}" loading="${index === 0 ? 'eager' : 'lazy'}">`;
+        layer.innerHTML = `<img src="${country.img}" alt="Government medical education campus in ${country.title}" loading="${index === 0 ? 'eager' : 'lazy'}">`;
         visualsHost.insertBefore(layer, shade);
 
         const ambient = document.createElement('div');
