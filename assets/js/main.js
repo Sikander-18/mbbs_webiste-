@@ -1001,7 +1001,7 @@ function initForgeCountries() {
             institutes: "7 government institutes",
             budget: "₹30–35 lakh",
             tieups: "Government-only network",
-            img: "/assets/images/countries/uzbekistan-campus.jpg",
+            img: "/assets/images/countries/uzbekistan.jpg",
             ctaText: "View country & colleges",
             ctaHref: "/countries/uzbekistan"
         },
@@ -1012,7 +1012,7 @@ function initForgeCountries() {
             institutes: "5 government institutes",
             budget: "₹30–35 lakh",
             tieups: "Government-only network",
-            img: "/assets/images/countries/kyrgyzstan-campus.jpg",
+            img: "/assets/images/countries/kyrgyzstan.jpg",
             ctaText: "View country & colleges",
             ctaHref: "/countries/kyrgyzstan"
         },
@@ -1023,7 +1023,7 @@ function initForgeCountries() {
             institutes: "10–12 government institutes",
             budget: "₹30–35 lakh",
             tieups: "Government-only network",
-            img: "/assets/images/countries/kazakhstan-campus.jpg",
+            img: "/assets/images/countries/kazakhstan.jpg",
             ctaText: "View country & colleges",
             ctaHref: "/countries/kazakhstan"
         },
@@ -1034,7 +1034,7 @@ function initForgeCountries() {
             institutes: "60+ government institutes",
             budget: "₹27–45 lakh",
             tieups: "10+ high-level tie-ups",
-            img: "/assets/images/countries/russia-campus.jpg",
+            img: "/assets/images/countries/russia.jpg",
             ctaText: "View country & colleges",
             ctaHref: "/countries/russia"
         },
@@ -1045,7 +1045,7 @@ function initForgeCountries() {
             institutes: "37 government institutes",
             budget: "₹32–45 lakh",
             tieups: "15+ high-level tie-ups",
-            img: "/assets/images/countries/bangladesh-campus.jpg",
+            img: "/assets/images/countries/bangladesh.jpg",
             ctaText: "View country & colleges",
             ctaHref: "/countries/bangladesh"
         },
@@ -1056,7 +1056,7 @@ function initForgeCountries() {
             institutes: "4–5 government institutes",
             budget: "₹38–55 lakh",
             tieups: "Government-only network",
-            img: "/assets/images/countries/georgia-campus.jpg",
+            img: "/assets/images/countries/georgia.jpg",
             ctaText: "View country & colleges",
             ctaHref: "/countries/georgia"
         },
@@ -1067,7 +1067,7 @@ function initForgeCountries() {
             institutes: "8–9 government institutes",
             budget: "₹57–80 lakh",
             tieups: "Government-only network",
-            img: "/assets/images/countries/nepal-campus.webp",
+            img: "/assets/images/countries/nepal.jpg",
             ctaText: "View country & colleges",
             ctaHref: "/countries/nepal"
         }
