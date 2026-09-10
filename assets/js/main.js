@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightActiveNavLink();
     initKineticHero();
     initStatCounters();
-    initBudgetCalculator();
     initMagneticButtons();
     initGalleryLightbox();
     initScrollReveals();
@@ -443,74 +442,6 @@ function initStatCounters() {
     }, { threshold: 0.2 });
 
     statCards.forEach(card => observer.observe(card));
-}
-
-// 8. Interactive MBBS Budget & Cost Calculator Widget
-function initBudgetCalculator() {
-    const slider = document.getElementById('budget-calc-slider');
-    if (!slider) return;
-
-    const budgetDisplay = document.getElementById('budget-calc-val');
-    const tuitionDisplay = document.getElementById('calc-tuition-val');
-    const hostelDisplay = document.getElementById('calc-hostel-val');
-    const durationDisplay = document.getElementById('calc-duration-val');
-    const uniList = document.getElementById('calc-uni-list');
-    const ctaBtn = document.getElementById('calc-whatsapp-cta');
-
-    const universityDatabase = [
-        { name: 'Kazan State Medical University', country: 'Russia', minBudget: 28, maxBudget: 35, tuition: '₹4,20,000 / yr', hostel: '₹65,000 / yr' },
-        { name: 'Volgograd State Medical University', country: 'Russia', minBudget: 24, maxBudget: 32, tuition: '₹3,80,000 / yr', hostel: '₹60,000 / yr' },
-        { name: 'Omsk State Medical University', country: 'Russia', minBudget: 22, maxBudget: 28, tuition: '₹3,40,000 / yr', hostel: '₹55,000 / yr' },
-        { name: 'Al-Farabi Kazakh National University', country: 'Kazakhstan', minBudget: 20, maxBudget: 26, tuition: '₹3,20,000 / yr', hostel: '₹70,000 / yr' },
-        { name: 'Astana Medical University', country: 'Kazakhstan', minBudget: 22, maxBudget: 28, tuition: '₹3,50,000 / yr', hostel: '₹75,000 / yr' },
-        { name: 'Semey Medical University', country: 'Kazakhstan', minBudget: 18, maxBudget: 24, tuition: '₹2,80,000 / yr', hostel: '₹60,000 / yr' },
-        { name: 'Tashkent Medical Academy', country: 'Uzbekistan', minBudget: 16, maxBudget: 22, tuition: '₹2,50,000 / yr', hostel: '₹50,000 / yr' },
-        { name: 'Kyrgyz State Medical Academy', country: 'Kyrgyzstan', minBudget: 15, maxBudget: 20, tuition: '₹2,30,000 / yr', hostel: '₹45,000 / yr' },
-        { name: 'David Tvildiani Medical University', country: 'Georgia', minBudget: 32, maxBudget: 42, tuition: '₹5,80,000 / yr', hostel: '₹90,000 / yr' },
-        { name: 'Tbilisi State Medical University', country: 'Georgia', minBudget: 35, maxBudget: 45, tuition: '₹6,20,000 / yr', hostel: '₹95,000 / yr' },
-        { name: 'University of Perpetual Help', country: 'Philippines', minBudget: 25, maxBudget: 32, tuition: '₹3,60,000 / yr', hostel: '₹80,000 / yr' },
-        { name: 'University of Kragujevac', country: 'Serbia', minBudget: 30, maxBudget: 38, tuition: '₹4,90,000 / yr', hostel: '₹85,000 / yr' }
-    ];
-
-    function updateCalculator() {
-        const val = parseInt(slider.value, 10);
-        if (budgetDisplay) budgetDisplay.textContent = `₹${val} Lakhs`;
-
-        const yearlyTotal = Math.round((val * 100000) / 5.8);
-        const estTuition = Math.round(yearlyTotal * 0.78 / 1000) * 1000;
-        const estHostel = Math.round(yearlyTotal * 0.22 / 1000) * 1000;
-
-        if (tuitionDisplay) tuitionDisplay.textContent = `₹${(estTuition).toLocaleString('en-IN')} / yr`;
-        if (hostelDisplay) hostelDisplay.textContent = `₹${(estHostel).toLocaleString('en-IN')} / yr`;
-        if (durationDisplay) durationDisplay.textContent = val >= 32 ? '6.0 Years (European ECTS)' : '5.8 Years (NMC Compliant)';
-
-        const matched = universityDatabase.filter(u => val >= (u.minBudget - 2) && val <= (u.maxBudget + 4));
-        if (uniList) {
-            uniList.innerHTML = '';
-            matched.slice(0, 4).forEach(u => {
-                const tag = document.createElement('div');
-                tag.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:6px;transition:all 0.2s;';
-                tag.innerHTML = `<div>
-                    <span style="font-family:var(--font-inter);font-size:0.82rem;font-weight:600;color:#FFFFFF;display:block">${u.name}</span>
-                    <span style="font-family:var(--font-mono);font-size:0.6rem;color:#C9A45C;letter-spacing:0.08em;text-transform:uppercase">${u.country}</span>
-                </div>
-                <div style="text-align:right">
-                    <span style="font-family:var(--font-mono);font-size:0.75rem;font-weight:700;color:#C9A45C">₹${u.minBudget}L – ₹${u.maxBudget}L</span>
-                    <span style="display:block;font-size:0.55rem;color:rgba(255,255,255,0.45)">All-inclusive est.</span>
-                </div>`;
-                uniList.appendChild(tag);
-            });
-        }
-
-        if (ctaBtn) {
-            const encodedMsg = encodeURIComponent(`Hi Stellar Science Hub, I used your website budget calculator for an MBBS abroad budget of ₹${val} Lakhs. Can you suggest the best NMC-approved universities and detailed fee breakdown?`);
-            ctaBtn.href = `https://wa.me/919004775531?text=${encodedMsg}`;
-            ctaBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg> Get Verified Universities for ₹${val}L via WhatsApp`;
-        }
-    }
-
-    slider.addEventListener('input', updateCalculator);
-    updateCalculator();
 }
 
 // 9. Magnetic Proximity Pull on Desktop CTAs (Forge Benchmark)
