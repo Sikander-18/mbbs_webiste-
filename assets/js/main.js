@@ -1,6 +1,7 @@
 // Stellar Science Hub & Educonsultancy - Main Client Interactions
 
 document.addEventListener('DOMContentLoaded', () => {
+    resetCinematicHomepageScroll();
     initRafiqProfileSection();
     initHeaderScroll();
     initMobileMenu();
@@ -19,6 +20,40 @@ document.addEventListener('DOMContentLoaded', () => {
     initForgeCountries();
     initForgeDoctors();
 });
+
+// The homepage is a continuous cinematic sequence and must initialize from its
+// first frame. Browser scroll restoration can otherwise hydrate pinned scenes
+// with stale fixed-position measurements after a refresh.
+function resetCinematicHomepageScroll() {
+    if (!document.getElementById('forge-stage-experience')) return;
+
+    if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+    }
+
+    const root = document.documentElement;
+    const previousBehavior = root.style.scrollBehavior;
+    const scrollToOpeningFrame = () => {
+        root.style.scrollBehavior = 'auto';
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        window.requestAnimationFrame(() => {
+            root.style.scrollBehavior = previousBehavior;
+        });
+    };
+
+    scrollToOpeningFrame();
+
+    // ScrollTrigger performs a load-time refresh and may briefly restore the old
+    // scroll coordinate. Reset once more after that refresh has settled.
+    const resetAfterLoad = () => {
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(scrollToOpeningFrame);
+        });
+    };
+
+    if (document.readyState === 'complete') resetAfterLoad();
+    else window.addEventListener('load', resetAfterLoad, { once: true });
+}
 
 // Homepage profile copy beside the featured video.
 function initRafiqProfileSection() {
@@ -898,7 +933,11 @@ function initBookExperience() {
     progress.innerHTML = '<span></span><small>Scroll to open</small>';
     sticky.appendChild(progress);
 
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        section.classList.add('book-story--open');
+        progress.hidden = true;
+        return;
+    }
     gsap.registerPlugin(ScrollTrigger);
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -911,34 +950,39 @@ function initBookExperience() {
 
     mm.add('(min-width: 768px)', () => {
         gsap.set(book, {
-            scale: 0.56,
-            y: 105,
-            rotationX: 15,
+            scale: 0.66,
+            y: 56,
+            rotationX: 10,
+            opacity: 1,
+            clipPath: 'inset(0% 0% 0% 0% round 8px)',
             transformPerspective: 1800,
             transformOrigin: '50% 72%'
         });
         gsap.set(leftPage, {
-            rotationY: 86,
+            rotationY: 64,
             transformOrigin: '100% 50%',
-            filter: 'brightness(0.42)'
+            filter: 'brightness(0.62)'
         });
         gsap.set(rightPage, {
-            rotationY: -86,
+            rotationY: -64,
             transformOrigin: '0% 50%',
-            filter: 'brightness(0.42)'
+            filter: 'brightness(0.62)'
         });
-        gsap.set(pageContent, { opacity: 0, y: 18 });
-        gsap.set(header, { opacity: 0.35, y: 26 });
+        gsap.set(pageContent, { opacity: 0, y: 14 });
+        gsap.set(header, { opacity: 0.58, y: 18 });
 
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
-                start: 'top top',
-                end: '+=3000',
+                // Numeric document offsets avoid the incorrect start calculation caused
+                // by the long native-sticky hero immediately above this section.
+                start: () => section.offsetTop,
+                end: () => section.offsetTop + 3200,
                 pin: sticky,
-                scrub: 1.15,
+                scrub: true,
                 anticipatePin: 1,
-                invalidateOnRefresh: true
+                invalidateOnRefresh: true,
+                refreshPriority: 2
             },
             onUpdate: () => {
                 section.style.setProperty('--book-progress', `${(tl.progress() * 100).toFixed(2)}%`);
@@ -946,14 +990,15 @@ function initBookExperience() {
             }
         });
 
-        tl.to(header, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, 0)
-          .to(book, { scale: 0.72, y: 30, rotationX: 10, duration: 1.1, ease: 'power2.out' }, 0)
-          .to(leftPage, { rotationY: 0, filter: 'brightness(1)', duration: 2.8, ease: 'power2.inOut' }, 0.75)
-          .to(rightPage, { rotationY: 0, filter: 'brightness(1)', duration: 2.8, ease: 'power2.inOut' }, 0.75)
-          .to(book, { scale: 1, y: 0, rotationX: 0, duration: 2.2, ease: 'power2.out' }, 1.2)
-          .to(pageContent, { opacity: 1, y: 0, duration: 1.1, stagger: 0.08, ease: 'power2.out' }, 2.65)
-          .to(book, { y: -8, duration: 1.15, ease: 'none' }, 3.75)
-          .to({}, { duration: 0.8 });
+        // Keep the opening linear and fully tied to scroll. The 64-degree starting
+        // angle reads as a closed volume without reducing the book to an invisible line.
+        tl.to(header, { opacity: 1, y: 0, duration: 0.8, ease: 'none' }, 0)
+          .to(book, { scale: 0.8, y: 20, rotationX: 6, duration: 1.1, ease: 'none' }, 0)
+          .to(leftPage, { rotationY: 0, filter: 'brightness(1)', duration: 2.4, ease: 'none' }, 0.35)
+          .to(rightPage, { rotationY: 0, filter: 'brightness(1)', duration: 2.4, ease: 'none' }, 0.35)
+          .to(book, { scale: 1, y: 0, rotationX: 0, duration: 2.15, ease: 'none' }, 0.55)
+          .to(pageContent, { opacity: 1, y: 0, duration: 0.85, stagger: 0.05, ease: 'none' }, 1.65)
+          .to({}, { duration: 1.2 });
 
         return () => {
             tl.kill();
@@ -962,29 +1007,36 @@ function initBookExperience() {
     });
 
     mm.add('(max-width: 767px)', () => {
-        gsap.set(book, { scale: 0.88, y: 70, clipPath: 'inset(0 48% 0 48% round 8px)' });
+        // Mobile uses a wider closed silhouette because the two paper faces stack.
+        gsap.set(book, { scale: 0.92, y: 38, opacity: 1, clipPath: 'inset(0% 32% 0% 32% round 8px)' });
+        gsap.set(header, { opacity: 1, y: 0 });
         gsap.set(pageContent, { opacity: 0, y: 14 });
 
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
-                start: 'top top',
-                end: '+=1450',
+                start: () => section.offsetTop,
+                end: () => section.offsetTop + 1800,
                 pin: sticky,
-                scrub: 0.9,
+                scrub: true,
                 anticipatePin: 1,
-                invalidateOnRefresh: true
+                invalidateOnRefresh: true,
+                refreshPriority: 2
             },
             onUpdate: () => {
                 section.style.setProperty('--book-progress', `${(tl.progress() * 100).toFixed(2)}%`);
+                progress.querySelector('small').textContent = tl.progress() > 0.82 ? 'Chapter open' : 'Scroll to open';
             }
         });
 
-        tl.to(book, { clipPath: 'inset(0 0% 0 0% round 8px)', scale: 1, y: 0, duration: 2.2, ease: 'power2.inOut' })
-          .to(pageContent, { opacity: 1, y: 0, duration: 0.9, stagger: 0.06, ease: 'power2.out' }, 1.3)
-          .to({}, { duration: 0.7 });
+        tl.to(book, { clipPath: 'inset(0% 0% 0% 0% round 8px)', scale: 1, y: 0, duration: 1.8, ease: 'none' })
+          .to(pageContent, { opacity: 1, y: 0, duration: 0.72, stagger: 0.04, ease: 'none' }, 0.9)
+          .to({}, { duration: 1.0 });
 
-        return () => tl.kill();
+        return () => {
+            tl.kill();
+            section.style.removeProperty('--book-progress');
+        };
     });
 }
 
@@ -1099,7 +1151,7 @@ function initForgeCountries() {
         const layer = document.createElement('div');
         layer.className = `country-story-image${index === 0 ? ' active' : ''}`;
         layer.dataset.country = index;
-        layer.innerHTML = `<img src="${country.img}" alt="Government medical education campus in ${country.title}" loading="${index === 0 ? 'eager' : 'lazy'}">`;
+        layer.innerHTML = `<img src="${country.img}" alt="Government medical education campus in ${country.title}" loading="eager" decoding="async"${index < 2 ? ' fetchpriority="high"' : ''}>`;
         visualsHost.insertBefore(layer, shade);
 
         const ambient = document.createElement('div');
@@ -1138,9 +1190,13 @@ function initForgeCountries() {
     const mm = gsap.matchMedia();
 
     const buildTimeline = (isDesktop) => {
+        const hiddenClip = isDesktop ? 'inset(0% 100% 0% 0%)' : 'inset(100% 0% 0% 0%)';
+        const holdDuration = isDesktop ? 1.55 : 1.35;
+        const transitionDuration = isDesktop ? 1.15 : 1.0;
+
         gsap.set(panes, { autoAlpha: 0, y: 34, pointerEvents: 'none' });
         gsap.set(panes[0], { autoAlpha: 1, y: 0, pointerEvents: 'auto' });
-        gsap.set(images, { autoAlpha: 0, scale: 1.08, clipPath: isDesktop ? 'inset(0 50% 0 50%)' : 'inset(50% 0 50% 0)' });
+        gsap.set(images, { autoAlpha: 0, scale: 1.035, clipPath: hiddenClip, transformOrigin: 'center center' });
         gsap.set(images[0], { autoAlpha: 1, scale: 1, clipPath: 'inset(0 0% 0 0%)', zIndex: 2 });
         gsap.set(ambientLayers, { autoAlpha: 0 });
         gsap.set(ambientLayers[0], { autoAlpha: 0.34 });
@@ -1151,15 +1207,11 @@ function initForgeCountries() {
                 start: 'top top',
                 end: isDesktop ? '+=8400' : '+=5600',
                 pin: section.querySelector('.countries-story__sticky'),
-                scrub: isDesktop ? 1.2 : 0.9,
+                // Keep every frame under the visitor's direct scroll control.
+                // Numeric scrub and snap previously continued the transition after scrolling stopped.
+                scrub: true,
                 anticipatePin: 1,
-                invalidateOnRefresh: true,
-                snap: {
-                    snapTo: 1 / (countryData.length - 1),
-                    duration: { min: 0.18, max: 0.5 },
-                    delay: 0.12,
-                    ease: 'power2.out'
-                }
+                invalidateOnRefresh: true
             },
             onUpdate: () => {
                 const activeIndex = Math.min(countryData.length - 1, Math.round(tl.progress() * (countryData.length - 1)));
@@ -1169,8 +1221,8 @@ function initForgeCountries() {
         });
 
         let cursor = 0;
-        tl.to(images[0].querySelector('img'), { scale: 1.035, duration: 1.45, ease: 'none' }, cursor);
-        cursor += 1.45;
+        tl.to(images[0].querySelector('img'), { scale: 1.025, duration: holdDuration, ease: 'none' }, cursor);
+        cursor += holdDuration;
 
         for (let index = 1; index < countryData.length; index += 1) {
             const previousPane = panes[index - 1];
@@ -1178,17 +1230,20 @@ function initForgeCountries() {
             const previousImage = images[index - 1];
             const nextImage = images[index];
 
-            tl.to(previousPane, { autoAlpha: 0, y: -28, duration: 0.42, ease: 'power2.in', pointerEvents: 'none' }, cursor)
-              .to(previousImage, { autoAlpha: 0.18, scale: 1.07, duration: 0.75, ease: 'power2.inOut' }, cursor)
-              .to(ambientLayers[index - 1], { autoAlpha: 0, duration: 0.75, ease: 'power1.inOut' }, cursor)
-              .set(nextImage, { zIndex: index + 2, autoAlpha: 1 }, cursor)
-              .to(nextImage, { clipPath: 'inset(0 0% 0 0%)', scale: 1, duration: 0.92, ease: 'power2.inOut' }, cursor)
-              .to(nextPane, { autoAlpha: 1, y: 0, duration: 0.62, ease: 'power2.out', pointerEvents: 'auto' }, cursor + 0.28)
-              .to(ambientLayers[index], { autoAlpha: 0.34, duration: 0.8, ease: 'power1.inOut' }, cursor + 0.15);
+            // The previous image stays fully rendered beneath the new one. The incoming
+            // image wipes in from a clean edge, so pausing mid-scroll never exposes a gap.
+            tl.to(previousPane, { autoAlpha: 0, y: -24, duration: transitionDuration * 0.42, ease: 'power1.in', pointerEvents: 'none' }, cursor)
+              .to(previousImage.querySelector('img'), { scale: 1.04, duration: transitionDuration, ease: 'none' }, cursor)
+              .to(ambientLayers[index - 1], { autoAlpha: 0, duration: transitionDuration, ease: 'none' }, cursor)
+              .set(nextImage, { zIndex: index + 2, autoAlpha: 1, clipPath: hiddenClip, scale: 1.035 }, cursor)
+              .to(nextImage, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: transitionDuration, ease: 'none' }, cursor)
+              .to(nextPane, { autoAlpha: 1, y: 0, duration: transitionDuration * 0.45, ease: 'power1.out', pointerEvents: 'auto' }, cursor + transitionDuration * 0.52)
+              .to(ambientLayers[index], { autoAlpha: 0.34, duration: transitionDuration * 0.8, ease: 'none' }, cursor + transitionDuration * 0.2)
+              .set(previousImage, { autoAlpha: 0, zIndex: index }, cursor + transitionDuration);
 
-            cursor += 0.95;
-            tl.to(nextImage.querySelector('img'), { scale: 1.035, duration: 1.35, ease: 'none' }, cursor);
-            cursor += 1.35;
+            cursor += transitionDuration;
+            tl.to(nextImage.querySelector('img'), { scale: 1.025, duration: holdDuration, ease: 'none' }, cursor);
+            cursor += holdDuration;
         }
 
         tl.to({}, { duration: 0.7 });
@@ -1272,22 +1327,25 @@ function initForgeDoctors() {
         const fromImg = fromPhoto ? fromPhoto.querySelector('.doctor-photo-img') : null;
         const toImg = toPhoto ? toPhoto.querySelector('.doctor-photo-img') : null;
 
+        const hiddenClip = "inset(0% 100% 0% 0%)";
+
         // --- Photo Layers Transition ---
         if (fromPhoto) {
-            // Outgoing photo drifts subtly and fades
+            // Keep the outgoing frame intact beneath the incoming wipe. Hiding it only
+            // after the reveal prevents the half-image / dark-gap state on slow scrolling.
             tl.to(fromPhoto, {
-                scale: 1.04,
-                opacity: 0,
-                duration: duration * 0.85,
-                ease: "power2.inOut"
+                scale: 1.025,
+                duration,
+                ease: "none"
             }, startTime);
             if (fromImg) {
                 tl.to(fromImg, {
-                    scale: 1.03,
+                    scale: 1.025,
                     duration: duration,
-                    ease: "power1.out"
+                    ease: "none"
                 }, startTime);
             }
+            tl.set(fromPhoto, { opacity: 0, zIndex: 0 }, startTime + duration);
         }
 
         if (toPhoto) {
@@ -1295,17 +1353,15 @@ function initForgeDoctors() {
             tl.set(toPhoto, { zIndex: 2, opacity: 1 }, startTime);
 
             if (isDesktop) {
-                // Signature Forge center-outward curtain reveal:
-                // Begins as a 0-width slit in exact center (50% left, 50% right)
-                // Opens smoothly outward to full frame (0% left, 0% right)
+                // A single-edge cinematic wipe always preserves one complete visual plane.
                 tl.fromTo(toPhoto, {
-                    clipPath: "inset(0% 50% 0% 50%)",
-                    scale: 1.08
+                    clipPath: hiddenClip,
+                    scale: 1.04
                 }, {
                     clipPath: "inset(0% 0% 0% 0%)",
                     scale: 1.0,
                     duration: duration,
-                    ease: "power2.inOut"
+                    ease: "none"
                 }, startTime);
             } else {
                 // Mobile optimized: smooth crossfade + gentle scale settling
@@ -1316,7 +1372,7 @@ function initForgeDoctors() {
                     opacity: 1,
                     scale: 1.0,
                     duration: duration,
-                    ease: "power2.out"
+                    ease: "none"
                 }, startTime);
             }
 
@@ -1326,7 +1382,7 @@ function initForgeDoctors() {
                 }, {
                     scale: 1.0,
                     duration: duration,
-                    ease: "power2.out"
+                    ease: "none"
                 }, startTime);
             }
         }
@@ -1339,15 +1395,18 @@ function initForgeDoctors() {
             const fRole = fromPane.querySelector('.doctor-pane__role');
             const fBio = fromPane.querySelector('.doctor-pane__bio');
             const fCta = fromPane.querySelector('.doctor-pane__cta');
+            const fromContent = [fIndex, fLabel, fName, fRole, fBio, fCta].filter(Boolean);
 
-            // Staggered exit upward
-            tl.to([fIndex, fLabel], { y: -24, opacity: 0, duration: duration * 0.35, ease: "power2.in" }, startTime);
-            tl.to(fName, { y: -65, opacity: 0, duration: duration * 0.45, ease: "power2.in" }, startTime + duration * 0.08);
-            tl.to(fRole, { y: -30, opacity: 0, duration: duration * 0.4, ease: "power2.in" }, startTime + duration * 0.12);
-            tl.to(fBio, { y: -28, opacity: 0, duration: duration * 0.45, ease: "power2.in" }, startTime + duration * 0.16);
-            tl.to(fCta, { y: -20, opacity: 0, duration: duration * 0.35, ease: "power2.in" }, startTime + duration * 0.2);
-
-            tl.set(fromPane, { pointerEvents: "none", opacity: 0 }, startTime + duration * 0.6);
+            // Finish the outgoing copy before introducing the next pane. This avoids
+            // two doctor names and biographies becoming readable at the same time.
+            tl.to(fromContent, {
+                y: -22,
+                opacity: 0,
+                duration: duration * 0.36,
+                stagger: duration * 0.012,
+                ease: "none"
+            }, startTime);
+            tl.set(fromPane, { pointerEvents: "none", opacity: 0 }, startTime + duration * 0.44);
         }
 
         if (toPane) {
@@ -1357,16 +1416,17 @@ function initForgeDoctors() {
             const tRole = toPane.querySelector('.doctor-pane__role');
             const tBio = toPane.querySelector('.doctor-pane__bio');
             const tCta = toPane.querySelector('.doctor-pane__cta');
+            const toContent = [tIndex, tLabel, tName, tRole, tBio, tCta].filter(Boolean);
 
-            tl.set(toPane, { opacity: 1 }, startTime + duration * 0.25);
-            tl.set(toPane, { pointerEvents: "auto" }, startTime + duration * 0.6);
-
-            // Staggered entry from below
-            tl.fromTo([tIndex, tLabel], { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.45, ease: "power2.out" }, startTime + duration * 0.3);
-            tl.fromTo(tName, { y: 65, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.55, ease: "power2.out" }, startTime + duration * 0.38);
-            tl.fromTo(tRole, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.48, ease: "power2.out" }, startTime + duration * 0.44);
-            tl.fromTo(tBio, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.5, ease: "power2.out" }, startTime + duration * 0.48);
-            tl.fromTo(tCta, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.45, ease: "power2.out" }, startTime + duration * 0.52);
+            tl.set(toPane, { opacity: 1 }, startTime + duration * 0.48);
+            tl.to(toContent, {
+                y: 0,
+                opacity: 1,
+                duration: duration * 0.38,
+                stagger: duration * 0.012,
+                ease: "none"
+            }, startTime + duration * 0.48);
+            tl.set(toPane, { pointerEvents: "auto" }, startTime + duration);
         }
 
         // --- Ambient Backdrop Transition ---
@@ -1412,7 +1472,7 @@ function initForgeDoctors() {
                 gsap.set(layer, { opacity: 1, scale: 1.0, clipPath: "inset(0% 0% 0% 0%)", zIndex: 1 });
                 if (img) gsap.set(img, { scale: 1.0 });
             } else {
-                gsap.set(layer, { opacity: 0, scale: 1.08, clipPath: "inset(0% 50% 0% 50%)", zIndex: 0 });
+                gsap.set(layer, { opacity: 0, scale: 1.04, clipPath: "inset(0% 100% 0% 0%)", zIndex: 0 });
                 if (img) gsap.set(img, { scale: 1.0 });
             }
         });
@@ -1435,15 +1495,9 @@ function initForgeDoctors() {
                 start: "top top",
                 end: "+=6200",
                 pin: true,
-                scrub: 1.15,
+                scrub: true,
                 anticipatePin: 1,
-                invalidateOnRefresh: true,
-                snap: {
-                    snapTo: 1 / 3,
-                    duration: { min: 0.18, max: 0.5 },
-                    delay: 0.12,
-                    ease: "power2.out"
-                }
+                invalidateOnRefresh: true
             },
             onUpdate: () => {
                 const curTime = tl.time();
@@ -1539,9 +1593,11 @@ function initForgeDoctors() {
 
         photoLayers.forEach((layer, i) => {
             if (i === 0) {
-                gsap.set(layer, { opacity: 1, scale: 1.0, zIndex: 1 });
+                gsap.set(layer, { opacity: 1, scale: 1.0, clipPath: "inset(0% 0% 0% 0%)", zIndex: 1 });
             } else {
-                gsap.set(layer, { opacity: 0, scale: 1.06, zIndex: 0 });
+                // Explicitly reset clip-path when crossing breakpoints so a desktop
+                // wipe cannot leave a mobile portrait trapped in a partial state.
+                gsap.set(layer, { opacity: 0, scale: 1.06, clipPath: "inset(0% 0% 0% 0%)", zIndex: 0 });
             }
         });
 
@@ -1562,15 +1618,9 @@ function initForgeDoctors() {
                 start: "top top",
                 end: "+=4000",
                 pin: true,
-                scrub: 1,
+                scrub: true,
                 anticipatePin: 1,
-                invalidateOnRefresh: true,
-                snap: {
-                    snapTo: 1 / 3,
-                    duration: { min: 0.16, max: 0.42 },
-                    delay: 0.1,
-                    ease: "power2.out"
-                }
+                invalidateOnRefresh: true
             },
             onUpdate: () => {
                 const curTime = tl.time();

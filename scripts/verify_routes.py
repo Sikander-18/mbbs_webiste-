@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 sys.stdout.reconfigure(encoding='utf-8')
 
 ROUTES = [
-    # Reference pages
     "/",
     "/countries",
     "/universities",
@@ -19,38 +18,13 @@ ROUTES = [
     "/contact",
     "/privacy",
     "/disclaimer",
-
-    # Country pages
-    "/countries/russia",
-    "/countries/georgia",
-    "/countries/kazakhstan",
     "/countries/uzbekistan",
     "/countries/kyrgyzstan",
-    "/countries/philippines",
-    "/countries/serbia",
-
-    # University pages
-    "/universities/kazan-state-medical-university",
-    "/universities/volgograd-state-medical-university",
-    "/universities/omsk-state-medical-university",
-    "/universities/tyumen-state-medical-university",
-    "/universities/north-ossetian-state-medical-academy",
-    "/universities/northern-state-medical-university",
-    "/universities/tbilisi-state-medical-university",
-    "/universities/david-tvildiani-medical-university",
-    "/universities/al-farabi-kazakh-national-university",
-    "/universities/astana-medical-university",
-    "/universities/asfendiyarov-kazakh-national-medical-university",
-    "/universities/semey-medical-university",
-    "/universities/karaganda-medical-university",
-    "/universities/west-kazakhstan-marat-ospanov-medical-university",
-    "/universities/tashkent-medical-academy",
-    "/universities/kyrgyz-state-medical-academy",
-    "/universities/university-of-perpetual-help-system-dalta",
-    "/universities/alfa-bk-university",
-    "/universities/university-of-kragujevac",
-
-    # Blog pages
+    "/countries/kazakhstan",
+    "/countries/russia",
+    "/countries/bangladesh",
+    "/countries/georgia",
+    "/countries/nepal",
     "/blog/mbbs-abroad-vs-private-medical-college-india-2026",
     "/blog/top-nmc-approved-universities-russia",
     "/blog/fmge-exam-what-it-is-how-to-prepare",
@@ -60,7 +34,7 @@ ROUTES = [
     "/blog/life-as-indian-student-in-russia",
     "/blog/neet-score-required-for-mbbs-abroad",
     "/blog/mbbs-abroad-document-checklist",
-    "/blog/why-fmge-pass-rate-matters-choosing-university"
+    "/blog/why-fmge-pass-rate-matters-choosing-university",
 ]
 
 BASE_URL = "http://localhost:3000"

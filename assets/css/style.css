@@ -630,6 +630,39 @@
     }
 }
 
+/* Official-institution catalogue cards */
+.university-official-card:hover {
+    border-color: #283A27 !important;
+    box-shadow: 0 18px 42px rgba(24, 33, 23, 0.1);
+    transform: translateY(-4px);
+}
+
+.university-official-card:focus-visible {
+    outline: 3px solid #C9A45C;
+    outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+    .university-catalogue > .container-custom > div:first-child,
+    .university-country-directory > .container-custom > div:first-child {
+        grid-template-columns: 1fr !important;
+    }
+
+    .university-official-card {
+        min-height: 190px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .university-official-card {
+        transition: none !important;
+    }
+
+    .university-official-card:hover {
+        transform: none;
+    }
+}
+
 /* Countries index — scroll-stacked destination banners. */
 .country-stack-section {
     overflow: visible !important;
@@ -2069,6 +2102,8 @@ body {
     background: none;
     width: min(1140px, calc(100vw - clamp(3rem, 8vw, 8rem)));
     max-width: 1140px;
+    /* CSS transitions otherwise lag behind GSAP's scroll-positioned transform. */
+    transition: none !important;
 }
 
 .book-story .medical-book-page-left,

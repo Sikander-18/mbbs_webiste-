@@ -2,7 +2,7 @@
 
 A high-performance, responsive multi-page web platform for **Stellar Science Hub & Educonsultancy** — a doctor-led overseas medical education advisory based in Mira Road, Mumbai.
 
-Featuring 7 country destinations, 19 NMC-approved medical universities, admissions guides, an interactive budget calculator, and custom motion choreography inspired by **[Forge Automotive](https://forgeautomotive.co.uk/)**.
+Featuring 7 country destinations, 34 featured government/public medical institutions with official-site links, admissions guides, an interactive budget calculator, and custom motion choreography inspired by **[Forge Automotive](https://forgeautomotive.co.uk/)**.
 
 ---
 
@@ -17,7 +17,7 @@ Featuring 7 country destinations, 19 NMC-approved medical universities, admissio
 2. **Interactive MBBS Budget Calculator**: Real-time slider (₹15L - ₹45L+) providing tuition fees, hostel costs, duration, and matching NMC-approved universities with direct WhatsApp pre-filled inquiry.
 3. **Verified Real Photo Gallery**: Lightbox modal showcasing real campus photos and student batches.
 4. **Complete Admissions Infrastructure**:
-   - 48 exact clean routes across core pages, 7 country destinations, 19 university profiles, and 10 detailed medical guides.
+   - 29 verified clean routes across core pages, 7 country destinations, and 10 detailed medical guides; individual university cards link to official institution websites.
    - 100% NMC Gazette and WDOMS directory compliant.
    - Direct counselor WhatsApp integration (`+91 90047 75531`).
 
@@ -44,7 +44,7 @@ npm run serve
 ```
 
 ### 3. Run Route & Concurrency Verification
-To verify all 48 clean routes and status codes:
+To verify all 29 clean routes and status codes:
 ```bash
 npm test
 ```
@@ -66,11 +66,11 @@ python scripts/verify_routes.py
 ├── blog/                        # 10 Medical advisory articles (/blog/...)
 ├── book/                        # 1-on-1 Doctor Call Booking (/book)
 ├── contact/                     # Contact & Location with Google Map (/contact)
-├── countries/                   # 7 Country guides (/countries/...)
+├── countries/                   # 7 approved country guides (/countries/...)
 ├── eligibility/                 # NMC Eligibility regulations (/eligibility)
 ├── faq/                         # Comprehensive FAQ directory (/faq)
 ├── process/                     # 6-Step Admission Journey (/process)
-├── universities/                # 19 Medical university profiles (/universities/...)
+├── universities/                # University directory only; cards open official websites
 │
 ├── assets/
 │   ├── css/
