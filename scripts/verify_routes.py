@@ -25,16 +25,6 @@ ROUTES = [
     "/countries/bangladesh",
     "/countries/georgia",
     "/countries/nepal",
-    "/blog/mbbs-abroad-vs-private-medical-college-india-2026",
-    "/blog/top-nmc-approved-universities-russia",
-    "/blog/fmge-exam-what-it-is-how-to-prepare",
-    "/blog/mbbs-in-georgia-complete-guide-2026",
-    "/blog/mbbs-in-kazakhstan-fees-universities-eligibility",
-    "/blog/how-to-get-nmc-eligibility-certificate",
-    "/blog/life-as-indian-student-in-russia",
-    "/blog/neet-score-required-for-mbbs-abroad",
-    "/blog/mbbs-abroad-document-checklist",
-    "/blog/why-fmge-pass-rate-matters-choosing-university",
 ]
 
 BASE_URL = "http://localhost:3000"

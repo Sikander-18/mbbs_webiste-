@@ -16,9 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveals();
     initForgeExperienceController();
     initHeroMarquee();
-    initBookExperience();
-    initForgeCountries();
-    initForgeDoctors();
+    initHomepagePinnedStories();
 });
 
 // The homepage is a continuous cinematic sequence and must initialize from its
@@ -53,6 +51,46 @@ function resetCinematicHomepageScroll() {
 
     if (document.readyState === 'complete') resetAfterLoad();
     else window.addEventListener('load', resetAfterLoad, { once: true });
+}
+
+// Build the three consecutive pinned stories only after browser scroll
+// restoration and image-driven layout shifts have settled. Initializing them
+// earlier can make a later section inherit the book's trigger position after a
+// deep-page refresh, causing overlapping pins and apparently blank scenes.
+function initHomepagePinnedStories() {
+    if (!document.getElementById('forge-stage-experience')) return;
+
+    const initialize = () => {
+        const root = document.documentElement;
+        const previousBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = 'auto';
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
+        initBookExperience();
+        initForgeCountries();
+        initForgeDoctors();
+
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.sort();
+            ScrollTrigger.refresh();
+        }
+
+        // A refresh may preserve the browser's former coordinate; keep the
+        // completed trigger measurements but present the true opening frame.
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        window.requestAnimationFrame(() => {
+            root.style.scrollBehavior = previousBehavior;
+        });
+    };
+
+    const queueInitialization = () => {
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(initialize);
+        });
+    };
+
+    if (document.readyState === 'complete') queueInitialization();
+    else window.addEventListener('load', queueInitialization, { once: true });
 }
 
 // Homepage profile copy beside the featured video.
@@ -363,16 +401,14 @@ function initMobileMenu() {
 
 // 3. Interactive FAQ Accordion
 function initFaqAccordion() {
-    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const closeTimers = new WeakMap();
 
     document.querySelectorAll('details').forEach(block => {
         const summary = block.querySelector(':scope > summary');
         const answer = summary?.nextElementSibling;
         if (!summary || !answer) return;
 
-        block.classList.add('faq-hover-item');
+        block.classList.add('faq-accordion-item');
         summary.style.cursor = 'pointer';
         summary.setAttribute('aria-expanded', String(block.open));
 
@@ -381,39 +417,16 @@ function initFaqAccordion() {
             if (block.open && !reduceMotion && typeof answer.animate === 'function') {
                 answer.animate(
                     [
-                        { opacity: 0, transform: 'translateY(-7px)' },
+                        { opacity: 0, transform: 'translateY(-6px)' },
                         { opacity: 1, transform: 'translateY(0)' }
                     ],
-                    { duration: 220, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+                    { duration: 200, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
                 );
-            }
-        });
-
-        if (!canHover) return;
-
-        block.addEventListener('mouseenter', () => {
-            window.clearTimeout(closeTimers.get(block));
-            block.open = true;
-        });
-
-        block.addEventListener('mouseleave', () => {
-            const timer = window.setTimeout(() => {
-                if (!block.contains(document.activeElement)) block.open = false;
-            }, 140);
-            closeTimers.set(block, timer);
-        });
-
-        // Pointer users get hover-first behaviour. Keyboard activation continues
-        // to use the native details control, and touch devices retain tap-to-open.
-        summary.addEventListener('click', event => {
-            if (event.detail > 0) {
-                event.preventDefault();
-                block.open = true;
             }
         });
     });
 
-    // Support any non-details FAQ components that may be added later.
+    // Support any custom FAQ item components
     document.querySelectorAll('[data-faq-item]').forEach(item => {
         const trigger = item.querySelector('[data-faq-trigger]');
         const content = item.querySelector('[data-faq-content]');
@@ -425,11 +438,10 @@ function initFaqAccordion() {
             content.hidden = !expanded;
         };
 
-        trigger.addEventListener('click', () => setExpanded(content.hidden));
-        if (canHover) {
-            item.addEventListener('mouseenter', () => setExpanded(true));
-            item.addEventListener('mouseleave', () => setExpanded(false));
-        }
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            setExpanded(content.hidden);
+        });
     });
 }
 
@@ -950,23 +962,23 @@ function initBookExperience() {
 
     mm.add('(min-width: 768px)', () => {
         gsap.set(book, {
-            scale: 0.66,
+            scale: 0.72,
             y: 56,
-            rotationX: 10,
+            rotationX: 8,
             opacity: 1,
             clipPath: 'inset(0% 0% 0% 0% round 8px)',
             transformPerspective: 1800,
             transformOrigin: '50% 72%'
         });
         gsap.set(leftPage, {
-            rotationY: 64,
+            rotationY: 82,
             transformOrigin: '100% 50%',
-            filter: 'brightness(0.62)'
+            filter: 'brightness(0.48)'
         });
         gsap.set(rightPage, {
-            rotationY: -64,
+            rotationY: -82,
             transformOrigin: '0% 50%',
-            filter: 'brightness(0.62)'
+            filter: 'brightness(0.48)'
         });
         gsap.set(pageContent, { opacity: 0, y: 14 });
         gsap.set(header, { opacity: 0.58, y: 18 });
@@ -990,15 +1002,17 @@ function initBookExperience() {
             }
         });
 
-        // Keep the opening linear and fully tied to scroll. The 64-degree starting
-        // angle reads as a closed volume without reducing the book to an invisible line.
+        // Begin from a clearly closed silhouette, then keep every opening frame
+        // linearly tied to the visitor's scroll position.
         tl.to(header, { opacity: 1, y: 0, duration: 0.8, ease: 'none' }, 0)
           .to(book, { scale: 0.8, y: 20, rotationX: 6, duration: 1.1, ease: 'none' }, 0)
           .to(leftPage, { rotationY: 0, filter: 'brightness(1)', duration: 2.4, ease: 'none' }, 0.35)
           .to(rightPage, { rotationY: 0, filter: 'brightness(1)', duration: 2.4, ease: 'none' }, 0.35)
           .to(book, { scale: 1, y: 0, rotationX: 0, duration: 2.15, ease: 'none' }, 0.55)
           .to(pageContent, { opacity: 1, y: 0, duration: 0.85, stagger: 0.05, ease: 'none' }, 1.65)
-          .to({}, { duration: 1.2 });
+          // A short readable landing frame prevents an abrupt cut without creating
+          // a long stretch of visually inactive scrolling.
+          .to({}, { duration: 0.22 });
 
         return () => {
             tl.kill();
@@ -1031,7 +1045,7 @@ function initBookExperience() {
 
         tl.to(book, { clipPath: 'inset(0% 0% 0% 0% round 8px)', scale: 1, y: 0, duration: 1.8, ease: 'none' })
           .to(pageContent, { opacity: 1, y: 0, duration: 0.72, stagger: 0.04, ease: 'none' }, 0.9)
-          .to({}, { duration: 1.0 });
+          .to({}, { duration: 0.2 });
 
         return () => {
             tl.kill();
@@ -1049,7 +1063,7 @@ function initForgeCountries() {
         {
             index: "DESTINATION 01 / 07",
             title: "Uzbekistan",
-            desc: "Access to 7 government medical institutes within Stellar's 130+ government college network, with structured guidance from selection through admission.",
+            desc: "Access to 7 government medical institutes within Stellar's 60+ government college network, with structured guidance from selection through admission.",
             institutes: "7 government institutes",
             budget: "₹30–35 lakh",
             tieups: "Government-only network",
@@ -1211,7 +1225,8 @@ function initForgeCountries() {
                 // Numeric scrub and snap previously continued the transition after scrolling stopped.
                 scrub: true,
                 anticipatePin: 1,
-                invalidateOnRefresh: true
+                invalidateOnRefresh: true,
+                refreshPriority: 1
             },
             onUpdate: () => {
                 const activeIndex = Math.min(countryData.length - 1, Math.round(tl.progress() * (countryData.length - 1)));
@@ -1242,11 +1257,11 @@ function initForgeCountries() {
               .set(previousImage, { autoAlpha: 0, zIndex: index }, cursor + transitionDuration);
 
             cursor += transitionDuration;
-            tl.to(nextImage.querySelector('img'), { scale: 1.025, duration: holdDuration, ease: 'none' }, cursor);
-            cursor += holdDuration;
+            const isLastCountry = index === countryData.length - 1;
+            const sceneHold = isLastCountry ? 0.32 : holdDuration;
+            tl.to(nextImage.querySelector('img'), { scale: 1.025, duration: sceneHold, ease: 'none' }, cursor);
+            cursor += sceneHold;
         }
-
-        tl.to({}, { duration: 0.7 });
 
         dots.forEach((dot, index) => {
             dot.onclick = () => {
@@ -1548,17 +1563,14 @@ function initForgeDoctors() {
         // Transition 2 -> 3 (t: 6.8 -> 7.8)
         addDoctorTransition(tl, 6.8, 2, 3, TRANS, true);
 
-        // Scene 3: Dr. Vikram Singh Hold (t: 7.8 -> 9.4)
+        // Scene 3: brief final landing frame before handing off to the next section.
         const img3 = photoLayers[3].querySelector('.doctor-photo-img');
         if (img3) {
-            tl.to(img3, { scale: 1.025, duration: HOLD, ease: "none" }, 7.8);
+            tl.to(img3, { scale: 1.015, duration: 0.42, ease: "none" }, 7.8);
         }
 
-        // Outro buffer before unpin (t: 9.4 -> 9.8)
-        tl.to(photoLayers[3], { scale: 1.02, duration: 0.4, ease: "none" }, 9.4);
-
         // Pill click jumps to precise hold centers
-        const pillTargets = [0.8 / 9.8, 3.4 / 9.8, 6.0 / 9.8, 8.6 / 9.8];
+        const pillTargets = [0.8 / 8.22, 3.4 / 8.22, 6.0 / 8.22, 8.0 / 8.22];
         pills.forEach((btn, idx) => {
             btn.onclick = (e) => {
                 e.preventDefault();
@@ -1648,7 +1660,7 @@ function initForgeDoctors() {
         addDoctorTransition(tl, 1.2, 0, 1, TRANS, false);
         addDoctorTransition(tl, 3.2, 1, 2, TRANS, false);
         addDoctorTransition(tl, 5.2, 2, 3, TRANS, false);
-        tl.to({}, { duration: 1.0 }, 6.0); // final hold
+        tl.to({}, { duration: 0.3 }, 6.0); // brief final landing frame
 
         return () => {
             tl.kill();

@@ -2136,3 +2136,152 @@ body {
         transform: none !important;
     }
 }
+
+/* ==========================================================================
+   Responsive Header & Mobile Navigation Optimization
+   ========================================================================== */
+@media (max-width: 1023px) {
+    header a[href="/"] {
+        padding-right: 0.5rem !important;
+        border-right: none !important;
+        min-width: 0 !important;
+        flex-shrink: 1 !important;
+        overflow: hidden !important;
+    }
+
+    .brand-logo-badge {
+        padding: 4px 6px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .brand-logo-badge img {
+        height: 22px !important;
+        max-width: 80px !important;
+    }
+
+    .brand-title {
+        font-size: clamp(0.75rem, 3.4vw, 1.05rem) !important;
+        white-space: normal !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 1 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: clamp(150px, 46vw, 280px) !important;
+        line-height: 1.2 !important;
+    }
+
+    .brand-sub {
+        font-size: 0.52rem !important;
+        letter-spacing: 0.12em !important;
+        margin-top: 1px !important;
+    }
+
+    header button[aria-label="Toggle menu"] {
+        flex-shrink: 0 !important;
+        min-width: 44px !important;
+        height: 44px !important;
+        margin-left: auto !important;
+        z-index: 60 !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .brand-title {
+        font-size: 0.78rem !important;
+        max-width: 175px !important;
+    }
+
+    .brand-logo-badge {
+        padding: 3px 5px !important;
+    }
+
+    .brand-logo-badge img {
+        height: 20px !important;
+    }
+}
+
+/* ==========================================================================
+   Inner-page editorial polish — intentionally excludes the animated homepage
+   ========================================================================== */
+.site-inner {
+    background: #F7F4EC;
+    color: #181915;
+}
+
+.site-inner main {
+    background: #F7F4EC;
+}
+
+.site-inner h1,
+.site-inner h2,
+.site-inner h3,
+.site-inner h4 {
+    text-wrap: balance;
+}
+
+.site-inner p,
+.site-inner li,
+.site-inner td {
+    text-wrap: pretty;
+}
+
+.site-inner .section-label,
+.site-inner .section-label-white,
+.site-inner .mono-label,
+.site-inner .mono-label-white {
+    font-size: 0.67rem;
+    line-height: 1.55;
+    letter-spacing: 0.13em;
+}
+
+.site-inner main > section:first-child > div[style*="width:90px"] {
+    display: none !important;
+}
+
+.site-inner .university-official-card {
+    min-height: 205px !important;
+    border-top: 3px solid #C9A45C !important;
+    background: #FFFEFA !important;
+}
+
+.site-inner details > summary {
+    min-height: 72px;
+}
+
+.site-inner details > summary:focus-visible,
+.site-inner a:focus-visible,
+.site-inner button:focus-visible {
+    outline: 3px solid #C9A45C;
+    outline-offset: 3px;
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+    header nav.hidden.lg\:flex,
+    header > div > div > div.hidden.lg\:flex {
+        display: none !important;
+    }
+
+    header button[aria-label="Toggle menu"] {
+        display: flex !important;
+    }
+
+    header > div + div.lg\:hidden {
+        display: block !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .site-inner .section-padding {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .site-inner .university-official-card {
+        min-height: 170px !important;
+    }
+}
