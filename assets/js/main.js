@@ -60,7 +60,12 @@ function initCountryBannerStack() {
         sequence.className = 'country-banner-sequence';
         sequence.textContent = `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
         sequence.setAttribute('aria-hidden', 'true');
-        card.appendChild(sequence);
+        const badgesContainer = card.querySelector('.country-banner-badges');
+        if (badgesContainer) {
+            badgesContainer.insertBefore(sequence, badgesContainer.firstChild);
+        } else {
+            card.appendChild(sequence);
+        }
     });
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

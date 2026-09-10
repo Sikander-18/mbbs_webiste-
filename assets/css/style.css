@@ -687,7 +687,37 @@
     transform: scale(1.075) !important;
 }
 
-.country-banner-sequence {
+.country-banner-badges {
+    position: absolute;
+    top: clamp(1.25rem, 2.5vw, 2.2rem);
+    right: clamp(1.25rem, 2.5vw, 2.2rem);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+}
+
+.country-banner-badges .country-banner-sequence {
+    position: static !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 9px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(12, 14, 12, 0.65);
+    color: rgba(255, 255, 255, 0.95);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    border-radius: 3px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.country-banner-card > .country-banner-sequence {
     position: absolute;
     top: clamp(1rem, 2vw, 1.5rem);
     right: clamp(1rem, 2vw, 1.5rem);
@@ -702,6 +732,17 @@
     letter-spacing: 0.14em;
     line-height: 1;
     backdrop-filter: blur(10px);
+}
+
+.country-banner-card:hover .country-banner-footer div {
+    background: #C9A45C !important;
+    border-color: #C9A45C !important;
+    color: #000000 !important;
+    transform: scale(1.08);
+}
+
+.country-banner-card:hover .country-banner-footer span {
+    color: #FFFFFF !important;
 }
 
 @media (max-width: 767px) {
