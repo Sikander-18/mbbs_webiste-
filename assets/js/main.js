@@ -488,14 +488,14 @@ function initBudgetCalculator() {
             uniList.innerHTML = '';
             matched.slice(0, 4).forEach(u => {
                 const tag = document.createElement('div');
-                tag.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:6px;transition:all 0.2s;';
+                tag.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:6px;transition:all 0.2s;';
                 tag.innerHTML = `<div>
-                    <span style="font-family:var(--font-inter);font-size:0.82rem;font-weight:600;color:#181915;display:block">${u.name}</span>
-                    <span style="font-family:var(--font-mono);font-size:0.6rem;color:#283A27;letter-spacing:0.08em;text-transform:uppercase">${u.country}</span>
+                    <span style="font-family:var(--font-inter);font-size:0.82rem;font-weight:600;color:#FFFFFF;display:block">${u.name}</span>
+                    <span style="font-family:var(--font-mono);font-size:0.6rem;color:#C9A45C;letter-spacing:0.08em;text-transform:uppercase">${u.country}</span>
                 </div>
                 <div style="text-align:right">
-                    <span style="font-family:var(--font-mono);font-size:0.75rem;font-weight:700;color:#0A0A0A">₹${u.minBudget}L – ₹${u.maxBudget}L</span>
-                    <span style="display:block;font-size:0.55rem;color:#9CA3AF">All-inclusive est.</span>
+                    <span style="font-family:var(--font-mono);font-size:0.75rem;font-weight:700;color:#C9A45C">₹${u.minBudget}L – ₹${u.maxBudget}L</span>
+                    <span style="display:block;font-size:0.55rem;color:rgba(255,255,255,0.45)">All-inclusive est.</span>
                 </div>`;
                 uniList.appendChild(tag);
             });
@@ -945,198 +945,385 @@ function initForgeCountries() {
 }
 
 // 14. Staged Doctor Counselors Controller (Forge Image 4 - Insight Style & Pinned Sticky Scroll)
+// 14. Pinned Editorial Doctor Counselors Controller (Forge Automotive Scroll-Driven Timeline)
 function initForgeDoctors() {
     const section = document.getElementById('pinned-doctors-section');
     if (!section) return;
 
-    const doctors = [
-        {
-            name: "Dr. Nishu Yadav",
-            role: "Founder & Lead Counselor • MBBS (Semey Medical University, Kazakhstan)",
-            bio: "Dr. Nishu completed his medical education across Ukraine and Kazakhstan, gaining diverse international clinical exposure. He cleared the FMGE on his very first attempt. His mission is providing practical, experience-based support to aspiring doctors.",
-            img: "/assets/images/nishu_yadav.jpg",
-            whatsapp: "https://wa.me/919004775531?text=Hi%20Dr.%20Nishu,%20I%20want%20to%20consult%20regarding%20MBBS%20Abroad."
-        },
-        {
-            name: "Dr. Lokesh Attri",
-            role: "Co-Founder & FMG Counselor • MBBS (Semey Medical University, Kazakhstan)",
-            bio: "Dr. Lokesh completed his medical degree with extensive hospital clinical exposure and cleared FMGE on his first attempt with an impressive score of 210. He actively mentors medical aspirants on subject-wise university preparation.",
-            img: "/assets/images/lokesh_attri.jpg",
-            whatsapp: "https://wa.me/919004775531?text=Hi%20Dr.%20Lokesh,%20I%20want%20to%20consult%20regarding%20MBBS%20Abroad."
-        },
-        {
-            name: "Dr. Bindu Tyagi",
-            role: "Co-Founder & Overseas Counselor • MBBS (Ternopil National Medical University)",
-            bio: "Dr. Bindu graduated with clinical honors and mentors students on European curriculum navigation, hostel safety, clinical rounds, and year-by-year NMC compliance.",
-            img: "/assets/images/bindu_tyagi.jpg",
-            whatsapp: "https://wa.me/919004775531?text=Hi%20Dr.%20Bindu,%20I%20want%20to%20consult%20regarding%20MBBS%20Abroad."
-        },
-        {
-            name: "Dr. Vikram Singh",
-            role: "Senior Academic Director • MBBS, MD (Pediatrics)",
-            bio: "With over a decade of clinical practice and overseas medical education advisory, Dr. Vikram oversees our rigorous university vetting process and post-arrival student welfare programs.",
-            img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800&q=80",
-            whatsapp: "https://wa.me/919004775531?text=Hi%20Dr.%20Vikram,%20I%20want%20to%20consult%20regarding%20MBBS%20Abroad."
-        }
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.warn('GSAP or ScrollTrigger not loaded; falling back.');
+        return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const panes = Array.from(section.querySelectorAll('.doctor-pane'));
+    const photoLayers = Array.from(section.querySelectorAll('.doctor-photo-layer'));
+    const ambientLayers = Array.from(section.querySelectorAll('.doctors-ambient-layer'));
+    const pills = Array.from(section.querySelectorAll('.doctors-story__progress-pill'));
+    const badgeEl = document.getElementById('doctor-badge-status');
+
+    if (!panes.length || !photoLayers.length) return;
+
+    const doctorCount = panes.length;
+    const doctorBadges = [
+        "AVAILABLE FOR CONSULTATION",
+        "AVAILABLE FOR CONSULTATION",
+        "AVAILABLE FOR CONSULTATION",
+        "SENIOR ACADEMIC DIRECTOR"
     ];
 
-    let currentDoc = 0;
-    let isTransitioning = false;
-    const nameEl = document.getElementById('doctor-name');
-    const roleEl = document.getElementById('doctor-role');
-    const bioEl = document.getElementById('doctor-bio');
-    const imgEl = document.getElementById('doctor-img');
-    const ctaBtn = document.getElementById('doctor-cta-btn');
-    const indicatorEl = document.getElementById('doc-step-indicator');
-    const ambientGlow = document.getElementById('doc-backdrop-ambient');
-    const editorialStack = document.getElementById('doc-editorial-stack');
-    const tabBtns = section.querySelectorAll('.doc-tab-btn');
-    const prevBtn = document.getElementById('doc-prev-btn');
-    const nextBtn = document.getElementById('doc-next-btn');
-
-    function renderDoc(index) {
-        if (index < 0) index = doctors.length - 1;
-        if (index >= doctors.length) index = 0;
-        if (index === currentDoc && isTransitioning) return;
-
-        const oldIndex = currentDoc;
-        currentDoc = index;
-        const d = doctors[index];
-
-        // Animate text slide-out / slide-in matching reference video
-        if (editorialStack && oldIndex !== index) {
-            isTransitioning = true;
-            editorialStack.classList.remove('anim-active', 'anim-enter');
-            editorialStack.classList.add('anim-exit');
-
-            setTimeout(() => {
-                if (nameEl) nameEl.textContent = d.name;
-                if (roleEl) roleEl.textContent = d.role;
-                if (bioEl) bioEl.textContent = d.bio;
-                if (ctaBtn) {
-                    ctaBtn.href = d.whatsapp;
-                    const firstName = d.name.split(' ')[1] || d.name;
-                    ctaBtn.textContent = `Consult With ${firstName} via WhatsApp →`;
-                }
-                if (indicatorEl) {
-                    indicatorEl.innerHTML = `0${index + 1} <span style="opacity:0.4;color:white;">/ 04</span>`;
-                }
-
-                editorialStack.classList.remove('anim-exit');
-                editorialStack.classList.add('anim-enter');
-
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        editorialStack.classList.remove('anim-enter');
-                        editorialStack.classList.add('anim-active');
-                        isTransitioning = false;
-                    });
-                });
-            }, 190);
-        } else {
-            if (nameEl) nameEl.textContent = d.name;
-            if (roleEl) roleEl.textContent = d.role;
-            if (bioEl) bioEl.textContent = d.bio;
-            if (ctaBtn) {
-                ctaBtn.href = d.whatsapp;
-                const firstName = d.name.split(' ')[1] || d.name;
-                ctaBtn.textContent = `Consult With ${firstName} via WhatsApp →`;
-            }
-            if (indicatorEl) {
-                indicatorEl.innerHTML = `0${index + 1} <span style="opacity:0.4;color:white;">/ 04</span>`;
-            }
-        }
-
-        // Image crossfade & subtle scale
-        if (imgEl && imgEl.src !== d.img) {
-            imgEl.style.opacity = '0.2';
-            imgEl.style.transform = 'scale(1.04)';
-            setTimeout(() => {
-                imgEl.src = d.img;
-                imgEl.alt = d.name;
-                imgEl.style.opacity = '1';
-                imgEl.style.transform = 'scale(1)';
-            }, 180);
-        }
-
-        // Ambient backdrop update
-        if (ambientGlow) {
-            ambientGlow.style.backgroundImage = `url('${d.img}')`;
-        }
-
-        // Update tab pill highlights
-        tabBtns.forEach((btn, i) => {
-            if (i === index) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-    }
-
-    // Scroll-driven pinned controller
-    let ticking = false;
-    function onDoctorScroll() {
-        ticking = false;
-        const rect = section.getBoundingClientRect();
-        const sectionHeight = section.offsetHeight;
-        const windowHeight = window.innerHeight;
-        const maxScroll = sectionHeight - windowHeight;
-
-        if (maxScroll <= 0) return;
-
-        const scrolledIntoSection = -rect.top;
-
-        if (scrolledIntoSection >= 0 && scrolledIntoSection <= maxScroll) {
-            const progress = Math.min(Math.max(scrolledIntoSection / maxScroll, 0), 0.999);
-            const totalDocs = doctors.length;
-            const targetIndex = Math.min(Math.floor(progress * totalDocs), totalDocs - 1);
-
-            if (targetIndex !== currentDoc) {
-                renderDoc(targetIndex);
-            }
-        }
-    }
-
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            ticking = true;
-            window.requestAnimationFrame(onDoctorScroll);
-        }
-    }, { passive: true });
-
-    function scrollToDoctor(index) {
-        renderDoc(index);
-        const sectionTop = window.scrollY + section.getBoundingClientRect().top;
-        const maxScroll = section.offsetHeight - window.innerHeight;
-        if (maxScroll > 0) {
-            const targetScroll = sectionTop + (index + 0.5) * (maxScroll / doctors.length);
-            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-        }
-    }
-
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const idx = parseInt(btn.dataset.doc, 10);
-            scrollToDoctor(idx);
-        });
+    // Preload all doctor imagery before scrub begins
+    const doctorImageSources = [
+        '/assets/images/nishu_yadav.jpg',
+        '/assets/images/lokesh_attri.jpg',
+        '/assets/images/bindu_tyagi.jpg',
+        'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800&q=80'
+    ];
+    doctorImageSources.forEach(src => {
+        const img = new Image();
+        img.src = src;
     });
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            const nextIdx = currentDoc > 0 ? currentDoc - 1 : doctors.length - 1;
-            scrollToDoctor(nextIdx);
+    // Reduced motion preference: static presentation
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        panes.forEach((p, i) => {
+            p.style.position = 'relative';
+            p.style.opacity = '1';
+            p.style.pointerEvents = 'auto';
         });
+        photoLayers.forEach((layer, i) => {
+            layer.style.position = 'relative';
+            layer.style.opacity = '1';
+        });
+        return;
     }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            const nextIdx = currentDoc < doctors.length - 1 ? currentDoc + 1 : 0;
-            scrollToDoctor(nextIdx);
-        });
+    // Master doctor transition builder
+    function addDoctorTransition(tl, startTime, fromIdx, toIdx, duration, isDesktop) {
+        const fromPane = panes[fromIdx];
+        const toPane = panes[toIdx];
+        const fromPhoto = photoLayers[fromIdx];
+        const toPhoto = photoLayers[toIdx];
+        const fromImg = fromPhoto ? fromPhoto.querySelector('.doctor-photo-img') : null;
+        const toImg = toPhoto ? toPhoto.querySelector('.doctor-photo-img') : null;
+
+        // --- Photo Layers Transition ---
+        if (fromPhoto) {
+            // Outgoing photo drifts subtly and fades
+            tl.to(fromPhoto, {
+                scale: 1.04,
+                opacity: 0,
+                duration: duration * 0.85,
+                ease: "power2.inOut"
+            }, startTime);
+            if (fromImg) {
+                tl.to(fromImg, {
+                    scale: 1.03,
+                    duration: duration,
+                    ease: "power1.out"
+                }, startTime);
+            }
+        }
+
+        if (toPhoto) {
+            // Incoming photo is brought above (zIndex: 2)
+            tl.set(toPhoto, { zIndex: 2, opacity: 1 }, startTime);
+
+            if (isDesktop) {
+                // Signature Forge center-outward curtain reveal:
+                // Begins as a 0-width slit in exact center (50% left, 50% right)
+                // Opens smoothly outward to full frame (0% left, 0% right)
+                tl.fromTo(toPhoto, {
+                    clipPath: "inset(0% 50% 0% 50%)",
+                    scale: 1.08
+                }, {
+                    clipPath: "inset(0% 0% 0% 0%)",
+                    scale: 1.0,
+                    duration: duration,
+                    ease: "power2.inOut"
+                }, startTime);
+            } else {
+                // Mobile optimized: smooth crossfade + gentle scale settling
+                tl.fromTo(toPhoto, {
+                    opacity: 0,
+                    scale: 1.06
+                }, {
+                    opacity: 1,
+                    scale: 1.0,
+                    duration: duration,
+                    ease: "power2.out"
+                }, startTime);
+            }
+
+            if (toImg) {
+                tl.fromTo(toImg, {
+                    scale: 1.06
+                }, {
+                    scale: 1.0,
+                    duration: duration,
+                    ease: "power2.out"
+                }, startTime);
+            }
+        }
+
+        // --- Typography & Editorial Pane Transition ---
+        if (fromPane) {
+            const fIndex = fromPane.querySelector('.doctor-pane__index');
+            const fLabel = fromPane.querySelector('.doctor-pane__label');
+            const fName = fromPane.querySelector('.doctor-pane__name');
+            const fRole = fromPane.querySelector('.doctor-pane__role');
+            const fBio = fromPane.querySelector('.doctor-pane__bio');
+            const fCta = fromPane.querySelector('.doctor-pane__cta');
+
+            // Staggered exit upward
+            tl.to([fIndex, fLabel], { y: -24, opacity: 0, duration: duration * 0.35, ease: "power2.in" }, startTime);
+            tl.to(fName, { y: -65, opacity: 0, duration: duration * 0.45, ease: "power2.in" }, startTime + duration * 0.08);
+            tl.to(fRole, { y: -30, opacity: 0, duration: duration * 0.4, ease: "power2.in" }, startTime + duration * 0.12);
+            tl.to(fBio, { y: -28, opacity: 0, duration: duration * 0.45, ease: "power2.in" }, startTime + duration * 0.16);
+            tl.to(fCta, { y: -20, opacity: 0, duration: duration * 0.35, ease: "power2.in" }, startTime + duration * 0.2);
+
+            tl.set(fromPane, { pointerEvents: "none", opacity: 0 }, startTime + duration * 0.6);
+        }
+
+        if (toPane) {
+            const tIndex = toPane.querySelector('.doctor-pane__index');
+            const tLabel = toPane.querySelector('.doctor-pane__label');
+            const tName = toPane.querySelector('.doctor-pane__name');
+            const tRole = toPane.querySelector('.doctor-pane__role');
+            const tBio = toPane.querySelector('.doctor-pane__bio');
+            const tCta = toPane.querySelector('.doctor-pane__cta');
+
+            tl.set(toPane, { opacity: 1 }, startTime + duration * 0.25);
+            tl.set(toPane, { pointerEvents: "auto" }, startTime + duration * 0.6);
+
+            // Staggered entry from below
+            tl.fromTo([tIndex, tLabel], { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.45, ease: "power2.out" }, startTime + duration * 0.3);
+            tl.fromTo(tName, { y: 65, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.55, ease: "power2.out" }, startTime + duration * 0.38);
+            tl.fromTo(tRole, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.48, ease: "power2.out" }, startTime + duration * 0.44);
+            tl.fromTo(tBio, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.5, ease: "power2.out" }, startTime + duration * 0.48);
+            tl.fromTo(tCta, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: duration * 0.45, ease: "power2.out" }, startTime + duration * 0.52);
+        }
+
+        // --- Ambient Backdrop Transition ---
+        if (ambientLayers[fromIdx]) {
+            tl.to(ambientLayers[fromIdx], { opacity: 0, duration: duration * 0.8, ease: "power1.inOut" }, startTime);
+        }
+        if (ambientLayers[toIdx]) {
+            tl.to(ambientLayers[toIdx], { opacity: 0.5, duration: duration * 0.8, ease: "power1.inOut" }, startTime + duration * 0.2);
+        }
     }
 
-    // Initialize initial state
-    renderDoc(0);
-    onDoctorScroll();
+    const mm = gsap.matchMedia();
+
+    // ========================================================
+    // DESKTOP / TABLET LANDSCAPE (>= 1024px)
+    // ========================================================
+    mm.add("(min-width: 1024px)", () => {
+        // Initial setup
+        panes.forEach((pane, i) => {
+            const isFirst = i === 0;
+            gsap.set(pane, { opacity: isFirst ? 1 : 0, pointerEvents: isFirst ? "auto" : "none" });
+            const idxEl = pane.querySelector('.doctor-pane__index');
+            const labelEl = pane.querySelector('.doctor-pane__label');
+            const nameEl = pane.querySelector('.doctor-pane__name');
+            const roleEl = pane.querySelector('.doctor-pane__role');
+            const bioEl = pane.querySelector('.doctor-pane__bio');
+            const ctaEl = pane.querySelector('.doctor-pane__cta');
+
+            if (isFirst) {
+                gsap.set([idxEl, labelEl, nameEl, roleEl, bioEl, ctaEl], { y: 0, opacity: 1 });
+            } else {
+                gsap.set([idxEl, labelEl], { y: 24, opacity: 0 });
+                gsap.set(nameEl, { y: 65, opacity: 0 });
+                gsap.set(roleEl, { y: 30, opacity: 0 });
+                gsap.set(bioEl, { y: 28, opacity: 0 });
+                gsap.set(ctaEl, { y: 20, opacity: 0 });
+            }
+        });
+
+        photoLayers.forEach((layer, i) => {
+            const img = layer.querySelector('.doctor-photo-img');
+            if (i === 0) {
+                gsap.set(layer, { opacity: 1, scale: 1.0, clipPath: "inset(0% 0% 0% 0%)", zIndex: 1 });
+                if (img) gsap.set(img, { scale: 1.0 });
+            } else {
+                gsap.set(layer, { opacity: 0, scale: 1.08, clipPath: "inset(0% 50% 0% 50%)", zIndex: 0 });
+                if (img) gsap.set(img, { scale: 1.0 });
+            }
+        });
+
+        ambientLayers.forEach((amb, i) => {
+            gsap.set(amb, { opacity: i === 0 ? 0.5 : 0 });
+        });
+
+        pills.forEach((p, i) => {
+            if (i === 0) p.classList.add('active');
+            else p.classList.remove('active');
+        });
+
+        if (badgeEl) badgeEl.textContent = doctorBadges[0];
+
+        // Master Timeline: 60% Hold, 40% Transition, Scrub: 1
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "+=4800",
+                pin: true,
+                scrub: 1,
+                anticipatePin: 1
+            },
+            onUpdate: () => {
+                const curTime = tl.time();
+                let activeDoc = 0;
+                if (curTime >= 6.8) activeDoc = 3;
+                else if (curTime >= 4.2) activeDoc = 2;
+                else if (curTime >= 1.6) activeDoc = 1;
+                else activeDoc = 0;
+
+                pills.forEach((p, k) => {
+                    if (k === activeDoc) p.classList.add('active');
+                    else p.classList.remove('active');
+                });
+
+                if (badgeEl && doctorBadges[activeDoc]) {
+                    badgeEl.textContent = doctorBadges[activeDoc];
+                }
+            }
+        });
+
+        const HOLD = 1.6;
+        const TRANS = 1.0;
+
+        // Scene 0: Dr. Nishu Yadav Hold (t: 0 -> 1.6)
+        const img0 = photoLayers[0].querySelector('.doctor-photo-img');
+        if (img0) {
+            tl.to(img0, { scale: 1.025, duration: HOLD, ease: "none" }, 0);
+        }
+
+        // Transition 0 -> 1 (t: 1.6 -> 2.6)
+        addDoctorTransition(tl, 1.6, 0, 1, TRANS, true);
+
+        // Scene 1: Dr. Lokesh Attri Hold (t: 2.6 -> 4.2)
+        const img1 = photoLayers[1].querySelector('.doctor-photo-img');
+        if (img1) {
+            tl.to(img1, { scale: 1.025, duration: HOLD, ease: "none" }, 2.6);
+        }
+
+        // Transition 1 -> 2 (t: 4.2 -> 5.2)
+        addDoctorTransition(tl, 4.2, 1, 2, TRANS, true);
+
+        // Scene 2: Dr. Bindu Tyagi Hold (t: 5.2 -> 6.8)
+        const img2 = photoLayers[2].querySelector('.doctor-photo-img');
+        if (img2) {
+            tl.to(img2, { scale: 1.025, duration: HOLD, ease: "none" }, 5.2);
+        }
+
+        // Transition 2 -> 3 (t: 6.8 -> 7.8)
+        addDoctorTransition(tl, 6.8, 2, 3, TRANS, true);
+
+        // Scene 3: Dr. Vikram Singh Hold (t: 7.8 -> 9.4)
+        const img3 = photoLayers[3].querySelector('.doctor-photo-img');
+        if (img3) {
+            tl.to(img3, { scale: 1.025, duration: HOLD, ease: "none" }, 7.8);
+        }
+
+        // Outro buffer before unpin (t: 9.4 -> 9.8)
+        tl.to(photoLayers[3], { scale: 1.02, duration: 0.4, ease: "none" }, 9.4);
+
+        // Pill click jumps to precise hold centers
+        const pillTargets = [0.8 / 9.8, 3.4 / 9.8, 6.0 / 9.8, 8.6 / 9.8];
+        pills.forEach((btn, idx) => {
+            btn.onclick = (e) => {
+                e.preventDefault();
+                const st = tl.scrollTrigger;
+                if (st) {
+                    const targetScroll = st.start + pillTargets[idx] * (st.end - st.start);
+                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+                }
+            };
+        });
+
+        return () => {
+            tl.kill();
+        };
+    });
+
+    // ========================================================
+    // MOBILE / TABLET PORTRAIT (< 1024px)
+    // ========================================================
+    mm.add("(max-width: 1023px)", () => {
+        // Initial setup for mobile
+        panes.forEach((pane, i) => {
+            const isFirst = i === 0;
+            gsap.set(pane, { opacity: isFirst ? 1 : 0, pointerEvents: isFirst ? "auto" : "none" });
+            const allKids = pane.children;
+            if (isFirst) {
+                gsap.set(allKids, { y: 0, opacity: 1 });
+            } else {
+                gsap.set(allKids, { y: 20, opacity: 0 });
+            }
+        });
+
+        photoLayers.forEach((layer, i) => {
+            if (i === 0) {
+                gsap.set(layer, { opacity: 1, scale: 1.0, zIndex: 1 });
+            } else {
+                gsap.set(layer, { opacity: 0, scale: 1.06, zIndex: 0 });
+            }
+        });
+
+        ambientLayers.forEach((amb, i) => {
+            gsap.set(amb, { opacity: i === 0 ? 0.4 : 0 });
+        });
+
+        pills.forEach((p, i) => {
+            if (i === 0) p.classList.add('active');
+            else p.classList.remove('active');
+        });
+
+        if (badgeEl) badgeEl.textContent = doctorBadges[0];
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "+=2800",
+                pin: true,
+                scrub: 0.8,
+                anticipatePin: 1
+            },
+            onUpdate: () => {
+                const curTime = tl.time();
+                let activeDoc = 0;
+                if (curTime >= 5.6) activeDoc = 3;
+                else if (curTime >= 3.6) activeDoc = 2;
+                else if (curTime >= 1.6) activeDoc = 1;
+                else activeDoc = 0;
+
+                pills.forEach((p, k) => {
+                    if (k === activeDoc) p.classList.add('active');
+                    else p.classList.remove('active');
+                });
+
+                if (badgeEl && doctorBadges[activeDoc]) {
+                    badgeEl.textContent = doctorBadges[activeDoc];
+                }
+            }
+        });
+
+        const HOLD = 1.2;
+        const TRANS = 0.8;
+
+        // Transitions for mobile
+        addDoctorTransition(tl, 1.2, 0, 1, TRANS, false);
+        addDoctorTransition(tl, 3.2, 1, 2, TRANS, false);
+        addDoctorTransition(tl, 5.2, 2, 3, TRANS, false);
+        tl.to({}, { duration: 1.0 }, 6.0); // final hold
+
+        return () => {
+            tl.kill();
+        };
+    });
 }
