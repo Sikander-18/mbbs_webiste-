@@ -997,13 +997,13 @@ function initForgeCountries() {
         {
             index: "DESTINATION 01 / 07",
             title: "Uzbekistan",
-            desc: "Access to 7 government medical institutes within Stellar's 60+ college network, with structured guidance from selection through admission.",
+            desc: "Access to 7 government medical institutes within Stellar's 130+ government college network, with structured guidance from selection through admission.",
             institutes: "7 government institutes",
             budget: "₹30–35 lakh",
             tieups: "Government-only network",
             img: "/assets/images/countries/uzbekistan-campus.jpg",
-            ctaText: "View affiliated universities",
-            ctaHref: "/universities"
+            ctaText: "View country & colleges",
+            ctaHref: "/countries/uzbekistan"
         },
         {
             index: "DESTINATION 02 / 07",
@@ -1013,8 +1013,8 @@ function initForgeCountries() {
             budget: "₹30–35 lakh",
             tieups: "Government-only network",
             img: "/assets/images/countries/kyrgyzstan-campus.jpg",
-            ctaText: "View affiliated universities",
-            ctaHref: "/universities"
+            ctaText: "View country & colleges",
+            ctaHref: "/countries/kyrgyzstan"
         },
         {
             index: "DESTINATION 03 / 07",
@@ -1024,8 +1024,8 @@ function initForgeCountries() {
             budget: "₹30–35 lakh",
             tieups: "Government-only network",
             img: "/assets/images/countries/kazakhstan-campus.jpg",
-            ctaText: "View affiliated universities",
-            ctaHref: "/universities"
+            ctaText: "View country & colleges",
+            ctaHref: "/countries/kazakhstan"
         },
         {
             index: "DESTINATION 04 / 07",
@@ -1035,8 +1035,8 @@ function initForgeCountries() {
             budget: "₹27–45 lakh",
             tieups: "10+ high-level tie-ups",
             img: "/assets/images/countries/russia-campus.jpg",
-            ctaText: "View affiliated universities",
-            ctaHref: "/universities"
+            ctaText: "View country & colleges",
+            ctaHref: "/countries/russia"
         },
         {
             index: "DESTINATION 05 / 07",
@@ -1046,30 +1046,30 @@ function initForgeCountries() {
             budget: "₹32–45 lakh",
             tieups: "15+ high-level tie-ups",
             img: "/assets/images/countries/bangladesh-campus.jpg",
-            ctaText: "View affiliated universities",
-            ctaHref: "/universities"
+            ctaText: "View country & colleges",
+            ctaHref: "/countries/bangladesh"
         },
         {
             index: "DESTINATION 06 / 07",
             title: "Georgia",
-            desc: "A focused selection of 4–5 government medical institutes with counselling that explains the destination, estimated cost, and institutional fit clearly.",
+            desc: "A focused selection of 4–5 government medical institutes with senior-guided consultation explaining the destination, curriculum, and cost context.",
             institutes: "4–5 government institutes",
             budget: "₹38–55 lakh",
             tieups: "Government-only network",
             img: "/assets/images/countries/georgia-campus.jpg",
-            ctaText: "View affiliated universities",
-            ctaHref: "/universities"
+            ctaText: "View country & colleges",
+            ctaHref: "/countries/georgia"
         },
         {
             index: "DESTINATION 07 / 07",
             title: "Nepal",
-            desc: "Eight to nine government medical institutes with close cultural proximity to India and personalised guidance for students and families.",
+            desc: "Eight to nine government medical institutes with close cultural proximity to India, AIIMS-pattern clinical rigor, and direct senior fee advisory.",
             institutes: "8–9 government institutes",
             budget: "₹57–80 lakh",
             tieups: "Government-only network",
             img: "/assets/images/countries/nepal-campus.webp",
-            ctaText: "View affiliated universities",
-            ctaHref: "/universities"
+            ctaText: "View country & colleges",
+            ctaHref: "/countries/nepal"
         }
     ];
 
