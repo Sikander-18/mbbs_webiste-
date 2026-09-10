@@ -28,6 +28,627 @@
   --color-luxe-ivory: #F7F5EE;             /* Warm Ivory Paver */
 }
 
+/* ========================================================
+   PRIORITY MOTION PASS — BOOK, COUNTRIES, DOCTORS
+   ======================================================== */
+
+/* Scroll-open compendium */
+.book-story {
+    --book-progress: 0%;
+    position: relative;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 58%, rgba(201, 164, 92, 0.11), transparent 34%),
+        #12130F;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: clip;
+}
+
+.book-story::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 52px 52px;
+}
+
+.book-story__sticky {
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.book-story__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-top: clamp(4.75rem, 8vh, 6.25rem);
+    padding-bottom: 2rem;
+}
+
+.book-story__header {
+    margin-bottom: clamp(1.1rem, 2.6vh, 2rem) !important;
+    will-change: transform, opacity;
+}
+
+.book-3d-scene {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1800px;
+    margin: 0;
+    min-height: min(520px, 62vh);
+    transform-style: preserve-3d;
+}
+
+.medical-book-wrap {
+    position: relative;
+    width: min(1140px, calc(100vw - clamp(3rem, 8vw, 8rem)));
+    max-width: 1140px;
+    margin: 0 auto;
+    background: none;
+    border-radius: 7px;
+    box-shadow: 0 42px 100px rgba(0, 0, 0, 0.78), 0 0 70px rgba(201, 164, 92, 0.12);
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.medical-book-wrap:hover {
+    transform: none;
+}
+
+.book-pages {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.34));
+}
+
+.medical-book-page-left,
+.medical-book-page-right {
+    min-height: min(520px, 62vh);
+    background-image: url('/assets/images/compendium_book_cropped.webp');
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform, filter;
+    overflow: hidden;
+}
+
+.medical-book-page-left {
+    background-position: left center;
+    border-radius: 7px 0 0 7px;
+    box-shadow: inset -18px 0 24px rgba(0, 0, 0, 0.11);
+}
+
+.medical-book-page-right {
+    background-position: right center;
+    border-radius: 0 7px 7px 0;
+    box-shadow: inset 18px 0 24px rgba(0, 0, 0, 0.11);
+}
+
+.medical-book-page-left::after,
+.medical-book-page-right::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent 28%, rgba(255,255,255,0.22) 46%, transparent 62%);
+    opacity: 0.16;
+    mix-blend-mode: screen;
+}
+
+.medical-book-spine {
+    position: absolute;
+    z-index: 8;
+    top: 2.5%;
+    bottom: 2.5%;
+    left: 50%;
+    width: 3px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: linear-gradient(180deg, transparent, rgba(201,164,92,0.7) 18%, rgba(34,31,24,0.75) 50%, rgba(201,164,92,0.65) 82%, transparent);
+    box-shadow: 0 0 16px rgba(0,0,0,0.55);
+    pointer-events: none;
+}
+
+.book-story__progress {
+    position: absolute;
+    z-index: 5;
+    left: clamp(1.5rem, 4vw, 4rem);
+    right: clamp(1.5rem, 4vw, 4rem);
+    bottom: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.book-story__progress > span {
+    display: block;
+    height: 2px;
+    flex: 1;
+    background: linear-gradient(90deg, #C9A45C var(--book-progress), rgba(255,255,255,0.12) var(--book-progress));
+}
+
+.book-story__progress small {
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #A7B0BA;
+    white-space: nowrap;
+}
+
+/* Seven-destination pinned editorial sequence */
+.countries-story {
+    position: relative;
+    min-height: 100vh;
+    background: #12130F;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: #F7F5EE;
+    overflow: clip;
+}
+
+.countries-story__sticky {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: #12130F;
+}
+
+.countries-story__ambient {
+    position: absolute;
+    inset: -8%;
+    pointer-events: none;
+}
+
+.country-story-ambient {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(72px) brightness(0.19) saturate(0.82);
+    transform: scale(1.12);
+    will-change: opacity;
+}
+
+.countries-story__grid {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+}
+
+.countries-story__content {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding: clamp(6rem, 10vh, 8rem) clamp(2rem, 5vw, 5.5rem) clamp(4rem, 7vh, 5rem);
+    background: linear-gradient(90deg, rgba(18,19,15,0.98) 0%, rgba(18,19,15,0.88) 72%, rgba(18,19,15,0.26) 100%);
+}
+
+.countries-story__eyebrow {
+    position: absolute;
+    top: clamp(5.75rem, 9vh, 7rem);
+    left: clamp(2rem, 5vw, 5.5rem);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.57rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #A7B0BA;
+}
+
+.countries-story__eyebrow-rule {
+    width: 34px;
+    height: 1px;
+    background: rgba(201,164,92,0.75);
+}
+
+.country-story-panes {
+    position: relative;
+    min-height: 490px;
+}
+
+.country-story-pane {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+.country-story-pane.active:first-child {
+    opacity: 1;
+}
+
+.country-story-pane__index {
+    margin-bottom: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #C9A45C;
+}
+
+.country-story-pane__title {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-display);
+    font-size: clamp(3.25rem, 6.1vw, 6.75rem);
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+    color: #FFFFFF;
+}
+
+.country-story-pane__description {
+    max-width: 590px;
+    margin-bottom: 1.5rem;
+    font-size: clamp(0.9rem, 1.15vw, 1.02rem);
+    line-height: 1.7;
+    color: rgba(255,255,255,0.62);
+}
+
+.country-story-pane__specs {
+    max-width: 560px;
+    margin: 0 0 1.65rem;
+    border-top: 1px solid rgba(255,255,255,0.11);
+}
+
+.country-story-pane__specs > div {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.72fr) 1.28fr;
+    gap: 1rem;
+    padding: 0.68rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.country-story-pane__specs dt,
+.country-story-pane__specs dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+}
+
+.country-story-pane__specs dt {
+    color: #77808A;
+    text-transform: uppercase;
+}
+
+.country-story-pane__specs dd {
+    color: #E7D6B1;
+    text-align: right;
+}
+
+.country-story-pane__cta,
+.countries-story__all-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    width: fit-content;
+    border: 1px solid rgba(201,164,92,0.45);
+    padding: 0.82rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.59rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #F7F5EE;
+    transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.country-story-pane__cta:hover,
+.countries-story__all-link:hover {
+    color: #12130F;
+    background: #C9A45C;
+    border-color: #C9A45C;
+}
+
+.countries-story__visual {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: #090A08;
+}
+
+.country-story-image {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    will-change: clip-path, transform, opacity;
+}
+
+.country-story-image.active:first-child {
+    opacity: 1;
+}
+
+.country-story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1);
+    will-change: transform;
+}
+
+.countries-story__visual-shade {
+    position: absolute;
+    z-index: 20;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(18,19,15,0.78), transparent 24%),
+        linear-gradient(0deg, rgba(18,19,15,0.58), transparent 34%);
+}
+
+.countries-story__visual-label {
+    position: absolute;
+    z-index: 25;
+    right: clamp(1.5rem, 3vw, 3rem);
+    bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.72);
+}
+
+.countries-story__visual-label span:first-child {
+    color: #C9A45C;
+    font-size: 0.78rem;
+}
+
+.countries-story__footer {
+    position: absolute;
+    left: clamp(2rem, 5vw, 5.5rem);
+    right: clamp(1.5rem, 3vw, 3rem);
+    bottom: 1.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.countries-story__progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.country-story-progress-dot {
+    display: block;
+    width: 22px;
+    height: 3px;
+    padding: 0;
+    border: 0;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.18);
+    transition: width 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+.country-story-progress-dot.active {
+    width: 42px;
+    background: #C9A45C;
+    box-shadow: 0 0 12px rgba(201,164,92,0.42);
+}
+
+.countries-story__all-link {
+    padding: 0;
+    border: 0;
+    color: #A7B0BA;
+}
+
+.countries-story__all-link:hover {
+    color: #C9A45C;
+    background: transparent;
+}
+
+.countries-story__rail {
+    position: absolute;
+    z-index: 30;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+}
+
+.countries-story__rail span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #C9A45C;
+    box-shadow: 0 0 10px rgba(201,164,92,0.45);
+}
+
+/* Doctor sequence refinements */
+.pin-spacer {
+    background: #12130F !important;
+}
+
+.doctors-story__photo-frame,
+.doctor-photo-layer,
+.doctor-photo-img,
+.doctor-pane {
+    will-change: transform, opacity, clip-path;
+}
+
+.doctor-photo-img {
+    transform-origin: center center;
+}
+
+.doctor-pane {
+    z-index: 1;
+}
+
+.doctor-pane.active {
+    z-index: 2;
+}
+
+@media (max-width: 899px) {
+    .countries-story__grid {
+        display: block;
+    }
+
+    .countries-story__visual {
+        position: absolute;
+        inset: 0;
+    }
+
+    .countries-story__content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 5.75rem 1.5rem 4.5rem;
+        background: linear-gradient(0deg, rgba(18,19,15,0.99) 0%, rgba(18,19,15,0.91) 54%, rgba(18,19,15,0.2) 100%);
+    }
+
+    .countries-story__eyebrow {
+        top: 5.2rem;
+        left: 1.5rem;
+    }
+
+    .country-story-panes {
+        min-height: 0;
+        height: 100%;
+    }
+
+    .country-story-pane {
+        justify-content: flex-end;
+        padding-bottom: 3.8rem;
+    }
+
+    .country-story-pane__title {
+        font-size: clamp(3rem, 14vw, 5rem);
+    }
+
+    .country-story-pane__description {
+        max-width: 38rem;
+        font-size: 0.88rem;
+        line-height: 1.6;
+    }
+
+    .country-story-pane__specs {
+        display: none;
+    }
+
+    .countries-story__footer {
+        left: 1.5rem;
+        right: 1.5rem;
+        bottom: 1.2rem;
+    }
+
+    .countries-story__visual-label {
+        top: 5.2rem;
+        right: 1.5rem;
+        bottom: auto;
+    }
+
+    .countries-story__visual-label span:last-child {
+        display: none;
+    }
+
+    .country-story-progress-dot {
+        width: 12px;
+    }
+
+    .country-story-progress-dot.active {
+        width: 27px;
+    }
+}
+
+@media (max-width: 767px) {
+    .book-story__sticky {
+        min-height: 100dvh;
+        height: auto;
+    }
+
+    .book-story__inner {
+        padding-top: 5.75rem;
+        padding-bottom: 3.5rem;
+    }
+
+    .book-story__header {
+        margin-bottom: 1.25rem !important;
+    }
+
+    .book-3d-scene {
+        min-height: 0;
+        perspective: none;
+    }
+
+    .medical-book-wrap {
+        width: 100%;
+        box-shadow: 0 24px 56px rgba(0,0,0,0.66);
+    }
+
+    .book-pages {
+        display: block;
+        filter: none;
+    }
+
+    .medical-book-page-left,
+    .medical-book-page-right {
+        min-height: auto;
+        background-size: cover;
+        background-position: center;
+        transform: none !important;
+    }
+
+    .medical-book-spine {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .book-story__sticky,
+    .countries-story__sticky {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .medical-book-wrap,
+    .medical-book-page-left,
+    .medical-book-page-right,
+    .country-story-pane,
+    .country-story-image,
+    .country-story-ambient {
+        transform: none !important;
+        filter: none !important;
+        clip-path: none !important;
+    }
+}
+
 *, *::before, *::after {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1335,4 +1956,42 @@ header {
 }
 body {
     background-color: #12130F !important;
+}
+
+/* Final cascade ownership for the scroll-open book. */
+.book-story .medical-book-wrap {
+    background: none;
+    width: min(1140px, calc(100vw - clamp(3rem, 8vw, 8rem)));
+    max-width: 1140px;
+}
+
+.book-story .medical-book-page-left,
+.book-story .medical-book-page-right {
+    min-height: min(520px, 62vh);
+    background-image: url('/assets/images/compendium_book_cropped.webp');
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    backface-visibility: hidden;
+}
+
+.book-story .medical-book-page-left {
+    background-position: left center;
+}
+
+.book-story .medical-book-page-right {
+    background-position: right center;
+}
+
+@media (max-width: 767px) {
+    .book-story .medical-book-wrap {
+        width: 100%;
+    }
+
+    .book-story .medical-book-page-left,
+    .book-story .medical-book-page-right {
+        min-height: auto;
+        background-size: cover;
+        background-position: center;
+        transform: none !important;
+    }
 }

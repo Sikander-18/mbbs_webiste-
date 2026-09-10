@@ -259,9 +259,10 @@
 <!-- APERTURE FRAME: Glowing border outlining the expanding center box -->
 <div class="stage-aperture-frame" id="stage-aperture-frame"></div>
 </div>
-</section><section id="why-stellar-book-section" style="background:#12130F;padding:clamp(5rem, 8vw, 7rem) 0;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden;">
-<div class="container-custom">
-<div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:3.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);">
+</section><section id="why-stellar-book-section" class="book-story">
+<div class="book-story__sticky">
+<div class="container-custom book-story__inner">
+<div class="book-story__header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:3.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);">
 <div>
 <p style="font-family:var(--font-mono);font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#A7B0BA;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.75rem;">
 <span style="opacity:0.4;">01</span><span style="opacity:0.4;">—</span><span>Why Stellar Science Hub &amp; Educonsultancy</span>
@@ -274,9 +275,10 @@
         Inside the walls of medical school, decisions are critical. Here is our ethical charter for every aspiring medical student.
       </p>
 </div>
-<div class="book-3d-scene" style="perspective:1600px;display:flex;justify-content:center;align-items:center;margin:2rem 0;">
+<div class="book-3d-scene">
 <div class="medical-book-wrap" id="medical-book">
-<div class="grid grid-cols-1 md:grid-cols-2" style="min-height:520px;">
+<div class="medical-book-spine" aria-hidden="true"></div>
+<div class="book-pages grid grid-cols-1 md:grid-cols-2" style="min-height:520px;">
 <div class="medical-book-page-left">
 <div>
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(0,0,0,0.08);">
@@ -340,49 +342,31 @@
 </div>
 </div>
 </div>
-</section><section id="pinned-countries-section" style="background:#12130F;position:relative;border-bottom:1px solid rgba(255,255,255,0.08);">
-<div class="pinned-countries-track" style="min-height:520vh;position:relative;">
-<div class="pinned-countries-sticky" style="position:sticky;top:72px;height:calc(100vh - 72px);overflow:hidden;display:flex;align-items:stretch;">
-<div class="pinned-country-left" style="width:50%;background:#0D1B2A;border-right:1px solid #243342;padding:clamp(2rem, 5vw, 4.5rem);display:flex;flex-direction:column;justify-content:center;position:relative;z-index:10;">
-<div id="country-dynamic-content">
-<p id="country-index" style="font-family:var(--font-mono);font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C9A45C;margin-bottom:1.5rem;">
-            DESTINATION 01 / 07
-          </p>
-<h2 id="country-title" style="font-family:var(--font-display);font-size:clamp(2.75rem, 5vw, 4.5rem);line-height:1;letter-spacing:-0.03em;color:#FFFFFF;margin-bottom:1.25rem;">
-            Russia
-          </h2>
-<p id="country-desc" style="color:rgba(255,255,255,0.65);font-size:clamp(0.95rem, 1.2vw, 1.0625rem);line-height:1.75;max-width:480px;margin-bottom:2rem;font-family:var(--font-inter);">
-            World-renowned government medical academies with 200+ years of history, English-medium curriculum, high FMGE pass rates, and subsidized tuition fees.
-          </p>
-<div id="country-specs" style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2.5rem;padding:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:6px;max-width:460px;">
-<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:0.4rem;">
-<span style="font-family:var(--font-mono);font-size:0.6rem;color:#94A3B8;text-transform:uppercase;">Estimated Budget:</span>
-<span id="country-spec-budget" style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:#C9A45C;">₹20L – ₹35L (Total 6-Yr)</span>
 </div>
-<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:0.4rem;">
-<span style="font-family:var(--font-mono);font-size:0.6rem;color:#94A3B8;text-transform:uppercase;">Duration:</span>
-<span id="country-spec-duration" style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:white;">5.8 Years with Internship</span>
-</div>
-<div style="display:flex;justify-content:space-between;">
-<span style="font-family:var(--font-mono);font-size:0.6rem;color:#94A3B8;text-transform:uppercase;">NMC Recognition:</span>
-<span id="country-spec-recog" style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:#C9A45C;">100% Compliant</span>
-</div>
-</div>
-<div id="country-cta-container">
-<a class="btn-surgical btn-magnetic" href="/countries/russia" id="country-cta-btn" style="display:inline-flex;align-items:center;gap:10px;padding:12px 26px;font-size:0.7rem;">
-              Explore Russia Universities →
-            </a>
-</div>
-</div>
-</div>
-<div class="pinned-country-right" style="width:50%;position:relative;overflow:hidden;background:#12130F;">
-<div id="country-img-container" style="position:absolute;inset:0;">
-<img alt="MBBS in Russia" id="country-img" src="https://images.unsplash.com/photo-1513326738677-b964603b136d?w=1200&amp;q=85" style="width:100%;height:100%;object-fit:cover;transition:opacity 0.5s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1);"/>
-<div style="position:absolute;inset:0;background:linear-gradient(to right, #0D1B2A 0%, transparent 20%), linear-gradient(to top, rgba(7,17,28,0.7) 0%, transparent 30%);"></div>
-</div>
-</div>
-</div>
-</div>
+</section><section id="pinned-countries-section" class="countries-story" aria-labelledby="countries-story-title">
+  <div class="countries-story__sticky">
+    <div class="countries-story__ambient" aria-hidden="true"></div>
+    <div class="countries-story__grid">
+      <div class="countries-story__content">
+        <div class="countries-story__eyebrow">
+          <span>02</span><span class="countries-story__eyebrow-rule"></span><span>Your Medical Destination</span>
+        </div>
+        <div class="country-story-panes" id="country-story-panes"></div>
+        <div class="countries-story__footer">
+          <div class="countries-story__progress" id="country-story-progress" aria-label="Country story progress"></div>
+          <a href="/universities" class="countries-story__all-link">Tap to know more <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="countries-story__visual" id="country-story-visuals">
+        <div class="countries-story__visual-shade" aria-hidden="true"></div>
+        <div class="countries-story__visual-label">
+          <span id="country-visual-index">01 / 07</span>
+          <span>Doctor-vetted destinations</span>
+        </div>
+      </div>
+    </div>
+    <div class="countries-story__rail"><span id="country-story-rail-fill"></span></div>
+  </div>
 </section><section id="pinned-doctors-section" class="doctors-story">
   <div class="doctors-story__sticky">
     <!-- Ambient blurred background layers -->
@@ -408,10 +392,10 @@
         </div>
         <div class="doctors-story__progress-wrap">
           <div class="doctors-story__progress-pills">
-            <div class="doctors-story__progress-pill active" data-doc="0"></div>
-            <div class="doctors-story__progress-pill" data-doc="1"></div>
-            <div class="doctors-story__progress-pill" data-doc="2"></div>
-            <div class="doctors-story__progress-pill" data-doc="3"></div>
+            <button type="button" class="doctors-story__progress-pill active" data-doc="0" aria-label="Show Dr. Nishu Yadav"></button>
+            <button type="button" class="doctors-story__progress-pill" data-doc="1" aria-label="Show Dr. Lokesh Attri"></button>
+            <button type="button" class="doctors-story__progress-pill" data-doc="2" aria-label="Show Dr. Bindu Tyagi"></button>
+            <button type="button" class="doctors-story__progress-pill" data-doc="3" aria-label="Show Dr. Vikram Singh"></button>
           </div>
         </div>
       </div>

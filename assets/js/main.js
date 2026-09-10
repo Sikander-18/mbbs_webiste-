@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveals();
     initForgeExperienceController();
     initHeroMarquee();
+    initBookExperience();
     initForgeCountries();
     initForgeDoctors();
 });
@@ -797,7 +798,114 @@ function initHeroMarquee() {
     }, { passive: true });
 }
 
-// 13. Pinned Split Country Explorer Controller (Forge Image 3 - Wheels Style)
+// 13. Scroll-open Doctor-Led Compendium
+function initBookExperience() {
+    const section = document.getElementById('why-stellar-book-section');
+    const sticky = section ? section.querySelector('.book-story__sticky') : null;
+    const book = document.getElementById('medical-book');
+    if (!section || !sticky || !book) return;
+
+    const leftPage = book.querySelector('.medical-book-page-left');
+    const rightPage = book.querySelector('.medical-book-page-right');
+    const header = section.querySelector('.book-story__header');
+    const pageContent = book.querySelectorAll('.medical-book-page-left > *, .medical-book-page-right > *');
+
+    const progress = document.createElement('div');
+    progress.className = 'book-story__progress';
+    progress.innerHTML = '<span></span><small>Scroll to open</small>';
+    sticky.appendChild(progress);
+
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        section.classList.add('book-story--open');
+        progress.hidden = true;
+        return;
+    }
+
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 768px)', () => {
+        gsap.set(book, {
+            scale: 0.56,
+            y: 105,
+            rotationX: 15,
+            transformPerspective: 1800,
+            transformOrigin: '50% 72%'
+        });
+        gsap.set(leftPage, {
+            rotationY: 86,
+            transformOrigin: '100% 50%',
+            filter: 'brightness(0.42)'
+        });
+        gsap.set(rightPage, {
+            rotationY: -86,
+            transformOrigin: '0% 50%',
+            filter: 'brightness(0.42)'
+        });
+        gsap.set(pageContent, { opacity: 0, y: 18 });
+        gsap.set(header, { opacity: 0.35, y: 26 });
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section,
+                start: 'top top',
+                end: '+=3000',
+                pin: sticky,
+                scrub: 1.15,
+                anticipatePin: 1,
+                invalidateOnRefresh: true
+            },
+            onUpdate: () => {
+                section.style.setProperty('--book-progress', `${(tl.progress() * 100).toFixed(2)}%`);
+                progress.querySelector('small').textContent = tl.progress() > 0.82 ? 'Chapter open' : 'Scroll to open';
+            }
+        });
+
+        tl.to(header, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, 0)
+          .to(book, { scale: 0.72, y: 30, rotationX: 10, duration: 1.1, ease: 'power2.out' }, 0)
+          .to(leftPage, { rotationY: 0, filter: 'brightness(1)', duration: 2.8, ease: 'power2.inOut' }, 0.75)
+          .to(rightPage, { rotationY: 0, filter: 'brightness(1)', duration: 2.8, ease: 'power2.inOut' }, 0.75)
+          .to(book, { scale: 1, y: 0, rotationX: 0, duration: 2.2, ease: 'power2.out' }, 1.2)
+          .to(pageContent, { opacity: 1, y: 0, duration: 1.1, stagger: 0.08, ease: 'power2.out' }, 2.65)
+          .to(book, { y: -8, duration: 1.15, ease: 'none' }, 3.75)
+          .to({}, { duration: 0.8 });
+
+        return () => {
+            tl.kill();
+            section.style.removeProperty('--book-progress');
+        };
+    });
+
+    mm.add('(max-width: 767px)', () => {
+        gsap.set(book, { scale: 0.88, y: 70, clipPath: 'inset(0 48% 0 48% round 8px)' });
+        gsap.set(pageContent, { opacity: 0, y: 14 });
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section,
+                start: 'top top',
+                end: '+=1450',
+                pin: sticky,
+                scrub: 0.9,
+                anticipatePin: 1,
+                invalidateOnRefresh: true
+            },
+            onUpdate: () => {
+                section.style.setProperty('--book-progress', `${(tl.progress() * 100).toFixed(2)}%`);
+            }
+        });
+
+        tl.to(book, { clipPath: 'inset(0 0% 0 0% round 8px)', scale: 1, y: 0, duration: 2.2, ease: 'power2.inOut' })
+          .to(pageContent, { opacity: 1, y: 0, duration: 0.9, stagger: 0.06, ease: 'power2.out' }, 1.3)
+          .to({}, { duration: 0.7 });
+
+        return () => tl.kill();
+    });
+}
+
+// 14. Pinned destination story
 function initForgeCountries() {
     const section = document.getElementById('pinned-countries-section');
     if (!section) return;
@@ -809,9 +917,9 @@ function initForgeCountries() {
             desc: "World-renowned government medical academies with 200+ years of history, English-medium curriculum, high FMGE pass rates, and subsidized tuition fees.",
             budget: "₹20L – ₹35L (Total 6-Yr)",
             duration: "5.8 Years with Internship",
-            recog: "100% NMC Compliant",
-            img: "https://images.unsplash.com/photo-1513326738677-b964603b136d?w=1200&q=85",
-            ctaText: "Explore Russia Universities →",
+            recog: "NMC Gazette Aligned",
+            img: "https://images.unsplash.com/photo-1562774053-701939374585?w=1600&q=88",
+            ctaText: "Explore Russia",
             ctaHref: "/countries/russia"
         },
         {
@@ -821,8 +929,8 @@ function initForgeCountries() {
             budget: "₹30L – ₹45L (Total 6-Yr)",
             duration: "6.0 Years (European ECTS)",
             recog: "WHO & WFME Recognized",
-            img: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=1200&q=85",
-            ctaText: "Explore Georgia Universities →",
+            img: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?w=1600&q=88",
+            ctaText: "Explore Georgia",
             ctaHref: "/countries/georgia"
         },
         {
@@ -831,9 +939,9 @@ function initForgeCountries() {
             desc: "Direct alumni mentorship from our founders. Top national universities like Semey and Al-Farabi offering high clinical patient loads and low cost of living.",
             budget: "₹18L – ₹26L (Total 5.8-Yr)",
             duration: "5.8 Years (NMC Validated)",
-            recog: "Highest First-Attempt FMGE Rate",
-            img: "https://images.unsplash.com/photo-1558588942-930faae5a389?w=1200&q=85",
-            ctaText: "Explore Kazakhstan Universities →",
+            recog: "Doctor-Mentored Pathway",
+            img: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=1600&q=88",
+            ctaText: "Explore Kazakhstan",
             ctaHref: "/countries/kazakhstan"
         },
         {
@@ -843,8 +951,8 @@ function initForgeCountries() {
             budget: "₹16L – ₹22L (Total 5.8-Yr)",
             duration: "5.8 Years with Clinical Training",
             recog: "NMC Gazette Listed",
-            img: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=1200&q=85",
-            ctaText: "Explore Uzbekistan Universities →",
+            img: "https://images.unsplash.com/photo-1529001618208-b45a62e0e6c2?w=1600&q=88",
+            ctaText: "Explore Uzbekistan",
             ctaHref: "/countries/uzbekistan"
         },
         {
@@ -854,8 +962,8 @@ function initForgeCountries() {
             budget: "₹15L – ₹24L (Total 5.8-Yr)",
             duration: "5.8 Years (NMC Compliant)",
             recog: "WHO, WDOMS & NMC Recognized",
-            img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200&q=85",
-            ctaText: "Explore Kyrgyzstan Universities →",
+            img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=88",
+            ctaText: "Explore Kyrgyzstan",
             ctaHref: "/countries/kyrgyzstan"
         },
         {
@@ -865,8 +973,8 @@ function initForgeCountries() {
             budget: "₹22L – ₹35L (Total 5.5-Yr)",
             duration: "5.5 Years (BS + MD)",
             recog: "CHED & NMC Compliant",
-            img: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200&q=85",
-            ctaText: "Explore Philippines Universities →",
+            img: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=1600&q=88",
+            ctaText: "Explore Philippines",
             ctaHref: "/countries/philippines"
         },
         {
@@ -875,77 +983,150 @@ function initForgeCountries() {
             desc: "Prestigious European Union candidate nation offering Bologna-compliant 6-year medical degrees with English instruction and residency pathways across Europe.",
             budget: "₹28L – ₹42L (Total 6-Yr)",
             duration: "6.0 Years (360 ECTS Credits)",
-            recog: "EU Bologna & NMC Compliant",
-            img: "https://images.unsplash.com/photo-1562774053-701939374585?w=1200&q=85",
-            ctaText: "Explore Serbia Universities →",
+            recog: "Bologna-Aligned Curriculum",
+            img: "/assets/images/alfa_bk_1.jpg",
+            ctaText: "Explore Serbia",
             ctaHref: "/countries/serbia"
         }
     ];
 
-    const idxEl = document.getElementById('country-index');
-    const titleEl = document.getElementById('country-title');
-    const descEl = document.getElementById('country-desc');
-    const budgetEl = document.getElementById('country-spec-budget');
-    const durEl = document.getElementById('country-spec-duration');
-    const recogEl = document.getElementById('country-spec-recog');
-    const ctaBtn = document.getElementById('country-cta-btn');
-    const imgEl = document.getElementById('country-img');
+    const panesHost = document.getElementById('country-story-panes');
+    const visualsHost = document.getElementById('country-story-visuals');
+    const progressHost = document.getElementById('country-story-progress');
+    const ambientHost = section.querySelector('.countries-story__ambient');
+    const visualIndex = document.getElementById('country-visual-index');
+    if (!panesHost || !visualsHost || !progressHost || !ambientHost) return;
 
-    let currentIndex = -1;
-    let ticking = false;
+    panesHost.innerHTML = countryData.map((country, index) => `
+        <article class="country-story-pane${index === 0 ? ' active' : ''}" data-country="${index}">
+            <p class="country-story-pane__index">${country.index}</p>
+            <h2 class="country-story-pane__title"${index === 0 ? ' id="countries-story-title"' : ''}>${country.title}</h2>
+            <p class="country-story-pane__description">${country.desc}</p>
+            <dl class="country-story-pane__specs">
+                <div><dt>Estimated budget</dt><dd>${country.budget}</dd></div>
+                <div><dt>Course duration</dt><dd>${country.duration}</dd></div>
+                <div><dt>Recognition</dt><dd>${country.recog}</dd></div>
+            </dl>
+            <a class="country-story-pane__cta" href="${country.ctaHref}">${country.ctaText}<span aria-hidden="true">↗</span></a>
+        </article>
+    `).join('');
 
-    function updateCountryScroll() {
-        ticking = false;
-        const rect = section.getBoundingClientRect();
-        const sectionHeight = section.offsetHeight;
-        const scrolledIntoSection = -rect.top;
+    const shade = visualsHost.querySelector('.countries-story__visual-shade');
+    countryData.forEach((country, index) => {
+        const layer = document.createElement('div');
+        layer.className = `country-story-image${index === 0 ? ' active' : ''}`;
+        layer.dataset.country = index;
+        layer.innerHTML = `<img src="${country.img}" alt="Medical education destination in ${country.title}" loading="${index === 0 ? 'eager' : 'lazy'}">`;
+        visualsHost.insertBefore(layer, shade);
 
-        if (scrolledIntoSection >= 0 && scrolledIntoSection <= sectionHeight) {
-            const fraction = scrolledIntoSection / (sectionHeight - window.innerHeight);
-            const totalSlides = countryData.length;
-            const slideIndex = Math.min(Math.floor(fraction * totalSlides), totalSlides - 1);
+        const ambient = document.createElement('div');
+        ambient.className = `country-story-ambient${index === 0 ? ' active' : ''}`;
+        ambient.style.backgroundImage = `url('${country.img}')`;
+        ambientHost.appendChild(ambient);
 
-            if (slideIndex !== currentIndex && slideIndex >= 0) {
-                currentIndex = slideIndex;
-                const d = countryData[slideIndex];
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `country-story-progress-dot${index === 0 ? ' active' : ''}`;
+        button.dataset.country = index;
+        button.setAttribute('aria-label', `Show ${country.title}`);
+        progressHost.appendChild(button);
 
-                if (idxEl) idxEl.textContent = d.index;
-                if (titleEl) titleEl.textContent = d.title;
-                if (descEl) descEl.textContent = d.desc;
-                if (budgetEl) budgetEl.textContent = d.budget;
-                if (durEl) durEl.textContent = d.duration;
-                if (recogEl) recogEl.textContent = d.recog;
-                if (ctaBtn) {
-                    ctaBtn.textContent = d.ctaText;
-                    ctaBtn.href = d.ctaHref;
-                    ctaBtn.style.background = '#283A27';
-                    ctaBtn.style.color = '#FFFFFF';
-                }
-                if (imgEl && imgEl.src !== d.img) {
-                    imgEl.style.opacity = '0.3';
-                    imgEl.style.transform = 'scale(1.06)';
-                    setTimeout(() => {
-                        imgEl.src = d.img;
-                        imgEl.alt = 'MBBS in ' + d.title;
-                        imgEl.style.opacity = '1';
-                        imgEl.style.transform = 'scale(1)';
-                    }, 180);
-                }
-            }
-        }
+        const preload = new Image();
+        preload.src = country.img;
+    });
+
+    const panes = Array.from(panesHost.querySelectorAll('.country-story-pane'));
+    const images = Array.from(visualsHost.querySelectorAll('.country-story-image'));
+    const ambientLayers = Array.from(ambientHost.querySelectorAll('.country-story-ambient'));
+    const dots = Array.from(progressHost.querySelectorAll('.country-story-progress-dot'));
+    const railFill = document.getElementById('country-story-rail-fill');
+
+    const setActiveCountry = (index) => {
+        dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === index));
+        if (visualIndex) visualIndex.textContent = `${String(index + 1).padStart(2, '0')} / ${String(countryData.length).padStart(2, '0')}`;
+    };
+
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setActiveCountry(0);
+        return;
     }
 
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            ticking = true;
-            window.requestAnimationFrame(updateCountryScroll);
+    gsap.registerPlugin(ScrollTrigger);
+    const mm = gsap.matchMedia();
+
+    const buildTimeline = (isDesktop) => {
+        gsap.set(panes, { autoAlpha: 0, y: 34, pointerEvents: 'none' });
+        gsap.set(panes[0], { autoAlpha: 1, y: 0, pointerEvents: 'auto' });
+        gsap.set(images, { autoAlpha: 0, scale: 1.08, clipPath: isDesktop ? 'inset(0 50% 0 50%)' : 'inset(50% 0 50% 0)' });
+        gsap.set(images[0], { autoAlpha: 1, scale: 1, clipPath: 'inset(0 0% 0 0%)', zIndex: 2 });
+        gsap.set(ambientLayers, { autoAlpha: 0 });
+        gsap.set(ambientLayers[0], { autoAlpha: 0.34 });
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section,
+                start: 'top top',
+                end: isDesktop ? '+=8400' : '+=5600',
+                pin: section.querySelector('.countries-story__sticky'),
+                scrub: isDesktop ? 1.2 : 0.9,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                snap: {
+                    snapTo: 1 / (countryData.length - 1),
+                    duration: { min: 0.18, max: 0.5 },
+                    delay: 0.12,
+                    ease: 'power2.out'
+                }
+            },
+            onUpdate: () => {
+                const activeIndex = Math.min(countryData.length - 1, Math.round(tl.progress() * (countryData.length - 1)));
+                setActiveCountry(activeIndex);
+                if (railFill) railFill.style.width = `${(tl.progress() * 100).toFixed(2)}%`;
+            }
+        });
+
+        let cursor = 0;
+        tl.to(images[0].querySelector('img'), { scale: 1.035, duration: 1.45, ease: 'none' }, cursor);
+        cursor += 1.45;
+
+        for (let index = 1; index < countryData.length; index += 1) {
+            const previousPane = panes[index - 1];
+            const nextPane = panes[index];
+            const previousImage = images[index - 1];
+            const nextImage = images[index];
+
+            tl.to(previousPane, { autoAlpha: 0, y: -28, duration: 0.42, ease: 'power2.in', pointerEvents: 'none' }, cursor)
+              .to(previousImage, { autoAlpha: 0.18, scale: 1.07, duration: 0.75, ease: 'power2.inOut' }, cursor)
+              .to(ambientLayers[index - 1], { autoAlpha: 0, duration: 0.75, ease: 'power1.inOut' }, cursor)
+              .set(nextImage, { zIndex: index + 2, autoAlpha: 1 }, cursor)
+              .to(nextImage, { clipPath: 'inset(0 0% 0 0%)', scale: 1, duration: 0.92, ease: 'power2.inOut' }, cursor)
+              .to(nextPane, { autoAlpha: 1, y: 0, duration: 0.62, ease: 'power2.out', pointerEvents: 'auto' }, cursor + 0.28)
+              .to(ambientLayers[index], { autoAlpha: 0.34, duration: 0.8, ease: 'power1.inOut' }, cursor + 0.15);
+
+            cursor += 0.95;
+            tl.to(nextImage.querySelector('img'), { scale: 1.035, duration: 1.35, ease: 'none' }, cursor);
+            cursor += 1.35;
         }
-    }, { passive: true });
-    updateCountryScroll();
+
+        tl.to({}, { duration: 0.7 });
+
+        dots.forEach((dot, index) => {
+            dot.onclick = () => {
+                const trigger = tl.scrollTrigger;
+                if (!trigger) return;
+                const destination = trigger.start + (index / (countryData.length - 1)) * (trigger.end - trigger.start);
+                window.scrollTo({ top: destination, behavior: 'smooth' });
+            };
+        });
+
+        return () => tl.kill();
+    };
+
+    mm.add('(min-width: 900px)', () => buildTimeline(true));
+    mm.add('(max-width: 899px)', () => buildTimeline(false));
 }
 
-// 14. Staged Doctor Counselors Controller (Forge Image 4 - Insight Style & Pinned Sticky Scroll)
-// 14. Pinned Editorial Doctor Counselors Controller (Forge Automotive Scroll-Driven Timeline)
+// 15. Pinned Editorial Doctor Counselors Controller
 function initForgeDoctors() {
     const section = document.getElementById('pinned-doctors-section');
     if (!section) return;
@@ -1169,17 +1350,24 @@ function initForgeDoctors() {
             scrollTrigger: {
                 trigger: section,
                 start: "top top",
-                end: "+=4800",
+                end: "+=6200",
                 pin: true,
-                scrub: 1,
-                anticipatePin: 1
+                scrub: 1.15,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                snap: {
+                    snapTo: 1 / 3,
+                    duration: { min: 0.18, max: 0.5 },
+                    delay: 0.12,
+                    ease: "power2.out"
+                }
             },
             onUpdate: () => {
                 const curTime = tl.time();
                 let activeDoc = 0;
-                if (curTime >= 6.8) activeDoc = 3;
-                else if (curTime >= 4.2) activeDoc = 2;
-                else if (curTime >= 1.6) activeDoc = 1;
+                if (curTime >= 7.3) activeDoc = 3;
+                else if (curTime >= 4.7) activeDoc = 2;
+                else if (curTime >= 2.1) activeDoc = 1;
                 else activeDoc = 0;
 
                 pills.forEach((p, k) => {
@@ -1289,10 +1477,17 @@ function initForgeDoctors() {
             scrollTrigger: {
                 trigger: section,
                 start: "top top",
-                end: "+=2800",
+                end: "+=4000",
                 pin: true,
-                scrub: 0.8,
-                anticipatePin: 1
+                scrub: 1,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                snap: {
+                    snapTo: 1 / 3,
+                    duration: { min: 0.16, max: 0.42 },
+                    delay: 0.1,
+                    ease: "power2.out"
+                }
             },
             onUpdate: () => {
                 const curTime = tl.time();
