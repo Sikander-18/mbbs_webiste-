@@ -341,12 +341,12 @@
 </div>
 </div>
 </section><section id="pinned-countries-section" style="background:#12130F;position:relative;border-bottom:1px solid rgba(255,255,255,0.08);">
-<div class="pinned-countries-track" style="min-height:300vh;position:relative;">
+<div class="pinned-countries-track" style="min-height:520vh;position:relative;">
 <div class="pinned-countries-sticky" style="position:sticky;top:72px;height:calc(100vh - 72px);overflow:hidden;display:flex;align-items:stretch;">
 <div class="pinned-country-left" style="width:50%;background:#0D1B2A;border-right:1px solid #243342;padding:clamp(2rem, 5vw, 4.5rem);display:flex;flex-direction:column;justify-content:center;position:relative;z-index:10;">
 <div id="country-dynamic-content">
 <p id="country-index" style="font-family:var(--font-mono);font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C9A45C;margin-bottom:1.5rem;">
-            DESTINATION 01 / 04
+            DESTINATION 01 / 07
           </p>
 <h2 id="country-title" style="font-family:var(--font-display);font-size:clamp(2.75rem, 5vw, 4.5rem);line-height:1;letter-spacing:-0.03em;color:#FFFFFF;margin-bottom:1.25rem;">
             Russia
@@ -383,64 +383,73 @@
 </div>
 </div>
 </div>
-</section><section id="pinned-doctors-section" style="background:#12130F;padding:clamp(5rem, 8vw, 7rem) 0;position:relative;border-bottom:1px solid rgba(255,255,255,0.08);overflow:hidden;">
-<div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 30%, rgba(201,164,92,0.12) 0%, transparent 60%);pointer-events:none;"></div>
-<div class="container-custom" style="position:relative;z-index:5;">
-<div style="margin-bottom:3.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
-<div>
-<p style="font-family:var(--font-mono);font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#A7B0BA;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.75rem;">
-<span>03</span><span style="opacity:0.4;">—</span><span>Our Doctor Counselors</span>
-</p>
-<h2 style="font-family:var(--font-display);font-size:clamp(2.25rem, 4.5vw, 3.75rem);line-height:1;letter-spacing:-0.03em;color:#FFFFFF;">
-          Doctors Who Have <em style="font-style:italic;color:#C9A45C;">Lived It</em>
-</h2>
-</div>
-<p style="color:rgba(255,255,255,0.65);font-size:0.875rem;max-width:400px;line-height:1.7;border-left:2px solid #C9A45C;padding-left:1.25rem;">
-        Direct guidance from practicing and licensed doctors who graduated from top medical universities abroad.
-      </p>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center" id="doctor-staged-wrapper" style="min-height:480px;background:#0D1B2A;border:1px solid #243342;border-radius:12px;padding:clamp(1.5rem, 3vw, 3rem);backdrop-filter:blur(10px);">
-<div class="lg:col-span-5" style="display:flex;justify-content:center;">
-<div id="doctor-frame-card" style="width:100%;max-width:360px;aspect-ratio:3/4;border-radius:8px;border:3px solid #243342;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,0.6), 0 0 30px rgba(40,58,39,0.25);position:relative;transition:all 0.5s cubic-bezier(0.16,1,0.3,1);">
-<img alt="Dr. Nishu Yadav" id="doctor-img" src="/assets/images/nishu_yadav.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:all 0.5s ease;"/>
-<div style="position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);">
-<span id="doctor-status-badge" style="font-family:var(--font-mono);font-size:0.55rem;font-weight:700;color:#283A27;background:#EBF2EA;border:1px solid rgba(40,58,39,0.25);padding:4px 8px;border-radius:4px;">AVAILABLE FOR CONSULTATION</span>
-</div>
-</div>
-</div>
-<div class="lg:col-span-7" style="display:flex;flex-direction:column;justify-content:center;">
-<div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;">
-<div id="doc-step-indicator" style="font-family:var(--font-mono);font-size:1.15rem;font-weight:700;color:#C9A45C;letter-spacing:0.1em;">
-            01 <span style="opacity:0.4;color:white;">/ 04</span>
-</div>
-<div style="display:flex;gap:6px;">
-<button class="doc-tab-btn active" data-doc="0" style="width:32px;height:4px;background:#283A27;border:none;border-radius:2px;cursor:pointer;"></button>
-<button class="doc-tab-btn" data-doc="1" style="width:32px;height:4px;background:rgba(255,255,255,0.2);border:none;border-radius:2px;cursor:pointer;"></button>
-<button class="doc-tab-btn" data-doc="2" style="width:32px;height:4px;background:rgba(255,255,255,0.2);border:none;border-radius:2px;cursor:pointer;"></button>
-<button class="doc-tab-btn" data-doc="3" style="width:32px;height:4px;background:rgba(255,255,255,0.2);border:none;border-radius:2px;cursor:pointer;"></button>
-</div>
-</div>
-<h3 id="doctor-name" style="font-family:var(--font-display);font-size:clamp(2rem, 3.8vw, 3.25rem);line-height:1.05;color:#FFFFFF;letter-spacing:-0.03em;margin-bottom:0.5rem;">
-          Dr. Nishu Yadav
-        </h3>
-<p id="doctor-role" style="font-family:var(--font-mono);font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#283A27;margin-bottom:1.25rem;">
-          Founder &amp; Lead Counselor • MBBS (Semey Medical University, Kazakhstan)
+</section><section id="pinned-doctors-section" class="doc-stage-track">
+  <div class="doc-stage-sticky">
+    <div class="doc-backdrop-ambient" id="doc-backdrop-ambient" style="background-image: url('/assets/images/nishu_yadav.jpg');"></div>
+    <div class="doc-backdrop-vignette"></div>
+
+    <div class="doc-stage-content">
+      <div class="doc-stage-topbar">
+        <div>
+          <p style="font-family:var(--font-mono);font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#A7B0BA;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.75rem;">
+            <span>03</span><span style="opacity:0.4;">—</span><span>Our Doctor Counselors</span>
+          </p>
+          <h2 style="font-family:var(--font-display);font-size:clamp(2.25rem, 4.5vw, 3.75rem);line-height:1;letter-spacing:-0.03em;color:#FFFFFF;margin:0;">
+            Doctors Who Have <em style="font-style:italic;color:#C9A45C;">Lived It</em>
+          </h2>
+        </div>
+        <p style="color:rgba(255,255,255,0.65);font-size:0.875rem;max-width:400px;line-height:1.7;border-left:2px solid #C9A45C;padding-left:1.25rem;margin:0;">
+          Direct guidance from practicing and licensed doctors who graduated from top medical universities abroad.
         </p>
-<p id="doctor-bio" style="font-family:var(--font-inter);font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.7);margin-bottom:2rem;max-width:540px;">
-          Dr. Nishu completed his medical education across Ukraine and Kazakhstan, gaining diverse international clinical exposure. He cleared the FMGE on his very first attempt. His mission is to simplify your journey and support aspiring doctors at every step.
-        </p>
-<div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
-<a class="btn-surgical btn-magnetic" href="https://wa.me/919004775531?text=Hi%20Dr.%20Nishu,%20I%20want%20to%20consult%20regarding%20MBBS%20Abroad." id="doctor-cta-btn" rel="noopener noreferrer" style="padding:12px 24px;font-size:0.7rem;" target="_blank">
-            Consult With Dr. Nishu via WhatsApp →
-          </a>
-<div style="display:flex;gap:8px;">
-<button id="doc-prev-btn" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>
-<button id="doc-next-btn" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;">→</button>
-</div>
-</div>
-</div>
-</div>
-</div>
+      </div>
+
+      <div class="doc-stage-grid">
+        <div class="doc-card-col">
+          <div id="doctor-frame-card" class="doc-frame-card">
+            <img alt="Dr. Nishu Yadav" class="doc-img-element" id="doctor-img" src="/assets/images/nishu_yadav.jpg" />
+            <div class="doc-card-badge-wrap">
+              <span id="doctor-status-badge" style="font-family:var(--font-mono);font-size:0.55rem;font-weight:700;color:#283A27;background:#EBF2EA;border:1px solid rgba(40,58,39,0.25);padding:4px 8px;border-radius:4px;">AVAILABLE FOR CONSULTATION</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-editorial-col">
+          <div class="doc-editorial-stack anim-active" id="doc-editorial-stack">
+            <div class="doc-indicator-bar">
+              <div id="doc-step-indicator" style="font-family:var(--font-mono);font-size:1.15rem;font-weight:700;color:#C9A45C;letter-spacing:0.1em;">
+                01 <span style="opacity:0.4;color:white;">/ 04</span>
+              </div>
+              <div class="doc-tab-pills">
+                <button class="doc-tab-btn active" data-doc="0" aria-label="Dr. Nishu Yadav"></button>
+                <button class="doc-tab-btn" data-doc="1" aria-label="Dr. Lokesh Attri"></button>
+                <button class="doc-tab-btn" data-doc="2" aria-label="Dr. Bindu Tyagi"></button>
+                <button class="doc-tab-btn" data-doc="3" aria-label="Dr. Vikram Singh"></button>
+              </div>
+            </div>
+
+            <h3 id="doctor-name" style="font-family:var(--font-display);font-size:clamp(2rem, 3.8vw, 3.25rem);line-height:1.05;color:#FFFFFF;letter-spacing:-0.03em;margin-bottom:0.5rem;">
+              Dr. Nishu Yadav
+            </h3>
+            <p id="doctor-role" style="font-family:var(--font-mono);font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C9A45C;margin-bottom:1.25rem;">
+              Founder &amp; Lead Counselor • MBBS (Semey Medical University, Kazakhstan)
+            </p>
+            <p id="doctor-bio" style="font-family:var(--font-inter);font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.75);margin-bottom:2rem;max-width:540px;">
+              Dr. Nishu completed his medical education across Ukraine and Kazakhstan, gaining diverse international clinical exposure. He cleared the FMGE on his very first attempt. His mission is to simplify your journey and support aspiring doctors at every step.
+            </p>
+            <div class="doc-cta-row">
+              <a class="btn-surgical btn-magnetic" href="https://wa.me/919004775531?text=Hi%20Dr.%20Nishu,%20I%20want%20to%20consult%20regarding%20MBBS%20Abroad." id="doctor-cta-btn" rel="noopener noreferrer" style="padding:13px 28px;font-size:0.72rem;" target="_blank">
+                Consult With Dr. Nishu via WhatsApp →
+              </a>
+              <div class="doc-nav-arrows">
+                <button id="doc-prev-btn" aria-label="Previous counselor">←</button>
+                <button id="doc-next-btn" aria-label="Next counselor">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section><section id="budget-calculator" style="background:#0D1B2A;padding:clamp(4rem, 6vw, 5.5rem) 0;border-bottom:1px solid rgba(255,255,255,0.08);position:relative;overflow:hidden">
 <div style="position:absolute;top:-50px;right:-50px;width:300px;height:300px;background:radial-gradient(circle, rgba(40,58,39,0.2) 0%, transparent 70%);border-radius:50%;pointer-events:none"></div>
 <div class="container-custom" style="position:relative;z-index:2">

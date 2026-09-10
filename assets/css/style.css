@@ -960,7 +960,241 @@ header {
     }
 }
 
-/* Responsive adjustments */
+/* --- PINNED DOCTOR COUNSELORS STICKY EXPERIENCE (Forge Automotive Style) --- */
+.doc-stage-track {
+    position: relative;
+    min-height: 380vh;
+    background: #12130F;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.doc-stage-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #12130F;
+}
+
+.doc-backdrop-ambient {
+    position: absolute;
+    inset: -10%;
+    width: 120%;
+    height: 120%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(60px) brightness(0.25) contrast(1.15);
+    opacity: 0.55;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.doc-backdrop-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 40% 50%, rgba(18, 19, 15, 0.35) 0%, rgba(18, 19, 15, 0.8) 60%, #12130F 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.doc-stage-content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1240px;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 84vh;
+    justify-content: space-between;
+}
+
+.doc-stage-topbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.doc-stage-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    flex: 1;
+    min-height: 0;
+}
+
+@media (min-width: 1024px) {
+    .doc-stage-grid {
+        grid-template-columns: 5fr 7fr;
+        gap: 4rem;
+    }
+}
+
+.doc-card-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.doc-frame-card {
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(40, 58, 39, 0.3);
+    position: relative;
+    background: #181915;
+    transform: translateZ(0);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+
+.doc-frame-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(201, 164, 92, 0.35);
+}
+
+.doc-img-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.doc-card-badge-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem;
+    background: linear-gradient(to top, rgba(18, 19, 15, 0.95) 0%, rgba(18, 19, 15, 0.6) 60%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.doc-editorial-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.doc-editorial-stack {
+    position: relative;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.doc-editorial-stack.anim-exit {
+    opacity: 0;
+    transform: translateY(-26px);
+}
+
+.doc-editorial-stack.anim-enter {
+    opacity: 0;
+    transform: translateY(26px);
+}
+
+.doc-editorial-stack.anim-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.doc-indicator-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.doc-tab-pills {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.doc-tab-btn {
+    width: 36px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.doc-tab-btn.active {
+    background: #283A27;
+    box-shadow: 0 0 10px rgba(40, 58, 39, 0.6);
+    width: 48px;
+}
+
+.doc-tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.doc-cta-row {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.doc-nav-arrows {
+    display: flex;
+    gap: 8px;
+}
+
+.doc-nav-arrows button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #F7F5EE;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.doc-nav-arrows button:hover {
+    background: #283A27;
+    border-color: #385237;
+    color: #F7F5EE;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 1023px) {
+    .doc-stage-track {
+        min-height: auto !important;
+    }
+    .doc-stage-sticky {
+        position: relative !important;
+        height: auto !important;
+        padding: 4rem 0 !important;
+    }
+    .doc-stage-content {
+        height: auto !important;
+        gap: 2.5rem !important;
+    }
+}
 @media (max-width: 1023px) {
     .forge-stage-content-wrap {
         padding: 1rem 1.5rem 1.5rem;

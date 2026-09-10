@@ -804,7 +804,7 @@ function initForgeCountries() {
 
     const countryData = [
         {
-            index: "DESTINATION 01 / 04",
+            index: "DESTINATION 01 / 07",
             title: "Russia",
             desc: "World-renowned government medical academies with 200+ years of history, English-medium curriculum, high FMGE pass rates, and subsidized tuition fees.",
             budget: "₹20L – ₹35L (Total 6-Yr)",
@@ -815,7 +815,7 @@ function initForgeCountries() {
             ctaHref: "/countries/russia"
         },
         {
-            index: "DESTINATION 02 / 04",
+            index: "DESTINATION 02 / 07",
             title: "Georgia",
             desc: "European-standard clinical education, 100% English medium from day one, safe student-friendly cities, and world-class simulation hospitals.",
             budget: "₹30L – ₹45L (Total 6-Yr)",
@@ -826,7 +826,7 @@ function initForgeCountries() {
             ctaHref: "/countries/georgia"
         },
         {
-            index: "DESTINATION 03 / 04",
+            index: "DESTINATION 03 / 07",
             title: "Kazakhstan",
             desc: "Direct alumni mentorship from our founders. Top national universities like Semey and Al-Farabi offering high clinical patient loads and low cost of living.",
             budget: "₹18L – ₹26L (Total 5.8-Yr)",
@@ -837,7 +837,7 @@ function initForgeCountries() {
             ctaHref: "/countries/kazakhstan"
         },
         {
-            index: "DESTINATION 04 / 04",
+            index: "DESTINATION 04 / 07",
             title: "Uzbekistan",
             desc: "Centrally located government institutions like Tashkent Medical Academy with affordable living costs, high clinical patient exposure, and strong doctor mentors.",
             budget: "₹16L – ₹22L (Total 5.8-Yr)",
@@ -848,15 +848,37 @@ function initForgeCountries() {
             ctaHref: "/countries/uzbekistan"
         },
         {
-            index: "AND 3 MORE DESTINATIONS",
-            title: "All 7 Countries",
-            desc: "We also guide eligible students to top NMC-recognized medical universities in Kyrgyzstan, Philippines, and Serbia tailored to your exact budget.",
-            budget: "₹15L – ₹45L Across 7 Nations",
-            duration: "Fully NMC & WHO Compliant",
-            recog: "Practice Rights in India",
+            index: "DESTINATION 05 / 07",
+            title: "Kyrgyzstan",
+            desc: "Highly affordable government medical education at Kyrgyz State Medical Academy with established Indian student communities, mess facilities, and clinical rotations.",
+            budget: "₹15L – ₹24L (Total 5.8-Yr)",
+            duration: "5.8 Years (NMC Compliant)",
+            recog: "WHO, WDOMS & NMC Recognized",
+            img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200&q=85",
+            ctaText: "Explore Kyrgyzstan Universities →",
+            ctaHref: "/countries/kyrgyzstan"
+        },
+        {
+            index: "DESTINATION 06 / 07",
+            title: "Philippines",
+            desc: "American-pattern USMLE-aligned medical curriculum with 100% English medium instruction, extensive hands-on hospital exposure, and high global practice readiness.",
+            budget: "₹22L – ₹35L (Total 5.5-Yr)",
+            duration: "5.5 Years (BS + MD)",
+            recog: "CHED & NMC Compliant",
+            img: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200&q=85",
+            ctaText: "Explore Philippines Universities →",
+            ctaHref: "/countries/philippines"
+        },
+        {
+            index: "DESTINATION 07 / 07",
+            title: "Serbia",
+            desc: "Prestigious European Union candidate nation offering Bologna-compliant 6-year medical degrees with English instruction and residency pathways across Europe.",
+            budget: "₹28L – ₹42L (Total 6-Yr)",
+            duration: "6.0 Years (360 ECTS Credits)",
+            recog: "EU Bologna & NMC Compliant",
             img: "https://images.unsplash.com/photo-1562774053-701939374585?w=1200&q=85",
-            ctaText: "Tap to know more →",
-            ctaHref: "/universities"
+            ctaText: "Explore Serbia Universities →",
+            ctaHref: "/countries/serbia"
         }
     ];
 
@@ -896,14 +918,8 @@ function initForgeCountries() {
                 if (ctaBtn) {
                     ctaBtn.textContent = d.ctaText;
                     ctaBtn.href = d.ctaHref;
-                    if (slideIndex === totalSlides - 1) {
-                        ctaBtn.style.background = '#283A27';
-                        ctaBtn.style.color = '#F7F5EE';
-                        ctaBtn.style.fontWeight = '700';
-                    } else {
-                        ctaBtn.style.background = '#283A27';
-                        ctaBtn.style.color = '#FFFFFF';
-                    }
+                    ctaBtn.style.background = '#283A27';
+                    ctaBtn.style.color = '#FFFFFF';
                 }
                 if (imgEl && imgEl.src !== d.img) {
                     imgEl.style.opacity = '0.3';
@@ -928,8 +944,11 @@ function initForgeCountries() {
     updateCountryScroll();
 }
 
-// 14. Staged Doctor Counselors Controller (Forge Image 4 - Insight Style)
+// 14. Staged Doctor Counselors Controller (Forge Image 4 - Insight Style & Pinned Sticky Scroll)
 function initForgeDoctors() {
+    const section = document.getElementById('pinned-doctors-section');
+    if (!section) return;
+
     const doctors = [
         {
             name: "Dr. Nishu Yadav",
@@ -956,42 +975,82 @@ function initForgeDoctors() {
             name: "Dr. Vikram Singh",
             role: "Senior Academic Director • MBBS, MD (Pediatrics)",
             bio: "With over a decade of clinical practice and overseas medical education advisory, Dr. Vikram oversees our rigorous university vetting process and post-arrival student welfare programs.",
-            img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&q=80",
+            img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800&q=80",
             whatsapp: "https://wa.me/919004775531?text=Hi%20Dr.%20Vikram,%20I%20want%20to%20consult%20regarding%20MBBS%20Abroad."
         }
     ];
 
     let currentDoc = 0;
+    let isTransitioning = false;
     const nameEl = document.getElementById('doctor-name');
     const roleEl = document.getElementById('doctor-role');
     const bioEl = document.getElementById('doctor-bio');
     const imgEl = document.getElementById('doctor-img');
     const ctaBtn = document.getElementById('doctor-cta-btn');
     const indicatorEl = document.getElementById('doc-step-indicator');
-    const tabBtns = document.querySelectorAll('.doc-tab-btn');
+    const ambientGlow = document.getElementById('doc-backdrop-ambient');
+    const editorialStack = document.getElementById('doc-editorial-stack');
+    const tabBtns = section.querySelectorAll('.doc-tab-btn');
     const prevBtn = document.getElementById('doc-prev-btn');
     const nextBtn = document.getElementById('doc-next-btn');
 
     function renderDoc(index) {
         if (index < 0) index = doctors.length - 1;
         if (index >= doctors.length) index = 0;
+        if (index === currentDoc && isTransitioning) return;
+
+        const oldIndex = currentDoc;
         currentDoc = index;
         const d = doctors[index];
 
-        if (nameEl) nameEl.textContent = d.name;
-        if (roleEl) roleEl.textContent = d.role;
-        if (bioEl) bioEl.textContent = d.bio;
-        if (ctaBtn) {
-            ctaBtn.href = d.whatsapp;
-            ctaBtn.textContent = `Consult With ${d.name} via WhatsApp →`;
-        }
-        if (indicatorEl) {
-            indicatorEl.innerHTML = `0${index + 1} <span style="opacity:0.4;color:white;">/ 04</span>`;
+        // Animate text slide-out / slide-in matching reference video
+        if (editorialStack && oldIndex !== index) {
+            isTransitioning = true;
+            editorialStack.classList.remove('anim-active', 'anim-enter');
+            editorialStack.classList.add('anim-exit');
+
+            setTimeout(() => {
+                if (nameEl) nameEl.textContent = d.name;
+                if (roleEl) roleEl.textContent = d.role;
+                if (bioEl) bioEl.textContent = d.bio;
+                if (ctaBtn) {
+                    ctaBtn.href = d.whatsapp;
+                    const firstName = d.name.split(' ')[1] || d.name;
+                    ctaBtn.textContent = `Consult With ${firstName} via WhatsApp →`;
+                }
+                if (indicatorEl) {
+                    indicatorEl.innerHTML = `0${index + 1} <span style="opacity:0.4;color:white;">/ 04</span>`;
+                }
+
+                editorialStack.classList.remove('anim-exit');
+                editorialStack.classList.add('anim-enter');
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        editorialStack.classList.remove('anim-enter');
+                        editorialStack.classList.add('anim-active');
+                        isTransitioning = false;
+                    });
+                });
+            }, 190);
+        } else {
+            if (nameEl) nameEl.textContent = d.name;
+            if (roleEl) roleEl.textContent = d.role;
+            if (bioEl) bioEl.textContent = d.bio;
+            if (ctaBtn) {
+                ctaBtn.href = d.whatsapp;
+                const firstName = d.name.split(' ')[1] || d.name;
+                ctaBtn.textContent = `Consult With ${firstName} via WhatsApp →`;
+            }
+            if (indicatorEl) {
+                indicatorEl.innerHTML = `0${index + 1} <span style="opacity:0.4;color:white;">/ 04</span>`;
+            }
         }
 
+        // Image crossfade & subtle scale
         if (imgEl && imgEl.src !== d.img) {
-            imgEl.style.opacity = '0.3';
-            imgEl.style.transform = 'scale(0.96)';
+            imgEl.style.opacity = '0.2';
+            imgEl.style.transform = 'scale(1.04)';
             setTimeout(() => {
                 imgEl.src = d.img;
                 imgEl.alt = d.name;
@@ -1000,24 +1059,84 @@ function initForgeDoctors() {
             }, 180);
         }
 
+        // Ambient backdrop update
+        if (ambientGlow) {
+            ambientGlow.style.backgroundImage = `url('${d.img}')`;
+        }
+
+        // Update tab pill highlights
         tabBtns.forEach((btn, i) => {
             if (i === index) {
-                btn.style.background = '#283A27'; btn.style.color = '#F7F5EE';
                 btn.classList.add('active');
             } else {
-                btn.style.background = 'rgba(255,255,255,0.2)';
                 btn.classList.remove('active');
             }
         });
     }
 
+    // Scroll-driven pinned controller
+    let ticking = false;
+    function onDoctorScroll() {
+        ticking = false;
+        const rect = section.getBoundingClientRect();
+        const sectionHeight = section.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const maxScroll = sectionHeight - windowHeight;
+
+        if (maxScroll <= 0) return;
+
+        const scrolledIntoSection = -rect.top;
+
+        if (scrolledIntoSection >= 0 && scrolledIntoSection <= maxScroll) {
+            const progress = Math.min(Math.max(scrolledIntoSection / maxScroll, 0), 0.999);
+            const totalDocs = doctors.length;
+            const targetIndex = Math.min(Math.floor(progress * totalDocs), totalDocs - 1);
+
+            if (targetIndex !== currentDoc) {
+                renderDoc(targetIndex);
+            }
+        }
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            ticking = true;
+            window.requestAnimationFrame(onDoctorScroll);
+        }
+    }, { passive: true });
+
+    function scrollToDoctor(index) {
+        renderDoc(index);
+        const sectionTop = window.scrollY + section.getBoundingClientRect().top;
+        const maxScroll = section.offsetHeight - window.innerHeight;
+        if (maxScroll > 0) {
+            const targetScroll = sectionTop + (index + 0.5) * (maxScroll / doctors.length);
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        }
+    }
+
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const idx = parseInt(btn.dataset.doc, 10);
-            renderDoc(idx);
+            scrollToDoctor(idx);
         });
     });
 
-    if (prevBtn) prevBtn.addEventListener('click', () => renderDoc(currentDoc - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => renderDoc(currentDoc + 1));
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const nextIdx = currentDoc > 0 ? currentDoc - 1 : doctors.length - 1;
+            scrollToDoctor(nextIdx);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const nextIdx = currentDoc < doctors.length - 1 ? currentDoc + 1 : 0;
+            scrollToDoctor(nextIdx);
+        });
+    }
+
+    // Initialize initial state
+    renderDoc(0);
+    onDoctorScroll();
 }
