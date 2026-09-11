@@ -2,7 +2,7 @@
 
 - **URL:** https://stellarsciencehub.in/universities
 - **Scope:** 34 featured institutions across 7 countries
-- **Network:** 60+ government institutions overall
+- **Russia network:** 60+ government institutions in Russia alone
 - **Link policy:** Institution cards open official websites directly
 
 ## Uzbekistan

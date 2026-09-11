@@ -99,7 +99,7 @@ The numbered inventory above contains 50 URL entries because `/universities` and
 The homepage is organized as a long-form conversion page:
 
 1. Hero: “For the Doctors. By the Doctors.”; foreign MBBS counseling by doctors who studied at the recommended universities.
-2. Trust statistics: 20L+ NEET candidates/year, 52K government seats, 7 countries, 500+ students placed.
+2. Trust statistics: 20L+ NEET candidates/year, 52K government seats, 7 countries, 1200+ students placed.
 3. Why Stellar Science Hub: doctor-led counseling, NMC/WDOMS compliance, end-to-end support, and FMGE planning from Day One.
 4. Destination cards: Russia, Georgia, Kazakhstan, Uzbekistan, Kyrgyzstan, Philippines, and Serbia.
 5. Difference section: compares Stellar Science Hub with a typical agent; emphasizes zero university commission and one counselor throughout the degree.
@@ -332,7 +332,7 @@ The company says Dr. Nishu Yadav studied across Ukraine and Kazakhstan, cleared 
 
 Transparency, student-first recommendations, medical integrity, and a long-term relationship through MBBS, FMGE, and PG planning.
 
-Displayed about-page numbers: 4 doctors on team, 500+ students placed, and 3 countries studied in.
+Displayed about-page numbers: 4 doctors on team, 1200+ students placed, and 3 countries studied in.
 
 ## 9. Book a Call page — `/book`
 

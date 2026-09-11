@@ -10,7 +10,7 @@
 ## 1. Complete Site Map & URL Hierarchy (46 Pages)
 
 ### Core & Conversion Pages (10 Pages)
-1. **Homepage:** `https://stellarsciencehub.in` — Hero, Doctor-Led USP, 500+ placed stats, Country filter, Testimonials, FAQs.
+1. **Homepage:** `https://stellarsciencehub.in` — Hero, Doctor-Led USP, 1200+ placed stats, Country filter, Testimonials, FAQs.
 2. **About Us:** `https://stellarsciencehub.in/about` — Mission, doctor founders, contrast with commercial agents, core ethics.
 3. **Admission Process:** `https://stellarsciencehub.in/process` — 6-step roadmap from initial counseling to airport pickup & FMGE prep.
 4. **Eligibility Criteria:** `https://stellarsciencehub.in/eligibility` — NEET cutoff, 10+2 marks, age criteria, NMC Gazette rules.

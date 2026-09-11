@@ -12,9 +12,9 @@ export const siteConfig = {
   },
   stats: {
     countries: 7,
-    governmentColleges: "60+",
+    governmentColleges: "60+ in Russia",
     featuredInstitutions: 34,
-    studentsGuided: "500+",
+    studentsGuided: "1200+",
     doctorCounselors: 3,
   },
   contact: {
