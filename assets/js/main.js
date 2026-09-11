@@ -759,8 +759,10 @@ function initForgeExperienceController() {
         if (header) {
             if (progress < 0.95) {
                 header.classList.add('header-cinematic-hidden');
+                header.classList.remove('header-scrolled-visible');
             } else {
                 header.classList.remove('header-cinematic-hidden');
+                header.classList.add('header-scrolled-visible');
             }
         }
 
