@@ -8,8 +8,8 @@
 
 - [Sechenov University – First Moscow State Medical University](https://www.sechenov.ru/eng/) — Moscow
 - [Pirogov Russian National Research Medical University](https://pirogov-university.com/) — Moscow
-- [Pavlov First Saint Petersburg State Medical University](https://www.en.1spbgmu.ru/) — Saint Petersburg
-- [Kazan State Medical University](https://kgmu.kcn.ru/) — Kazan
+- [Pavlov First Saint Petersburg State Medical University](https://1spbgmu.ru/en/) — Saint Petersburg
+- [Kazan State Medical University](https://kazangmu.ru/) — Kazan
 - [Tver State Medical University](https://tvgmu.ru/) — Tver
 
 > Always confirm current programme, eligibility, recognition, and admission information on the institution’s official website.

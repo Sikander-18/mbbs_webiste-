@@ -6,7 +6,7 @@
 
 ## Featured Institutions
 
-- [I.K. Akhunbaev Kyrgyz State Medical Academy (KSMA)](https://ksma.edu.kg/en) — Bishkek
+- [I.K. Akhunbaev Kyrgyz State Medical Academy (KSMA)](https://www.kgma.kg/en) — Bishkek
 - [Osh State University – Faculty of Medicine](https://www.oshsu.kg/en/page/109) — Osh
 - [Jalal-Abad State University named after B. Osmonov – Medical Faculty](https://jasu.kg/) — Jalal-Abad
 - [Kyrgyz-Russian Slavic University named after B.N. Yeltsin – Faculty of Medicine](https://www.krsu.kg/en/medical_faculty) — Bishkek
