@@ -1061,80 +1061,80 @@ function initForgeCountries() {
 
     const countryData = [
         {
-            index: "DESTINATION 01 / 07",
+            index: "01 / 07",
             title: "Uzbekistan",
-            desc: "Access to 7 government medical institutes within Stellar's 60+ government college network, with structured guidance from selection through admission.",
+            desc: "Public medical universities with established hospital affiliations, modern laboratory facilities, and an expanding community of Indian students.",
             institutes: "7 government institutes",
             budget: "₹30–35 lakh",
-            tieups: "Government-only network",
+            tieups: "Public medical universities",
             img: "/assets/images/countries/uzbekistan.jpg",
-            ctaText: "View country & colleges",
+            ctaText: "Explore universities",
             ctaHref: "/countries/uzbekistan"
         },
         {
-            index: "DESTINATION 02 / 07",
+            index: "02 / 07",
             title: "Kyrgyzstan",
-            desc: "Five government medical institutes offering an accessible MBBS pathway, supported by transparent counselling and end-to-end admission guidance.",
+            desc: "Government medical institutes offering English-medium MBBS tracks, straightforward admission criteria, and predictable living costs.",
             institutes: "5 government institutes",
             budget: "₹30–35 lakh",
-            tieups: "Government-only network",
+            tieups: "Public medical universities",
             img: "/assets/images/countries/kyrgyzstan.jpg",
-            ctaText: "View country & colleges",
+            ctaText: "Explore universities",
             ctaHref: "/countries/kyrgyzstan"
         },
         {
-            index: "DESTINATION 03 / 07",
+            index: "03 / 07",
             title: "Kazakhstan",
-            desc: "A broad choice of 10–12 government medical institutes, paired with practical counselling on university fit, budget, and student readiness.",
+            desc: "Recognized national and regional medical universities with 5-year modular curricula, university clinical hospitals, and structured clinical exposure.",
             institutes: "10–12 government institutes",
             budget: "₹30–35 lakh",
-            tieups: "Government-only network",
+            tieups: "National medical universities",
             img: "/assets/images/countries/kazakhstan.jpg",
-            ctaText: "View country & colleges",
+            ctaText: "Explore universities",
             ctaHref: "/countries/kazakhstan"
         },
         {
-            index: "DESTINATION 04 / 07",
+            index: "04 / 07",
             title: "Russia",
-            desc: "Stellar's largest government-college ecosystem, including 10+ high-level institutional tie-ups and options across established medical education hubs.",
+            desc: "Historic state medical academies and research universities with extensive tertiary hospital networks and decades of training international students.",
             institutes: "60+ government institutes",
             budget: "₹27–45 lakh",
-            tieups: "10+ high-level tie-ups",
+            tieups: "State medical universities",
             img: "/assets/images/countries/russia.jpg",
-            ctaText: "View country & colleges",
+            ctaText: "Explore universities",
             ctaHref: "/countries/russia"
         },
         {
-            index: "DESTINATION 05 / 07",
+            index: "05 / 07",
             title: "Bangladesh",
-            desc: "A substantial network of 37 government medical institutes, including 15+ high-level tie-ups and a familiar South Asian academic environment.",
+            desc: "Government medical colleges sharing syllabus, disease spectrum, and clinical case-load patterns closely aligned with the Indian healthcare system.",
             institutes: "37 government institutes",
             budget: "₹32–45 lakh",
-            tieups: "15+ high-level tie-ups",
+            tieups: "Government medical colleges",
             img: "/assets/images/countries/bangladesh.jpg",
-            ctaText: "View country & colleges",
+            ctaText: "Explore universities",
             ctaHref: "/countries/bangladesh"
         },
         {
-            index: "DESTINATION 06 / 07",
+            index: "06 / 07",
             title: "Georgia",
-            desc: "A focused selection of 4–5 government medical institutes with senior-guided consultation explaining the destination, curriculum, and cost context.",
+            desc: "European-aligned medical institutions with modern simulation labs, English-medium coursework, and recognized hospital clinical postings.",
             institutes: "4–5 government institutes",
             budget: "₹38–55 lakh",
-            tieups: "Government-only network",
+            tieups: "State medical universities",
             img: "/assets/images/countries/georgia.jpg",
-            ctaText: "View country & colleges",
+            ctaText: "Explore universities",
             ctaHref: "/countries/georgia"
         },
         {
-            index: "DESTINATION 07 / 07",
+            index: "07 / 07",
             title: "Nepal",
-            desc: "Eight to nine government medical institutes with close cultural proximity to India, AIIMS-pattern clinical rigor, and direct senior fee advisory.",
+            desc: "Colleges following curricula and clinical training modeled closely on Indian medical guidelines, with direct overland accessibility and no student visa requirement for Indians.",
             institutes: "8–9 government institutes",
             budget: "₹57–80 lakh",
-            tieups: "Government-only network",
+            tieups: "Government medical institutes",
             img: "/assets/images/countries/nepal.jpg",
-            ctaText: "View country & colleges",
+            ctaText: "Explore universities",
             ctaHref: "/countries/nepal"
         }
     ];
@@ -1154,7 +1154,7 @@ function initForgeCountries() {
             <dl class="country-story-pane__specs">
                 <div><dt>Government institutes</dt><dd>${country.institutes}</dd></div>
                 <div><dt>Estimated total budget</dt><dd>${country.budget}</dd></div>
-                <div><dt>Institutional access</dt><dd>${country.tieups}</dd></div>
+                <div><dt>Institution type</dt><dd>${country.tieups}</dd></div>
             </dl>
             <a class="country-story-pane__cta" href="${country.ctaHref}">${country.ctaText}<span aria-hidden="true">↗</span></a>
         </article>

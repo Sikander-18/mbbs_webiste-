@@ -1535,6 +1535,98 @@ header {
     color: #F7F5EE;
 }
 
+/* Secondary Button & Button Group (Directive 7 & 26) */
+.forge-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.forge-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 12px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F7F5EE;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.forge-btn-secondary:hover {
+    border-color: #C9A45C;
+    color: #C9A45C;
+    background: rgba(201, 164, 92, 0.08);
+}
+
+/* Restrained Verification Strip (Directive 10) */
+.verification-strip-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 540px;
+}
+
+.verification-strip-header {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #C9A45C;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.verification-strip-header::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 1px;
+    background: #C9A45C;
+}
+
+.verification-strip-items {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    color: #F7F5EE;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+}
+
+.verification-strip-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.verification-strip-sep {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.65rem;
+}
+
+.verification-strip-note {
+    font-family: var(--font-inter);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+}
+
+
 /* Forge-Style Infinite Marquee Ribbon (Middle Placement) */
 .forge-marquee-ribbon {
     width: 100%;
