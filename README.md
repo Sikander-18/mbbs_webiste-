@@ -1,98 +1,93 @@
-# Stellar Science Hub & Educonsultancy — MBBS Abroad Platform
+# Stellar Science Hub & Educonsultancy — MBBS Abroad Website
 
-A high-performance, responsive multi-page web platform for **Stellar Science Hub & Educonsultancy** — a doctor-led overseas medical education advisory based in Mira Road, Mumbai.
+Production-ready static website for **Stellar Science Hub & Educonsultancy**, an MBBS-abroad education consultancy based in Mira Road, Mumbai.
 
-Featuring 7 country destinations, 34 featured government/public medical institutions with official-site links, admissions guides, an interactive budget calculator, and custom motion choreography inspired by **[Forge Automotive](https://forgeautomotive.co.uk/)**.
+The site includes a cinematic landing page, country guides, a university directory with official outbound links, admissions-process information, eligibility guidance, FAQs, booking/contact pages, and documentation for the animation references used during design.
 
----
+## Key features
 
-## Key Features
+- **Cinematic homepage animation system**
+  - Scroll-driven university gate entrance hero.
+  - Campus quote transition.
+  - 3D medical compendium/book section.
+  - Pinned country explorer.
+  - Doctor guidance showcase.
+- **Country coverage**
+  - Russia, Georgia, Kazakhstan, Uzbekistan, Kyrgyzstan, Bangladesh, and Nepal.
+- **University directory**
+  - Cards link directly to the official university websites.
+  - Old individual university detail routes are not part of the current production site.
+- **Conversion paths**
+  - WhatsApp booking links.
+  - Consultation CTAs.
+  - Contact/location page.
+- **Static route support**
+  - Root `.html` files and matching `folder/index.html` files are intentionally kept so both direct-file and clean URLs work across local/dev hosting setups.
 
-1. **Forge Automotive-Style Signature Animations**:
-   - **University Gate Entrance Hero**: 3D perspective campus entrance with wrought-iron gate doors that swing open on scroll as the camera moves into the campus facade.
-   - **Atmospheric Thesis Quote**: High-impact editorial statement screen: *"We Don't Just Process Admissions. We Build Future Doctors."*
-   - **3D Medical Compendium / Book Opening**: Perspective journal revealing the founding standard and the 4 core pillars of NMC compliance.
-   - **Pinned Split Country Explorer**: 50/50 sticky screen layout with live crossfading destination specs across Russia, Georgia, Kazakhstan, and Uzbekistan.
-   - **Staged Doctor Counselors Showcase**: Interactive doctor counselor portfolio with credentials, FMGE scores, bios, and direct WhatsApp consultations.
-2. **Interactive MBBS Budget Calculator**: Real-time slider (₹15L - ₹45L+) providing tuition fees, hostel costs, duration, and matching NMC-approved universities with direct WhatsApp pre-filled inquiry.
-3. **Verified Real Photo Gallery**: Lightbox modal showcasing real campus photos and student batches.
-4. **Complete Admissions Infrastructure**:
-   - 29 verified clean routes across core pages, 7 country destinations, and 10 detailed medical guides; individual university cards link to official institution websites.
-   - 100% NMC Gazette and WDOMS directory compliant.
-   - Direct counselor WhatsApp integration (`+91 90047 75531`).
+## Quick start
 
----
-
-## Quick Start
-
-### 1. Run the Local Development Server
-Launch the multi-threaded Python preview server with clean URL handling and custom 404 routing:
+Run the local clean-URL development server:
 
 ```bash
 python server.py
 ```
-*Or using npm:*
+
+Or:
+
 ```bash
 npm run dev
 ```
 
-Visit the website at: **`http://localhost:3000`**
+Visit:
 
-### 2. Static Preview (`npx serve`)
-```bash
-npm run serve
+```text
+http://localhost:3000
 ```
 
-### 3. Run Route & Concurrency Verification
-To verify all 29 clean routes and status codes:
+## Verification
+
+Run the route verification suite:
+
 ```bash
 npm test
 ```
-*Or directly:*
-```bash
-python scripts/verify_routes.py
-```
 
----
+The test checks the 19 supported clean routes, including the branded 404 behavior for `/privacy` and `/disclaimer`.
 
-## Project Structure
+There is currently no separate production build, lint, or type-check script because this project is a static HTML/CSS/JS site.
 
-```
+## Project structure
+
+```text
 .
-├── index.html                   # Homepage with Forge Automotive motion architecture
-├── 404.html                     # Branded 404 Page Not Found
-│
-├── about/                       # About Us (/about)
-├── blog/                        # 10 Medical advisory articles (/blog/...)
-├── book/                        # 1-on-1 Doctor Call Booking (/book)
-├── contact/                     # Contact & Location with Google Map (/contact)
-├── countries/                   # 7 approved country guides (/countries/...)
-├── eligibility/                 # NMC Eligibility regulations (/eligibility)
-├── faq/                         # Comprehensive FAQ directory (/faq)
-├── process/                     # 6-Step Admission Journey (/process)
-├── universities/                # University directory only; cards open official websites
-│
+├── index.html                  # Homepage with the main scroll animation sequence
+├── 404.html                    # Branded 404 page
+├── about.html / about/         # About route, direct and clean URL variants
+├── blog.html / blog/           # Blog landing route
+├── book.html / book/           # Consultation booking route
+├── contact.html / contact/     # Contact route
+├── countries.html / countries/ # Country index and 7 country detail routes
+├── eligibility.html / eligibility/
+├── faq.html / faq/
+├── gallery.html / gallery/
+├── process.html / process/
+├── universities.html / universities/
 ├── assets/
-│   ├── css/
-│   │   └── style.css            # Consolidated design system tokens, 3D perspective & styles
-│   ├── js/
-│   │   └── main.js              # Motion engine, gate entrance, pinned explorer & tab controllers
-│   └── images/                  # Doctor portraits, campus gates, and university media
-│
-├── data/                        # Structured content datasets
-├── scripts/
-│   ├── apply_forge_experience.py # Automated animation builder script
-│   ├── install_animations.py     # Base animation installer
-│   ├── update_branding_and_purge.py # Branding & purge utility
-│   └── verify_routes.py          # 48-route test suite
-├── server.py                    # Multi-threaded clean URL development server
-├── package.json
-└── README.md
+│   ├── css/style.css           # Site design system, layout, responsive rules, animation styling
+│   ├── js/main.js              # Site interactions and GSAP/ScrollTrigger animation logic
+│   ├── js/vendor/              # Local GSAP vendor files
+│   └── images/                 # Runtime image assets used by the website
+├── images/                     # Compatibility logo assets used by `_next/image` metadata redirects
+├── _next/static/media/         # Font assets referenced by exported HTML
+├── docs/animation-references/  # Reference reports from Forge Automotive and Peryton Film
+├── scripts/verify_routes.py    # Clean-route verification script
+├── server.py                   # Local preview server with clean URL and `_next/image` handling
+├── serve.json                  # Static-hosting preview config
+└── package.json
 ```
 
----
+## Notes for maintainers
 
-## License & Credits
-- **Client**: Stellar Science Hub & Educonsultancy
-- **Lead Counselors**: Dr. Nishu Yadav, Dr. Lokesh Attri, Dr. Bindu Tyagi
-- **Website**: [stellarsciencehub.in](https://stellarsciencehub.in)
+- Keep `assets/js/main.js` and the animation-related CSS changes deliberate; the homepage book, country, and doctor sequences rely on coordinated GSAP timelines.
+- Keep both route forms (`about.html` and `about/index.html`, etc.) unless the server and tests are changed together.
+- Keep root `images/logo_512.png`; exported `_next/image` metadata URLs are routed to it by `server.py`.
