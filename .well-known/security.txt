@@ -1,0 +1,5 @@
+Contact: https://stellarsciencehub.in/contact
+Preferred-Languages: en, hi
+Expires: 2027-09-12T00:00:00Z
+Canonical: https://stellarsciencehub.in/.well-known/security.txt
+

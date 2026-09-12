@@ -1,0 +1,46 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "EducationalOrganization",
+        "LocalBusiness"
+      ],
+      "@id": "https://stellarsciencehub.in/#organization",
+      "name": "Stellar Science Hub & Educonsultancy",
+      "url": "https://stellarsciencehub.in/",
+      "description": "Expert-led MBBS abroad consultancy for Indian students and families.",
+      "logo": "https://stellarsciencehub.in/assets/images/logo_512.png",
+      "image": "https://stellarsciencehub.in/assets/images/logo_512.png",
+      "telephone": "+91 9004775531",
+      "sameAs": [
+        "https://www.instagram.com/stellarsciencehub/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mira Road",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      },
+      "areaServed": "India",
+      "knowsAbout": [
+        "MBBS abroad",
+        "Foreign medical education",
+        "NMC eligibility",
+        "FMGE preparation",
+        "University selection"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://stellarsciencehub.in/#website",
+      "url": "https://stellarsciencehub.in/",
+      "name": "Stellar Science Hub & Educonsultancy",
+      "publisher": {
+        "@id": "https://stellarsciencehub.in/#organization"
+      }
+    }
+  ]
+}
+

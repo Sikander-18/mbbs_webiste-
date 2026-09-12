@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Dr. Nishu Yadav",
+    "role": "Founder & Lead Admissions Advisor",
+    "degree": "MBBS",
+    "university": "Semey Medical University",
+    "country": "Kazakhstan",
+    "expertise": [
+      "MBBS abroad guidance",
+      "FMGE preparation",
+      "Admissions counselling"
+    ],
+    "bio": "Completed medical education across Ukraine and Kazakhstan, cleared FMGE on the first attempt with a strong score, and guides students for MBBS abroad and FMGE preparation.",
+    "image": "/assets/images/nishu_yadav.jpg"
+  },
+  {
+    "name": "Dr. Lokesh Attri",
+    "role": "Co-Founder & FMGE Expert",
+    "degree": "MBBS",
+    "university": "Semey Medical University",
+    "country": "Kazakhstan",
+    "expertise": [
+      "FMGE coaching",
+      "Central Asia guidance",
+      "MBBS abroad counselling"
+    ],
+    "bio": "Completed medical education across Ukraine and Kazakhstan, cleared FMGE on the first attempt with a score of 210, and counsels students for FMGE and MBBS abroad decisions.",
+    "image": "/assets/images/lokesh_attri.jpg"
+  },
+  {
+    "name": "Dr. Bindu Tyagi",
+    "role": "Co-Founder & Admissions Advisor",
+    "degree": "MBBS",
+    "university": "Ternopil National Medical University",
+    "country": "Ukraine",
+    "expertise": [
+      "Admissions guidance",
+      "Student safety guidance",
+      "MBBS abroad and FMGE preparation"
+    ],
+    "bio": "Completed medical education at Ternopil National Medical University and guides students on safety, academics, adaptation abroad, MBBS abroad and FMGE preparation.",
+    "image": "/assets/images/bindu_tyagi.jpg"
+  }
+]
+

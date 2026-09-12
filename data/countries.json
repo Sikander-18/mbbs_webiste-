@@ -1,0 +1,121 @@
+[
+  {
+    "name": "Uzbekistan",
+    "slug": "uzbekistan",
+    "page": "https://stellarsciencehub.in/countries/uzbekistan",
+    "governmentInstitutions": "7",
+    "highLevelTieUps": null,
+    "estimatedBudget": "₹30–35 lakh",
+    "description": "Central Asian MBBS destination with affordable government medical education options and selected public medical institutions featured by Stellar.",
+    "featuredUniversities": [
+      "Tashkent State Medical University",
+      "Samarkand State Medical University",
+      "Andijan State Medical Institute",
+      "Bukhara State Medical Institute named after Abu Ali ibn Sino",
+      "Fergana Medical Institute of Public Health"
+    ],
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Kyrgyzstan",
+    "slug": "kyrgyzstan",
+    "page": "https://stellarsciencehub.in/countries/kyrgyzstan",
+    "governmentInstitutions": "5",
+    "highLevelTieUps": null,
+    "estimatedBudget": "₹30–35 lakh",
+    "description": "Affordable MBBS destination in Central Asia with government/public medical education options featured by Stellar.",
+    "featuredUniversities": [
+      "I.K. Akhunbaev Kyrgyz State Medical Academy",
+      "Osh State University – Faculty of Medicine",
+      "Jalal-Abad State University named after B. Osmonov – Medical Faculty",
+      "Kyrgyz-Russian Slavic University named after B.N. Yeltsin – Faculty of Medicine"
+    ],
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Kazakhstan",
+    "slug": "kazakhstan",
+    "page": "https://stellarsciencehub.in/countries/kazakhstan",
+    "governmentInstitutions": "10–12",
+    "highLevelTieUps": null,
+    "estimatedBudget": "₹30–35 lakh",
+    "description": "Central Asian MBBS destination with government/public medical universities and practical student support considerations.",
+    "featuredUniversities": [
+      "Asfendiyarov Kazakh National Medical University",
+      "Medical University Astana",
+      "Karaganda Medical University",
+      "Semey Medical University",
+      "West Kazakhstan Marat Ospanov Medical University"
+    ],
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Russia",
+    "slug": "russia",
+    "page": "https://stellarsciencehub.in/countries/russia",
+    "governmentInstitutions": "60+",
+    "highLevelTieUps": "10+",
+    "estimatedBudget": "₹27–45 lakh",
+    "description": "Major MBBS abroad destination with Russia's 60+ government medical universities and selected high-level tie-ups in Stellar's consultancy network.",
+    "featuredUniversities": [
+      "Sechenov University – First Moscow State Medical University",
+      "Pirogov Russian National Research Medical University",
+      "Pavlov First Saint Petersburg State Medical University",
+      "Kazan State Medical University",
+      "Tver State Medical University"
+    ],
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Bangladesh",
+    "slug": "bangladesh",
+    "page": "https://stellarsciencehub.in/countries/bangladesh",
+    "governmentInstitutions": "37",
+    "highLevelTieUps": "15+",
+    "estimatedBudget": "₹32–45 lakh",
+    "description": "South Asian MBBS destination with government/public medical colleges and curriculum familiarity for Indian students.",
+    "featuredUniversities": [
+      "Dhaka Medical College",
+      "Sir Salimullah Medical College",
+      "Chittagong Medical College",
+      "Rajshahi Medical College",
+      "Mymensingh Medical College"
+    ],
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Georgia",
+    "slug": "georgia",
+    "page": "https://stellarsciencehub.in/countries/georgia",
+    "governmentInstitutions": "4–5",
+    "highLevelTieUps": null,
+    "estimatedBudget": "₹38–55 lakh",
+    "description": "European MBBS destination with selected government/public institutions and university-specific eligibility checks.",
+    "featuredUniversities": [
+      "Tbilisi State Medical University",
+      "Ivane Javakhishvili Tbilisi State University",
+      "Ilia State University",
+      "Akaki Tsereteli State University",
+      "Batumi Shota Rustaveli State University"
+    ],
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Nepal",
+    "slug": "nepal",
+    "page": "https://stellarsciencehub.in/countries/nepal",
+    "governmentInstitutions": "8–9",
+    "highLevelTieUps": null,
+    "estimatedBudget": "₹57–80 lakh",
+    "description": "Nearby South Asian MBBS destination with government/public health-science institutions and familiar clinical exposure for Indian students.",
+    "featuredUniversities": [
+      "Institute of Medicine, Tribhuvan University – Maharajgunj Medical Campus",
+      "B.P. Koirala Institute of Health Sciences",
+      "Patan Academy of Health Sciences",
+      "Pokhara Academy of Health Sciences",
+      "Karnali Academy of Health Sciences"
+    ],
+    "lastChecked": "2026-09-12"
+  }
+]
+

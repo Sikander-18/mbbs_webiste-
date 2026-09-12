@@ -1,0 +1,16 @@
+TEAM
+Stellar Science Hub & Educonsultancy
+
+WEBSITE
+https://stellarsciencehub.in/
+
+CONTACT
+WhatsApp: +91 9004775531
+Instagram: https://www.instagram.com/stellarsciencehub/
+
+LOCATION
+Mira Road, Mumbai, Maharashtra, India
+
+TECHNOLOGY
+Static HTML, CSS, JavaScript, GSAP, ScrollTrigger
+

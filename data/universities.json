@@ -1,0 +1,309 @@
+[
+  {
+    "name": "Tashkent State Medical University",
+    "country": "Uzbekistan",
+    "city": "Tashkent",
+    "type": "Government / Public",
+    "officialWebsite": "https://tashmeduni.uz/en/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Samarkand State Medical University",
+    "country": "Uzbekistan",
+    "city": "Samarkand",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.sammu.uz/en",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Andijan State Medical Institute",
+    "country": "Uzbekistan",
+    "city": "Andijan",
+    "type": "Government / Public",
+    "officialWebsite": "https://adti.uz/en/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Bukhara State Medical Institute named after Abu Ali ibn Sino",
+    "country": "Uzbekistan",
+    "city": "Bukhara",
+    "type": "Government / Public",
+    "officialWebsite": "https://bsmi.uz/en/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Fergana Medical Institute of Public Health",
+    "country": "Uzbekistan",
+    "city": "Fergana",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.fmioph.uz/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "I.K. Akhunbaev Kyrgyz State Medical Academy (KSMA)",
+    "country": "Kyrgyzstan",
+    "city": "Bishkek",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.kgma.kg/en",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Osh State University – Faculty of Medicine",
+    "country": "Kyrgyzstan",
+    "city": "Osh",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.oshsu.kg/en/page/109",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Jalal-Abad State University named after B. Osmonov – Medical Faculty",
+    "country": "Kyrgyzstan",
+    "city": "Jalal-Abad",
+    "type": "Government / Public",
+    "officialWebsite": "https://jasu.kg/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Kyrgyz-Russian Slavic University named after B.N. Yeltsin – Faculty of Medicine",
+    "country": "Kyrgyzstan",
+    "city": "Bishkek",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.krsu.kg/en/medical_faculty",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Asfendiyarov Kazakh National Medical University (KazNMU)",
+    "country": "Kazakhstan",
+    "city": "Almaty",
+    "type": "Government / Public",
+    "officialWebsite": "https://kaznmu.edu.kz/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Medical University Astana",
+    "country": "Kazakhstan",
+    "city": "Astana",
+    "type": "Government / Public",
+    "officialWebsite": "https://amu.edu.kz/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Karaganda Medical University",
+    "country": "Kazakhstan",
+    "city": "Karaganda",
+    "type": "Government / Public",
+    "officialWebsite": "https://qmu.edu.kz/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Semey Medical University",
+    "country": "Kazakhstan",
+    "city": "Semey",
+    "type": "Government / Public",
+    "officialWebsite": "https://smu.edu.kz/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "West Kazakhstan Marat Ospanov Medical University",
+    "country": "Kazakhstan",
+    "city": "Aktobe",
+    "type": "Government / Public",
+    "officialWebsite": "https://zkmu.edu.kz/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Sechenov University – First Moscow State Medical University",
+    "country": "Russia",
+    "city": "Moscow",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.sechenov.ru/eng/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Pirogov Russian National Research Medical University",
+    "country": "Russia",
+    "city": "Moscow",
+    "type": "Government / Public",
+    "officialWebsite": "https://pirogov-university.com/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Pavlov First Saint Petersburg State Medical University",
+    "country": "Russia",
+    "city": "Saint Petersburg",
+    "type": "Government / Public",
+    "officialWebsite": "https://1spbgmu.ru/en/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Kazan State Medical University",
+    "country": "Russia",
+    "city": "Kazan",
+    "type": "Government / Public",
+    "officialWebsite": "https://kazangmu.ru/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Tver State Medical University",
+    "country": "Russia",
+    "city": "Tver",
+    "type": "Government / Public",
+    "officialWebsite": "https://tvgmu.ru/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Dhaka Medical College",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "type": "Government / Public",
+    "officialWebsite": "https://dmc.gov.bd/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Sir Salimullah Medical College",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "type": "Government / Public",
+    "officialWebsite": "https://ssmc.gov.bd/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Chittagong Medical College",
+    "country": "Bangladesh",
+    "city": "Chattogram",
+    "type": "Government / Public",
+    "officialWebsite": "https://cmc.gov.bd/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Rajshahi Medical College",
+    "country": "Bangladesh",
+    "city": "Rajshahi",
+    "type": "Government / Public",
+    "officialWebsite": "https://rmc.edu.bd/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Mymensingh Medical College",
+    "country": "Bangladesh",
+    "city": "Mymensingh",
+    "type": "Government / Public",
+    "officialWebsite": "http://mmc.gov.bd/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Tbilisi State Medical University (TSMU)",
+    "country": "Georgia",
+    "city": "Tbilisi",
+    "type": "Government / Public",
+    "officialWebsite": "https://tsmu.edu/ts/index.php?lang=en",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Ivane Javakhishvili Tbilisi State University (TSU)",
+    "country": "Georgia",
+    "city": "Tbilisi",
+    "type": "Government / Public",
+    "officialWebsite": "https://tsu.ge/en/programs/434",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Ilia State University",
+    "country": "Georgia",
+    "city": "Tbilisi",
+    "type": "Government / Public",
+    "officialWebsite": "https://iliauni.edu.ge/en/iliauni/AcademicDepartments/sainjinro-fakulteti-270/programebi-310/medicinis-programa",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Akaki Tsereteli State University",
+    "country": "Georgia",
+    "city": "Kutaisi",
+    "type": "Government / Public",
+    "officialWebsite": "https://atsu.edu.ge/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Batumi Shota Rustaveli State University",
+    "country": "Georgia",
+    "city": "Batumi",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.bsu.edu.ge/?lang=en",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Institute of Medicine (IOM), Tribhuvan University – Maharajgunj Medical Campus",
+    "country": "Nepal",
+    "city": "Kathmandu",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.iom.edu.np/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "B.P. Koirala Institute of Health Sciences (BPKIHS)",
+    "country": "Nepal",
+    "city": "Dharan",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.bpkihs.edu/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Patan Academy of Health Sciences (PAHS)",
+    "country": "Nepal",
+    "city": "Lalitpur",
+    "type": "Government / Public",
+    "officialWebsite": "https://web.pahs.edu.np/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Pokhara Academy of Health Sciences (PoAHS)",
+    "country": "Nepal",
+    "city": "Pokhara",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.poahs.edu.np/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  },
+  {
+    "name": "Karnali Academy of Health Sciences (KAHS)",
+    "country": "Nepal",
+    "city": "Jumla",
+    "type": "Government / Public",
+    "officialWebsite": "https://www.kahs.edu.np/",
+    "language": "English",
+    "lastChecked": "2026-09-12"
+  }
+]
+

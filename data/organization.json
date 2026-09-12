@@ -1,0 +1,45 @@
+{
+  "name": "Stellar Science Hub & Educonsultancy",
+  "alternateName": "Stellar MBBS Abroad",
+  "website": "https://stellarsciencehub.in/",
+  "description": "Expert-led MBBS abroad consultancy for Indian students and families.",
+  "foundingYear": 2024,
+  "location": {
+    "locality": "Mira Road",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India"
+  },
+  "contact": {
+    "whatsapp": "+91 9004775531",
+    "whatsappUrl": "https://wa.me/919004775531",
+    "instagram": "https://www.instagram.com/stellarsciencehub/"
+  },
+  "hours": "Mon-Sat, 9 AM-8 PM IST",
+  "studentsGuided": "1200+",
+  "countriesCovered": 7,
+  "russiaGovernmentUniversities": "60+",
+  "russiaHighLevelTieUps": "10+",
+  "destinations": [
+    "Uzbekistan",
+    "Kyrgyzstan",
+    "Kazakhstan",
+    "Russia",
+    "Bangladesh",
+    "Georgia",
+    "Nepal"
+  ],
+  "services": [
+    "MBBS abroad counselling",
+    "Country comparison",
+    "University selection support",
+    "Eligibility guidance",
+    "Admissions support",
+    "Documentation guidance",
+    "Student and family counselling",
+    "FMGE preparation guidance"
+  ],
+  "verificationNote": "University recognition, WDOMS listing, NMC/FMGL eligibility, admissions rules, visa rules, fee details and licensing pathways can change. Students should verify current official sources before final admission or payment.",
+  "lastChecked": "2026-09-12"
+}
+
