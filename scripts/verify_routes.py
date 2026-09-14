@@ -12,9 +12,9 @@ ROUTES = [
     "/process",
     "/eligibility",
     "/blog",
+    "/gallery",
     "/faq",
     "/about",
-    "/book",
     "/contact",
     "/privacy",
     "/countries/uzbekistan",
@@ -61,3 +61,20 @@ for route in ROUTES:
         failed += 1
 
 print(f"\nVerification Results: {passed} PASSED, {failed} FAILED out of {len(ROUTES)} routes.")
+
+for removed_route in ["/book", "/book/", "/book.html"]:
+    try:
+        urllib.request.urlopen(BASE_URL + removed_route, timeout=5)
+        print(f"FAIL: Removed route {removed_route} still resolves")
+        failed += 1
+    except urllib.error.HTTPError as error:
+        if error.code == 404:
+            print(f"OK [404 Removed]: {removed_route}")
+        else:
+            print(f"FAIL: {removed_route} -> Status {error.code}")
+            failed += 1
+    except Exception as error:
+        print(f"FAIL: {removed_route} -> {error}")
+        failed += 1
+
+sys.exit(1 if failed else 0)

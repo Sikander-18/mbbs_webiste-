@@ -10,18 +10,18 @@ Core services include MBBS abroad counselling, country comparison, university se
 
 ## Public website pages
 
-- Home: https://stellarsciencehub.in/
-- Countries: https://stellarsciencehub.in/countries
-- Universities: https://stellarsciencehub.in/universities
-- Process: https://stellarsciencehub.in/process
-- Eligibility: https://stellarsciencehub.in/eligibility
-- FAQ: https://stellarsciencehub.in/faq
-- About: https://stellarsciencehub.in/about
-- Book: https://stellarsciencehub.in/book
-- Contact: https://stellarsciencehub.in/contact
-- Blog: https://stellarsciencehub.in/blog
-- Gallery: https://stellarsciencehub.in/gallery
-- Privacy: https://stellarsciencehub.in/privacy
+- Home: https://stellareduconsultancy.com/
+- Countries: https://stellareduconsultancy.com/countries
+- Universities: https://stellareduconsultancy.com/universities
+- Process: https://stellareduconsultancy.com/process
+- Eligibility: https://stellareduconsultancy.com/eligibility
+- FAQ: https://stellareduconsultancy.com/faq
+- About: https://stellareduconsultancy.com/about
+- Book a free session (WhatsApp only): https://wa.me/917447867887
+- Contact: https://stellareduconsultancy.com/contact
+- Blog: https://stellareduconsultancy.com/blog
+- Gallery: https://stellareduconsultancy.com/gallery
+- Privacy: https://stellareduconsultancy.com/privacy
 
 ## Key public facts
 
@@ -29,8 +29,8 @@ Core services include MBBS abroad counselling, country comparison, university se
 - Countries covered: 7
 - Featured government/public institutions listed on the universities page: 34
 - Russia network: 60+ government medical universities and 10+ high-level tie-ups.
-- Consultation contact: WhatsApp +91 9004775531
-- Instagram: @stellarsciencehub
+- Consultation contact: WhatsApp +91 744 786 7887
+- Instagram: @stellareduconsultancy
 - Office: Mira Road, Mumbai, Maharashtra, India
 - Hours: Monday to Saturday, 9 AM to 8 PM IST
 
@@ -38,28 +38,28 @@ Core services include MBBS abroad counselling, country comparison, university se
 
 ### Uzbekistan
 
-- Page: https://stellarsciencehub.in/countries/uzbekistan
+- Page: https://stellareduconsultancy.com/countries/uzbekistan
 - Government institutes: 7
 - Budget range: ₹30–35 lakh
 - Featured universities: Tashkent State Medical University, Samarkand State Medical University, Andijan State Medical Institute, Bukhara State Medical Institute, Fergana Medical Institute of Public Health.
 
 ### Kyrgyzstan
 
-- Page: https://stellarsciencehub.in/countries/kyrgyzstan
+- Page: https://stellareduconsultancy.com/countries/kyrgyzstan
 - Government institutes: 5
 - Budget range: ₹30–35 lakh
 - Featured universities: I.K. Akhunbaev Kyrgyz State Medical Academy, Osh State University Faculty of Medicine, Jalal-Abad State University Medical Faculty, Kyrgyz-Russian Slavic University Faculty of Medicine.
 
 ### Kazakhstan
 
-- Page: https://stellarsciencehub.in/countries/kazakhstan
+- Page: https://stellareduconsultancy.com/countries/kazakhstan
 - Government institutes: 10–12
 - Budget range: ₹30–35 lakh
 - Featured universities: Asfendiyarov Kazakh National Medical University, Medical University Astana, Karaganda Medical University, Semey Medical University, West Kazakhstan Marat Ospanov Medical University.
 
 ### Russia
 
-- Page: https://stellarsciencehub.in/countries/russia
+- Page: https://stellareduconsultancy.com/countries/russia
 - Government institutes: 60+
 - High-level tie-ups: 10+
 - Budget range: ₹27–45 lakh
@@ -67,7 +67,7 @@ Core services include MBBS abroad counselling, country comparison, university se
 
 ### Bangladesh
 
-- Page: https://stellarsciencehub.in/countries/bangladesh
+- Page: https://stellareduconsultancy.com/countries/bangladesh
 - Government institutes: 37
 - High-level tie-ups: 15+
 - Budget range: ₹32–45 lakh
@@ -75,14 +75,14 @@ Core services include MBBS abroad counselling, country comparison, university se
 
 ### Georgia
 
-- Page: https://stellarsciencehub.in/countries/georgia
+- Page: https://stellareduconsultancy.com/countries/georgia
 - Government institutes: 4–5
 - Budget range: ₹38–55 lakh
 - Featured universities: Tbilisi State Medical University, Ivane Javakhishvili Tbilisi State University, Ilia State University, Akaki Tsereteli State University, Batumi Shota Rustaveli State University.
 
 ### Nepal
 
-- Page: https://stellarsciencehub.in/countries/nepal
+- Page: https://stellareduconsultancy.com/countries/nepal
 - Government institutes: 8–9
 - Budget range: ₹57–80 lakh
 - Featured universities: Institute of Medicine, B.P. Koirala Institute of Health Sciences, Patan Academy of Health Sciences, Pokhara Academy of Health Sciences, Karnali Academy of Health Sciences.
@@ -111,20 +111,20 @@ The website explains that Indian students generally need NEET qualification, Phy
 
 ## Contact
 
-- Website: https://stellarsciencehub.in/
-- WhatsApp: +91 9004775531
-- WhatsApp link: https://wa.me/919004775531
-- Instagram: https://www.instagram.com/stellarsciencehub/
+- Website: https://stellareduconsultancy.com/
+- WhatsApp: +91 744 786 7887
+- WhatsApp link: https://wa.me/917447867887
+- Instagram: https://www.instagram.com/stellareduconsultancy?stkn=ejRmZGJyaGMzaWI0
 - Office: Mira Road, Mumbai, Maharashtra, India
 - Hours: Mon–Sat, 9 AM–8 PM IST
 
 ## Machine-readable JSON files
 
-- Organization data: https://stellarsciencehub.in/data/organization.json
-- Country data: https://stellarsciencehub.in/data/countries.json
-- University data: https://stellarsciencehub.in/data/universities.json
-- Doctor/counsellor data: https://stellarsciencehub.in/data/doctors.json
-- FAQ data: https://stellarsciencehub.in/data/faq.json
+- Organization data: https://stellareduconsultancy.com/data/organization.json
+- Country data: https://stellareduconsultancy.com/data/countries.json
+- University data: https://stellareduconsultancy.com/data/universities.json
+- Doctor/counsellor data: https://stellareduconsultancy.com/data/doctors.json
+- FAQ data: https://stellareduconsultancy.com/data/faq.json
 
 ## Verification note
 

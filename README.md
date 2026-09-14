@@ -64,7 +64,6 @@ There is currently no separate production build, lint, or type-check script beca
 ├── 404.html                    # Branded 404 page
 ├── about.html / about/         # About route, direct and clean URL variants
 ├── blog.html / blog/           # Blog landing route
-├── book.html / book/           # Consultation booking route
 ├── contact.html / contact/     # Contact route
 ├── countries.html / countries/ # Country index and 7 country detail routes
 ├── eligibility.html / eligibility/

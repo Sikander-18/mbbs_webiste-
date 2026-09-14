@@ -7,15 +7,19 @@
         "EducationalOrganization",
         "LocalBusiness"
       ],
-      "@id": "https://stellarsciencehub.in/#organization",
+      "@id": "https://stellareduconsultancy.com/#organization",
       "name": "Stellar Edu Consultancy",
-      "url": "https://stellarsciencehub.in/",
+      "url": "https://stellareduconsultancy.com/",
       "description": "Expert-led MBBS abroad consultancy for Indian students and families.",
-      "logo": "https://stellarsciencehub.in/assets/images/logo_512.png",
-      "image": "https://stellarsciencehub.in/assets/images/logo_512.png",
-      "telephone": "+91 9004775531",
+      "logo": "https://stellareduconsultancy.com/assets/images/logo_512.png",
+      "image": "https://stellareduconsultancy.com/assets/images/logo_512.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Counselling via WhatsApp only",
+        "url": "https://wa.me/917447867887"
+      },
       "sameAs": [
-        "https://www.instagram.com/stellarsciencehub/"
+        "https://www.instagram.com/stellareduconsultancy?stkn=ejRmZGJyaGMzaWI0"
       ],
       "address": {
         "@type": "PostalAddress",
@@ -34,11 +38,11 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://stellarsciencehub.in/#website",
-      "url": "https://stellarsciencehub.in/",
+      "@id": "https://stellareduconsultancy.com/#website",
+      "url": "https://stellareduconsultancy.com/",
       "name": "Stellar Edu Consultancy",
       "publisher": {
-        "@id": "https://stellarsciencehub.in/#organization"
+        "@id": "https://stellareduconsultancy.com/#organization"
       }
     }
   ]
