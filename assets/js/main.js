@@ -1099,7 +1099,7 @@ function initForgeCountries() {
             index: "04 / 07",
             title: "Russia",
             desc: "Historic state medical academies and research universities with extensive tertiary hospital networks and decades of training international students.",
-            institutes: "60+ government institutes",
+            institutes: "100+ government institutes",
             budget: "₹27–45 lakh",
             tieups: "State medical universities",
             img: "/assets/images/countries/russia.jpg",
