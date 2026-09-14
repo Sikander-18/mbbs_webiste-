@@ -1,8 +1,8 @@
-// Stellar Science Hub & Educonsultancy - Main Client Interactions
+// Stellar Edu Consultancy - Main Client Interactions
 
 document.addEventListener('DOMContentLoaded', () => {
     resetCinematicHomepageScroll();
-    initRafiqProfileSection();
+    initRafiqueProfileSection();
     initHeaderScroll();
     initMobileMenu();
     initFaqAccordion();
@@ -94,7 +94,7 @@ function initHomepagePinnedStories() {
 }
 
 // Homepage profile copy beside the featured video.
-function initRafiqProfileSection() {
+function initRafiqueProfileSection() {
     const video = document.querySelector('iframe[src*="youtube.com/embed/dQw4w9WgXcQ"]');
     const section = video?.closest('section');
     const heading = section?.querySelector('h2');
@@ -102,8 +102,8 @@ function initRafiqProfileSection() {
 
     if (!heading || !description) return;
 
-    heading.textContent = 'Rafiq Sir';
-    description.textContent = 'With a career dedicated to guiding students toward the right medical education opportunities, Rafiq Sir brings over a decade of experience in the MBBS abroad counselling space. He completed his B.Sc. in 1997 and later pursued an LLB, completed in 2026. While Stellar Educonsultancy was officially established in 2024, his work in the field began more than 10 years ago, during which he has successfully guided and placed 1,200+ students in medical universities abroad. His experience is built on understanding students’ aspirations, choosing the right destinations, and helping families navigate the journey with confidence.';
+    heading.textContent = 'Rafique Sir';
+    description.textContent = 'With a career dedicated to guiding students toward the right medical education opportunities, Rafique Sir brings over a decade of experience in the MBBS abroad counselling space. He completed his B.Sc. in 1997 and later pursued an LLB, completed in 2026. While Stellar Edu Consultancy was officially established in 2024, his work in the field began more than 10 years ago, during which he has successfully guided and placed 1,200+ students in medical universities abroad. His experience is built on understanding students’ aspirations, choosing the right destinations, and helping families navigate the journey with confidence.';
 }
 
 // Countries page: scroll-driven editorial banner stack.
@@ -702,7 +702,7 @@ function initGalleryLightbox() {
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxCaption = document.getElementById('lightbox-caption');
             if (lightboxImg) lightboxImg.src = img.src;
-            if (lightboxCaption) lightboxCaption.textContent = img.alt || 'Stellar Science Hub Medical Community';
+            if (lightboxCaption) lightboxCaption.textContent = img.alt || 'Stellar Edu Consultancy Medical Community';
             lightbox.classList.add('active');
         });
     });

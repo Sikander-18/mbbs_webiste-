@@ -1,8 +1,8 @@
-# Stellar Science Hub & Educonsultancy
+# Stellar Edu Consultancy
 
 > Expert-led MBBS abroad consultancy for Indian students and families.
 
-Stellar Science Hub & Educonsultancy helps students compare MBBS abroad options, understand country and university choices, check eligibility, prepare documents, and receive practical admissions guidance.
+Stellar Edu Consultancy helps students compare MBBS abroad options, understand country and university choices, check eligibility, prepare documents, and receive practical admissions guidance.
 
 ## Important pages
 
@@ -28,7 +28,7 @@ Stellar Science Hub & Educonsultancy helps students compare MBBS abroad options,
 
 ## Key facts
 
-- Business: Stellar Science Hub & Educonsultancy
+- Business: Stellar Edu Consultancy
 - Focus: MBBS abroad counselling, university comparison, eligibility guidance, admissions support, documentation guidance, and student/family counselling.
 - Students guided: 1200+
 - Countries covered: 7

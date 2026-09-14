@@ -8,7 +8,7 @@
         "LocalBusiness"
       ],
       "@id": "https://stellarsciencehub.in/#organization",
-      "name": "Stellar Science Hub & Educonsultancy",
+      "name": "Stellar Edu Consultancy",
       "url": "https://stellarsciencehub.in/",
       "description": "Expert-led MBBS abroad consultancy for Indian students and families.",
       "logo": "https://stellarsciencehub.in/assets/images/logo_512.png",
@@ -36,7 +36,7 @@
       "@type": "WebSite",
       "@id": "https://stellarsciencehub.in/#website",
       "url": "https://stellarsciencehub.in/",
-      "name": "Stellar Science Hub & Educonsultancy",
+      "name": "Stellar Edu Consultancy",
       "publisher": {
         "@id": "https://stellarsciencehub.in/#organization"
       }

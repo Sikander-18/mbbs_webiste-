@@ -1,6 +1,6 @@
-# Stellar Science Hub & Educonsultancy — MBBS Abroad Website
+# Stellar Edu Consultancy — MBBS Abroad Website
 
-Production-ready static website for **Stellar Science Hub & Educonsultancy**, an MBBS-abroad education consultancy based in Mira Road, Mumbai.
+Production-ready static website for **Stellar Edu Consultancy**, an MBBS-abroad education consultancy based in Mira Road, Mumbai.
 
 The site includes a cinematic landing page, country guides, a university directory with official outbound links, admissions-process information, eligibility guidance, FAQs, booking/contact pages, and documentation for the animation references used during design.
 
