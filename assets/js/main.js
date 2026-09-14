@@ -693,7 +693,7 @@ function initGalleryLightbox() {
         });
     }
 
-    const galleryImages = document.querySelectorAll('section img[src*="stellar_"], section img[src*="alfa_"]');
+    const galleryImages = document.querySelectorAll('section img[src*="stellar_"], section img[src*="alfa_"], section img[src*="/gallery/gallery-"]');
     galleryImages.forEach(img => {
         img.style.cursor = 'zoom-in';
         img.addEventListener('click', (e) => {

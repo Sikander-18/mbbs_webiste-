@@ -29,6 +29,7 @@ wheels/
 # Logs & Temp
 *.log
 *.mp4
+!assets/videos/**/*.mp4
 gate image.png
 book image.png
 screenshot_*.*
