@@ -53,21 +53,7 @@ class CleanURLHandler(http.server.SimpleHTTPRequestHandler):
         if os.path.isfile(local_path):
             return super().do_GET()
 
-        # Handle privacy and disclaimer (styled reference 404)
         norm_path = clean_url.strip('/')
-        if norm_path in ['privacy', 'disclaimer']:
-            target_html = os.path.join(os.getcwd(), f"{norm_path}.html")
-            if os.path.isfile(target_html):
-                self.send_response(404)
-                self.send_header('Content-Type', 'text/html; charset=utf-8')
-                with open(target_html, 'rb') as f:
-                    content = f.read()
-                self.send_header('Content-Length', str(len(content)))
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                return self.send_error_404()
 
         # Clean URLs without trailing slash: e.g. /countries -> countries.html or countries/index.html
         if norm_path:
@@ -94,7 +80,7 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
 if __name__ == '__main__':
     with ThreadedTCPServer(("", PORT), CleanURLHandler) as httpd:
-        print(f"Server serving clean URLs and branded 404 on port {PORT} (Multi-threaded)")
+        print(f"Server serving clean URLs on port {PORT} (Multi-threaded)")
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

@@ -17,7 +17,6 @@ ROUTES = [
     "/book",
     "/contact",
     "/privacy",
-    "/disclaimer",
     "/countries/uzbekistan",
     "/countries/kyrgyzstan",
     "/countries/kazakhstan",
@@ -54,19 +53,11 @@ for route in ROUTES:
     h1_text = h1.get_text(strip=True) if h1 else 'No H1'
 
     # Check expectations
-    if route in ['/privacy', '/disclaimer']:
-        if status == 404 and 'Page Not Found' in body and '404' in body:
-            print(f"OK [404 Branded]: {route} -> Status {status} | '{h1_text}' | {len(body)} bytes")
-            passed += 1
-        else:
-            print(f"FAIL [Expected 404 Branded]: {route} -> Status {status}")
-            failed += 1
+    if status == 200 and len(body) > 5000:
+        print(f"OK [200 Clean]: {route} -> Status {status} | '{h1_text}' | {len(body)} bytes")
+        passed += 1
     else:
-        if status == 200 and len(body) > 5000:
-            print(f"OK [200 Clean]: {route} -> Status {status} | '{h1_text}' | {len(body)} bytes")
-            passed += 1
-        else:
-            print(f"FAIL: {route} -> Status {status} | Len: {len(body)}")
-            failed += 1
+        print(f"FAIL: {route} -> Status {status} | Len: {len(body)}")
+        failed += 1
 
 print(f"\nVerification Results: {passed} PASSED, {failed} FAILED out of {len(ROUTES)} routes.")

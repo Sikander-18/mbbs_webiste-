@@ -52,7 +52,7 @@ Run the route verification suite:
 npm test
 ```
 
-The test checks the 19 supported clean routes, including the branded 404 behavior for `/privacy` and `/disclaimer`.
+The test checks the supported clean routes, including the live `/privacy` page.
 
 There is currently no separate production build, lint, or type-check script because this project is a static HTML/CSS/JS site.
 
