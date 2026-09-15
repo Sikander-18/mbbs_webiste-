@@ -2,7 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     resetCinematicHomepageScroll();
-    initRafiqueProfileSection();
     initHeaderScroll();
     initMobileMenu();
     initFaqAccordion();
@@ -91,19 +90,6 @@ function initHomepagePinnedStories() {
 
     if (document.readyState === 'complete') queueInitialization();
     else window.addEventListener('load', queueInitialization, { once: true });
-}
-
-// Homepage profile copy beside the featured video.
-function initRafiqueProfileSection() {
-    const video = document.querySelector('iframe[src*="youtube.com/embed/dQw4w9WgXcQ"]');
-    const section = video?.closest('section');
-    const heading = section?.querySelector('h2');
-    const description = section?.querySelector('h2 + div + p');
-
-    if (!heading || !description) return;
-
-    heading.textContent = 'Rafique Sir';
-    description.textContent = 'With a career dedicated to guiding students toward the right medical education opportunities, Rafique Sir brings over a decade of experience in the MBBS abroad counselling space. He completed his B.Sc. in 1997 and later pursued an LLB, completed in 2026. While Stellar Edu Consultancy was officially established in 2024, his work in the field began more than 10 years ago, during which he has successfully guided and placed 1,200+ students in medical universities abroad. His experience is built on understanding students’ aspirations, choosing the right destinations, and helping families navigate the journey with confidence.';
 }
 
 // Countries page: scroll-driven editorial banner stack.
@@ -1311,10 +1297,10 @@ function initForgeDoctors() {
 
     // Preload all doctor imagery before scrub begins
     const doctorImageSources = [
-        '/assets/images/nishu_yadav.jpg',
-        '/assets/images/lokesh_attri.jpg',
-        '/assets/images/bindu_tyagi.jpg',
-        'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800&q=80'
+        '/assets/images/students/student_zaved_khan.png',
+        '/assets/images/students/student_ashiya_murad.png',
+        '/assets/images/students/student_muskan_sharma.png',
+        '/assets/images/students/student_sunaina_das.png'
     ];
     doctorImageSources.forEach(src => {
         const img = new Image();
