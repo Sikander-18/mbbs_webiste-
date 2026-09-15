@@ -332,16 +332,17 @@
 .country-story-pane__specs dd {
     margin: 0;
     font-family: var(--font-mono);
-    font-size: 0.6rem;
     letter-spacing: 0.06em;
 }
 
 .country-story-pane__specs dt {
+    font-size: 0.6rem;
     color: #78716C;
     text-transform: uppercase;
 }
 
 .country-story-pane__specs dd {
+    font-size: 0.75rem;
     color: #181915;
     text-align: right;
     font-weight: 600;
@@ -358,7 +359,7 @@
     border: 1px solid #385237;
     padding: 0.82rem 1.25rem;
     font-family: var(--font-mono);
-    font-size: 0.59rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -1240,8 +1241,7 @@ header.header-scrolled-visible {
     font-family: var(--font-mono);
     font-size: clamp(0.62rem, 0.95vw, 0.75rem);
     font-weight: 700;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: rgba(255,255,255,0.9);
     margin: 0;
     text-shadow: 0 2px 14px rgba(0,0,0,0.95);
@@ -1618,7 +1618,7 @@ header.header-scrolled-visible {
     flex-wrap: wrap;
     color: #F7F5EE;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     letter-spacing: 0.04em;
 }
 
@@ -2001,7 +2001,7 @@ header.header-scrolled-visible {
 
 .doctor-pane__label {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -2022,7 +2022,7 @@ header.header-scrolled-visible {
 
 .doctor-pane__role {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
