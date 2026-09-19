@@ -1221,8 +1221,9 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
     overflow: hidden;
     touch-action: none;
     user-select: none;
@@ -1230,7 +1231,9 @@
 }
 .modal-lightbox-backdrop.active {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
 }
 .modal-lightbox-content {
     width: 100vw;

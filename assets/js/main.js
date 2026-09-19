@@ -724,6 +724,7 @@ function initGalleryLightbox() {
     let startX = 0;
     let startY = 0;
     let lastActiveTrigger = null;
+    let savedScrollY = 0;
 
     function updateTransform(withTransition = true) {
         if (!lightboxImg) return;
@@ -791,8 +792,11 @@ function initGalleryLightbox() {
             captionEl.textContent = imgElement.alt || 'Stellar Edu Consultancy Medical Community';
         }
         lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        document.body.style.touchAction = 'none';
+        savedScrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${savedScrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
         if (closeBtn) {
             setTimeout(() => closeBtn.focus(), 50);
         }
@@ -800,11 +804,14 @@ function initGalleryLightbox() {
 
     function closeLightbox() {
         lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        document.body.style.touchAction = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        window.scrollTo(0, savedScrollY);
         resetZoom();
         if (lastActiveTrigger && typeof lastActiveTrigger.focus === 'function') {
-            lastActiveTrigger.focus();
+            lastActiveTrigger.focus({ preventScroll: true });
         }
     }
 
