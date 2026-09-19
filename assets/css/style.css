@@ -1213,7 +1213,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 0 1.125rem;
+    padding: 0 0.65rem;
     font-family: var(--font-mono);
     font-size: 0.6rem;
     font-weight: 700;
@@ -1230,8 +1230,8 @@
 .site-nav-link .site-nav-underline {
     position: absolute;
     bottom: 0;
-    left: 1.125rem;
-    right: 1.125rem;
+    left: 0.65rem;
+    right: 0.65rem;
     height: 2px;
     background: #C9A45C;
     transform: scaleX(0);
