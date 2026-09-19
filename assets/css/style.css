@@ -1208,6 +1208,127 @@
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
 }
 
+/* Site Header Nav: links, Countries dropdown, CTA button */
+.site-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 1.125rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #57534E;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease;
+}
+.site-nav-link:hover {
+    color: #283A27;
+}
+.site-nav-link .site-nav-underline {
+    position: absolute;
+    bottom: 0;
+    left: 1.125rem;
+    right: 1.125rem;
+    height: 2px;
+    background: #C9A45C;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+.site-nav-link:hover .site-nav-underline {
+    transform: scaleX(1);
+}
+.site-nav-dropdown {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+}
+.site-nav-dropdown-chevron {
+    transition: transform 0.2s ease;
+}
+.site-nav-dropdown:hover .site-nav-dropdown-chevron,
+.site-nav-dropdown.is-open .site-nav-dropdown-chevron {
+    transform: rotate(180deg);
+}
+.site-countries-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #FFFFFF;
+    border: 1px solid #E5DFD5;
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(24, 25, 21, 0.14);
+    min-width: 230px;
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+    z-index: 70;
+}
+.site-nav-dropdown:hover .site-countries-panel,
+.site-nav-dropdown:focus-within .site-countries-panel,
+.site-nav-dropdown.is-open .site-countries-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(8px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0s;
+}
+.site-countries-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #181915;
+    transition: background 0.15s ease;
+}
+.site-countries-item:hover {
+    background: #FAF8F5;
+}
+.site-countries-flag {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(24, 25, 21, 0.08);
+}
+.site-countries-item svg {
+    margin-left: auto;
+    opacity: 0.35;
+    flex-shrink: 0;
+}
+.nav-cta-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #181915;
+    background: #C9A45C;
+    border: 1px solid #C9A45C;
+    border-radius: 999px;
+    padding: 11px 22px;
+    transition: all 0.2s ease;
+}
+.nav-cta-gold:hover {
+    background: #B8923F;
+    border-color: #B8923F;
+}
+
 /* Lightbox Modal & Zoom Viewer */
 .modal-lightbox-backdrop {
     position: fixed;
@@ -1463,10 +1584,8 @@ header {
 }
 
 header.header-scrolled-visible {
-    background: #131C24 !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    background: #FFFFFF !important;
+    border-bottom: 1px solid #E5DFD5 !important;
 }
 
 /* --- UNIFIED FORGE HERO EXPERIENCE --- */

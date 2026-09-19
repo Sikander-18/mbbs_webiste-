@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     resetCinematicHomepageScroll();
     initHeaderScroll();
+    initCountriesDropdown();
     initMobileMenu();
     initFaqAccordion();
     initCountryFilters();
@@ -266,113 +267,54 @@ function initHeaderScroll() {
     const header = document.querySelector('header');
     if (!header) return;
 
-    // Ensure accent line exists at top of header
-    let accentLine = header.querySelector('#header-accent-line');
-    if (!accentLine) {
-        accentLine = document.createElement('div');
-        accentLine.id = 'header-accent-line';
-        accentLine.style.position = 'absolute';
-        accentLine.style.top = '0';
-        accentLine.style.left = '0';
-        accentLine.style.right = '0';
-        accentLine.style.height = '2px';
-        accentLine.style.background = 'linear-gradient(to right, #283A27, #C9A45C)';
-        accentLine.style.display = 'none';
-        accentLine.style.zIndex = '10';
-        header.prepend(accentLine);
-    }
-
-    const brandContainer = header.querySelector('a.mr-auto');
-    const brandBadge = brandContainer ? brandContainer.querySelector('.brand-logo-badge') : null;
-    const brandTitle = brandContainer ? brandContainer.querySelector('p:first-of-type') : null;
-    const brandSub = brandContainer ? brandContainer.querySelector('p:last-of-type') : null;
-    const navLinks = header.querySelectorAll('nav a');
-    const counselingContainer = header.querySelector('.hidden.lg\\:flex.items-center');
-    const toggleBtn = header.querySelector('button[aria-label="Toggle menu"]');
-
-    let isScrolled = false;
-
-    // Attach hover listeners for nav links
-    navLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            if (!link.dataset.active) {
-                link.style.color = isScrolled ? '#283A27' : '#F7F5EE';
-            }
-        });
-        link.addEventListener('mouseleave', () => {
-            if (!link.dataset.active) {
-                link.style.color = isScrolled ? '#9CA3AF' : 'rgba(255, 255, 255, 0.55)';
-            }
-        });
-    });
-
+    // Header is permanently light-themed; only add a subtle shadow once the
+    // page has scrolled past the top, so it reads as "lifted" above content.
     function onScroll() {
-        const forgeStage = document.getElementById('forge-stage-experience');
-        const isOverDarkHero = forgeStage 
-            ? (window.scrollY < (forgeStage.offsetTop + forgeStage.offsetHeight - 80)) 
-            : (window.scrollY < 2200);
-
-        if (isOverDarkHero) {
-            header.style.background = 'rgba(7, 17, 28, 0.88)';
-            header.style.backdropFilter = 'blur(12px)';
-            header.style.webkitBackdropFilter = 'blur(12px)';
-            header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
-            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
-            accentLine.style.display = 'block';
-
-            if (brandContainer) brandContainer.style.borderRight = '1px solid rgba(255, 255, 255, 0.1)';
-            if (brandTitle) brandTitle.style.color = 'white';
-            if (brandSub) brandSub.style.color = '#C9A45C';
-            if (brandBadge) {
-                brandBadge.style.borderColor = 'rgba(255, 255, 255, 0.25)';
-                brandBadge.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
-            }
-
-            navLinks.forEach(link => {
-                link.style.borderRight = '1px solid rgba(255, 255, 255, 0.08)';
-                if (!link.dataset.active) {
-                    link.style.color = 'rgba(255, 255, 255, 0.7)';
-                }
-            });
-
-            if (counselingContainer) counselingContainer.style.borderLeft = '1px solid rgba(255, 255, 255, 0.1)';
-            if (toggleBtn) {
-                toggleBtn.style.color = 'white';
-                toggleBtn.style.borderLeft = '1px solid rgba(255, 255, 255, 0.1)';
-            }
+        if (window.scrollY > 12) {
+            header.style.boxShadow = '0 2px 16px rgba(24, 25, 21, 0.08)';
         } else {
-            header.style.background = 'rgba(13, 27, 42, 0.96)';
-            header.style.backdropFilter = 'blur(12px)';
-            header.style.webkitBackdropFilter = 'blur(12px)';
-            header.style.borderBottom = '1px solid #243342';
-            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.06)';
-            accentLine.style.display = 'block';
-
-            if (brandContainer) brandContainer.style.borderRight = '1px solid #243342';
-            if (brandTitle) brandTitle.style.color = '#F5F3EE';
-            if (brandSub) brandSub.style.color = '#C9A45C';
-            if (brandBadge) {
-                brandBadge.style.borderColor = '#E2E8F0';
-                brandBadge.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.08)';
-            }
-
-            navLinks.forEach(link => {
-                link.style.borderRight = '1px solid #243342';
-                if (!link.dataset.active) {
-                    link.style.color = '#9CA3AF';
-                }
-            });
-
-            if (counselingContainer) counselingContainer.style.borderLeft = '1px solid #243342';
-            if (toggleBtn) {
-                toggleBtn.style.color = '#F5F3EE';
-                toggleBtn.style.borderLeft = '1px solid #243342';
-            }
+            header.style.boxShadow = 'none';
         }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+}
+
+// Countries nav dropdown: CSS :hover/:focus-within handles mouse and
+// keyboard; this adds a tap-to-toggle fallback for touch devices that
+// don't reliably support :hover (e.g. tablets at the desktop breakpoint).
+function initCountriesDropdown() {
+    document.querySelectorAll('.site-nav-dropdown').forEach(dropdown => {
+        const trigger = dropdown.querySelector('.site-nav-dropdown-trigger');
+        if (!trigger) return;
+
+        trigger.addEventListener('click', (e) => {
+            if (window.matchMedia('(hover: hover)').matches) return;
+            e.preventDefault();
+            const isOpen = dropdown.classList.toggle('is-open');
+            trigger.setAttribute('aria-expanded', String(isOpen));
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        document.querySelectorAll('.site-nav-dropdown.is-open').forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('is-open');
+                const trigger = dropdown.querySelector('.site-nav-dropdown-trigger');
+                if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        document.querySelectorAll('.site-nav-dropdown.is-open').forEach(dropdown => {
+            dropdown.classList.remove('is-open');
+            const trigger = dropdown.querySelector('.site-nav-dropdown-trigger');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        });
+    });
 }
 
 
@@ -656,7 +598,7 @@ function initStatCounters() {
 function initMagneticButtons() {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-    const buttons = document.querySelectorAll('.btn-teal, .btn-surgical, .btn-magnetic');
+    const buttons = document.querySelectorAll('.btn-teal, .btn-surgical, .btn-magnetic, .nav-cta-gold');
     buttons.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
